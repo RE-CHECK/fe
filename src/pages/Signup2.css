@@ -1,0 +1,257 @@
+/*
+  Figma 기준: 1378 × ~2350 px  /  k = 100 / 1378
+*/
+
+.s2 {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100svh;
+  container-type: inline-size;
+  background: linear-gradient(to bottom, #4585ff, #b2cbff);
+  padding: 7.37cqw 4.91cqw 10cqw;
+  box-sizing: border-box;
+}
+
+/* ── 헤더 (Signup과 동일 구조) ── */
+.s2__header {
+  margin-bottom: 2.91cqw;
+}
+
+.s2__title {
+  margin: 0;
+  font-family: '온글잎 박다현체', sans-serif;
+  font-size: 6.69cqw;
+  line-height: 9.59cqw;
+  color: #ffffff;
+  letter-spacing: 0.100cqw;
+}
+
+.s2__subtitle {
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 700;
+  font-size: 4.31cqw;
+  line-height: 6.18cqw;
+  color: #ffffff;
+  letter-spacing: 0.043cqw;
+}
+
+.s2__divider {
+  border: none;
+  border-top: 2px dashed rgba(255, 255, 255, 0.6);
+  margin: 5cqw 0 4cqw;
+}
+
+.s2__step {
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 500;
+  font-size: 3.91cqw;
+  color: #ffffff;
+  letter-spacing: -0.039cqw;
+}
+
+/* ── 섹션 제목 ── */
+.s2__section-head {
+  margin-bottom: 7.64cqw;
+}
+
+.s2__section-title {
+  margin: 0 0 3.84cqw;
+  font-family: '온글잎 박다현체', sans-serif;
+  font-size: 8.81cqw;
+  line-height: 12.63cqw;
+  color: #ffffff;
+  letter-spacing: 0.132cqw;
+}
+
+.s2__section-desc {
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 600;
+  font-size: 4.31cqw;
+  line-height: 6.18cqw;
+  color: #ffffff;
+  letter-spacing: 0.060cqw;
+}
+
+/* ── 폼 ── */
+.s2__form {
+  display: flex;
+  flex-direction: column;
+  gap: 5.69cqw;
+}
+
+/* ── 필드 ── */
+.s2__field {
+  display: flex;
+  flex-direction: column;
+  gap: 2.91cqw;
+}
+
+.s2__label {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 600;
+  font-size: 4.01cqw;
+  line-height: 4.01cqw;
+  color: #ffffff;
+  letter-spacing: 0.060cqw;
+}
+
+/* ── 인풋 ── */
+.s2__input {
+  width: 100%;
+  height: 13.83cqw;
+  border: 2px solid transparent;
+  border-radius: 8.59cqw;
+  background: #ffffff;
+  padding: 0 5.5cqw;
+  box-sizing: border-box;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-size: 4.58cqw;
+  color: #333333;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.s2__input::placeholder {
+  color: #888888;
+}
+
+.s2__input--error {
+  border-color: #ff4d4f;
+}
+
+.s2__error-msg {
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-size: 3.2cqw;
+  color: #ffe0e0;
+}
+
+/* ── 아이디 행 ── */
+/* Figma: 아이디 input width 733.497, 중복확인 width 468.278, gap ~78px */
+.s2__id-row {
+  display: flex;
+  gap: 3.5cqw;
+}
+
+.s2__input--id {
+  flex: 1;
+  width: auto;
+}
+
+/* ── 중복확인 버튼 ── */
+.s2__check-btn {
+  flex-shrink: 0;
+  width: 34cqw;   /* 468.278 / 1378 * 100 */
+  height: 13.83cqw;
+  border: none;
+  border-radius: 8.59cqw;
+  background: #ffffff;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-size: 4.21cqw;   /* 58.017 / 1378 * 100 */
+  font-weight: 600;
+  color: #333333;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.s2__check-btn--done {
+  background: #4585ff;
+  color: #ffffff;
+}
+
+/* ── 아이디 사용 가능 텍스트 ── */
+.s2__id-available {
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-size: 3.2cqw;
+  color: #c8f5c8;
+  font-weight: 500;
+}
+
+/* ── 중복 모달 ── */
+.s2-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.s2-modal {
+  background: #ffffff;
+  border-radius: 5cqw;
+  padding: 8cqw 7cqw 6cqw;
+  width: 78cqw;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3cqw;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+}
+
+.s2-modal__icon {
+  width: 18cqw;
+  height: 18cqw;
+  object-fit: contain;
+}
+
+.s2-modal__title {
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 700;
+  font-size: 4.5cqw;
+  color: #222222;
+  text-align: center;
+}
+
+.s2-modal__desc {
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-size: 3.5cqw;
+  color: #666666;
+  text-align: center;
+}
+
+.s2-modal__btn {
+  margin-top: 1cqw;
+  width: 100%;
+  height: 11cqw;
+  border: none;
+  border-radius: 5cqw;
+  background: #4585ff;
+  color: #ffffff;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 700;
+  font-size: 4.2cqw;
+  cursor: pointer;
+}
+
+/* ── 완료 버튼 ── */
+.s2__submit-btn {
+  width: 100%;
+  height: 14.73cqw;
+  border: none;
+  border-radius: 6.20cqw;
+  background: #949494;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 800;
+  font-size: 6.01cqw;
+  color: #ffffff;
+  cursor: not-allowed;
+  letter-spacing: 0.060cqw;
+  transition: background 0.2s;
+  margin-top: 2cqw;
+}
+
+.s2__submit-btn--active {
+  background: #4585ff;
+  cursor: pointer;
+}
