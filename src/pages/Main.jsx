@@ -51,14 +51,18 @@ export default function Main() {
 
       <div className="main__stat-block">
         <div className="main__pill main__pill--red">총 누적 소비 금액</div>
-        <p className="main__stat-num">27,191,475</p>
+        <p className="main__stat-num">
+          27,191,475<span className="main__stat-unit">원</span>
+        </p>
       </div>
 
       <div className="main__stat-block main__stat-block--last">
         <div className="main__pill main__pill--green">
           총 {USER.college} 누적 소비 금액
         </div>
-        <p className="main__stat-num">91,475</p>
+        <p className="main__stat-num">
+          91,475<span className="main__stat-unit">원</span>
+        </p>
       </div>
 
       {/* ── 차트 섹션 ── */}
