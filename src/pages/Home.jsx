@@ -42,8 +42,8 @@ export default function Home() {
       </div>
 
       {/* START! 버튼 배경 */}
-      <div className="home__btn-bg home__btn-bg--start" />
-      <p className="home__btn-text home__btn-text--start">START!</p>
+      <button className="home__btn-bg home__btn-bg--start" onClick={() => navigate('/login')} />
+      <p className="home__btn-text home__btn-text--start" onClick={() => navigate('/login')}>START!</p>
 
       {/* 회원가입 버튼 배경 */}
       <button className="home__btn-bg home__btn-bg--signup" onClick={() => navigate('/signup')} />

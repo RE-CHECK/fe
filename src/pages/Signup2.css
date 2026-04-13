@@ -173,67 +173,6 @@
   font-weight: 500;
 }
 
-/* ── 중복 모달 ── */
-.s2-modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 200;
-}
-
-.s2-modal {
-  background: #ffffff;
-  border-radius: 5cqw;
-  padding: 8cqw 7cqw 6cqw;
-  width: 78cqw;
-  max-width: 340px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3cqw;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
-}
-
-.s2-modal__icon {
-  width: 18cqw;
-  height: 18cqw;
-  object-fit: contain;
-}
-
-.s2-modal__title {
-  margin: 0;
-  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
-  font-weight: 700;
-  font-size: 4.5cqw;
-  color: #222222;
-  text-align: center;
-}
-
-.s2-modal__desc {
-  margin: 0;
-  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
-  font-size: 3.5cqw;
-  color: #666666;
-  text-align: center;
-}
-
-.s2-modal__btn {
-  margin-top: 1cqw;
-  width: 100%;
-  height: 11cqw;
-  border: none;
-  border-radius: 5cqw;
-  background: #4585ff;
-  color: #ffffff;
-  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
-  font-weight: 700;
-  font-size: 4.2cqw;
-  cursor: pointer;
-}
-
 /* ── 완료 버튼 ── */
 .s2__submit-btn {
   width: 100%;

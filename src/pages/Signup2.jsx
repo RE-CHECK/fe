@@ -1,25 +1,12 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Signup2.css'
-import warningIcon from '../assets/icon/warning.png'
+import AlertModal from '../components/AlertModal'
 
 // TODO: 실제 API 연동 시 아래 함수를 교체하세요
 function checkIdDuplicate(userId) {
   const DUPLICATE_IDS = ['test', 'admin', 'user']
   return DUPLICATE_IDS.includes(userId.toLowerCase())
-}
-
-function DuplicateModal({ onClose }) {
-  return (
-    <div className="s2-modal-overlay" onClick={onClose}>
-      <div className="s2-modal" onClick={e => e.stopPropagation()}>
-        <img className="s2-modal__icon" src={warningIcon} alt="경고" />
-        <p className="s2-modal__title">이미 사용 중인 아이디입니다</p>
-        <p className="s2-modal__desc">다른 아이디를 입력해주세요</p>
-        <button className="s2-modal__btn" onClick={onClose}>확인</button>
-      </div>
-    </div>
-  )
 }
 
 export default function Signup2() {
@@ -56,7 +43,13 @@ export default function Signup2() {
     <div className="s2">
 
       {/* ── 중복 모달 ── */}
-      {showModal && <DuplicateModal onClose={() => setShowModal(false)} />}
+      {showModal && (
+        <AlertModal
+          title="이미 사용 중인 아이디입니다"
+          desc="다른 아이디를 입력해주세요"
+          onClose={() => setShowModal(false)}
+        />
+      )}
 
       {/* ── 헤더 ── */}
       <header className="s2__header">
