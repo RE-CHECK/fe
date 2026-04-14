@@ -110,6 +110,8 @@
   width:  67.63cqw;  /* 932 / 1378 * 100 */
   height: 12.05cqw;  /* 166 / 1378 * 100 */
   border-radius: 6.24cqw;
+  border: none;
+  cursor: pointer;
 }
 .home__btn-bg--start  { top: 175.25cqw; background: #679bff; } /* 2415 */
 .home__btn-bg--signup { top: 195.21cqw; background: #fdbd28; } /* 2690 */
@@ -117,6 +119,7 @@
 /* ── 버튼 텍스트 ── */
 .home__btn-text {
   position: absolute;
+  cursor: pointer;
   left: 50cqw;       /* 689 / 1378 * 100 */
   transform: translateX(-50%);
   margin: 0;

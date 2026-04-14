@@ -1,0 +1,432 @@
+/*
+  Figma 기준: 1378px  /  k = 100 / 1378
+*/
+
+.main {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100svh;
+  container-type: inline-size;
+  position: relative;
+  background: linear-gradient(to bottom, #4585ff, #b2cbff);
+  padding: 6.86cqw 4.57cqw 10cqw;
+  box-sizing: border-box;
+
+  /* aspect-ratio 제거: 콘텐츠 높이보다 배경이 짧아 하단이 검게 보이는 문제 */
+}
+
+/* ── 헤더 ── */
+.main__header {
+  margin-bottom: 4cqw;
+}
+
+.main__title {
+  margin: 0;
+  font-family: '온글잎 박다현체', sans-serif;
+  font-size: 6.22cqw;
+  line-height: 8.93cqw;
+  color: #ffffff;
+  letter-spacing: 0.093cqw;
+}
+
+.main__subtitle {
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 600;
+  font-size: 4.01cqw;
+  line-height: 5.76cqw;
+  color: #ffffff;
+  letter-spacing: 0.060cqw;
+}
+
+/* 별 장식 — .main 기준 absolute
+   Figma inset:
+     Group110: top=45.89cqw, right=5.68cqw, w=11.08cqw, h=13.34cqw
+     Group114: top=46.08cqw, right=35.81cqw, w=10cqw,   h=14.46cqw
+*/
+.main__star {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+}
+.main__star img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+.main__star--r {
+  top: 19.89%;
+  right: 8.68%;
+  width: 9.08%;
+  aspect-ratio: 141.299 / 202.669;
+}
+
+.main__star--m {
+  top: 19.77%;
+  right: 34.81%;
+  width: 10%;
+  aspect-ratio: 141.299 / 202.669;
+}
+
+/* 점선 구분선 */
+.main__divider {
+  border: none;
+  border-top: 2px dashed rgba(255, 255, 255, 0.6);
+  margin: 0 0 7.5cqw;
+}
+
+/* ── 유저 카드 ── */
+/*
+  Figma: card left=63.01, top=498.37, w=1287.93, h=891.718, radius=70.299
+  cqw: w=93.46, h=64.71, radius=5.10
+  내부 좌표는 카드 좌상단 기준
+*/
+.main__card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.81);
+  border-radius: 5.10cqw;
+  height: 64.71cqw;
+  margin-bottom: 7.41cqw;
+  overflow: hidden;
+}
+
+/* 카드 배경 에셋 */
+.main__card-asset {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* 마스코트 (우측) */
+/* Figma: mascot left=827.75, top=677.86, w=472.763, h=646.013
+   relative to card: left=764.74→55.50cqw, right=50.43→3.66cqw, top=179.49→13.02cqw */
+.main__card-mascot {
+  position: absolute;
+  right: 3.66cqw;
+  top: 13.02cqw;
+  width: 34.31cqw;
+  height: 46.88cqw;
+}
+.main__card-mascot img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* 이름: left=169.94→7.76cqw from card, top=621.53→8.94cqw from card */
+.main__card-name {
+  position: absolute;
+  left: 7.76cqw;
+  top: 8.94cqw;
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 800;
+  font-size: 8.89cqw;
+  line-height: 12.74cqw;
+  color: #000000;
+  letter-spacing: 0.133cqw;
+  z-index: 1;
+}
+
+/* 단과대: left=174.72→8.10cqw, top=796.24→21.62cqw */
+.main__card-college {
+  position: absolute;
+  left: 8.10cqw;
+  top: 21.62cqw;
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 700;
+  font-size: 5.24cqw;
+  color: #0088ff;
+  letter-spacing: 0.079cqw;
+  z-index: 1;
+}
+
+/* 지금까지 얼마 썼나요?: left=169.94→7.76cqw, top=1057.84→40.61cqw */
+.main__card-label {
+  position: absolute;
+  left: 7.76cqw;
+  top: 40.61cqw;
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 700;
+  font-size: 4.23cqw;
+  color: #000000;
+  z-index: 1;
+}
+
+/* 금액: top=1137.08→46.35cqw */
+.main__card-amount {
+  position: absolute;
+  left: 7.76cqw;
+  top: 46.35cqw;
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 700;
+  font-size: 5.80cqw;
+  color: #0088ff;
+  z-index: 1;
+}
+
+/* ── 통계 블록 ── */
+.main__stat-block {
+  margin-bottom: 5.52cqw;
+}
+.main__stat-block--last {
+  margin-bottom: 15cqw;
+}
+
+/* 색상 pill */
+.main__pill {
+  display: inline-flex;
+  align-items: center;
+  height: 9.84cqw;
+  padding: 0 5cqw;
+  border-radius: 5.54cqw;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 600;
+  font-size: 4.02cqw;
+  color: #ffffff;
+  letter-spacing: 0.060cqw;
+  margin-bottom: 1.5cqw;
+}
+.main__pill--yellow { background: rgba(253, 189, 40, 0.74); }
+.main__pill--red    { background: rgba(255, 82, 82, 0.8); }
+.main__pill--green  { background: rgba(12, 162, 20, 0.56); }
+
+/* 통계 숫자 */
+.main__stat-num {
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 700;
+  font-size: 14.07cqw;
+  line-height: 1.35;
+  color: #ffffff;
+  letter-spacing: 0.211cqw;
+}
+
+.main__stat-unit {
+  font-size: 5.10cqw;
+  font-weight: 500;
+  margin-left: 1cqw;
+}
+
+/* ── 차트 섹션 ── */
+/* Figma: left=62.53, radius=28.642→2.08cqw */
+.main__chart-section {
+  background: rgba(255, 255, 255, 0.23);
+  border-radius: 2.08cqw;
+  padding: 5cqw 4cqw 5cqw;
+  margin-bottom: 5cqw;
+}
+
+.main__chart-title-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2.5cqw;
+}
+
+/* 파란 pill: h=12.05cqw, radius=6.24cqw */
+.main__chart-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 12.05cqw;
+  padding: 0 5cqw;
+  border-radius: 6.24cqw;
+  background: #0088ff;
+  font-family: '온글잎 박다현체', sans-serif;
+  font-size: 6.72cqw;
+  color: #ffffff;
+  letter-spacing: 0.101cqw;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.main__chart-update {
+  margin: 0 0 3cqw;
+  text-align: center;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-size: 2.43cqw;
+  color: #676767;
+  letter-spacing: 0.036cqw;
+}
+
+/* 차트 영역 */
+.main__chart-area {
+  position: relative;
+  height: 61.73cqw;
+  margin-bottom: 2cqw;
+}
+
+/* 요일별 세로 점선 */
+.main__chart-vline {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-left: 1.5px dashed rgba(255, 255, 255, 0.45);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+/*
+  Figma 차트 이미지 좌표 (1378px 기준 → ×430/1378)
+    chart-section top  = 3165.88px
+    chart-area 시작    ≈ section top + 26cqw(pill+텍스트+패딩)
+    group3: top=3686.21 → section 기준 520.33px → 37.76cqw / h=527.97px → 38.33cqw
+    group2: top=3760.68 → 594.80px → 43.16cqw / h=543.24px → 39.44cqw
+    group1: top=3831.33 → 665.45px → 48.28cqw / h=349.43px → 25.38cqw
+  chart-area top = 26cqw → 각 이미지의 chart-area 기준 top:
+    group3: 37.76-26 = 11.76cqw  → chart-area(61.73cqw) 대비 19%
+    group2: 43.16-26 = 17.16cqw  → 28%
+    group1: 48.28-26 = 22.28cqw  → 36%
+  height 비율(chart-area 61.73cqw 기준):
+    group3: 38.33/61.73 = 62%
+    group2: 39.44/61.73 = 64%
+    group1: 25.38/61.73 = 41%
+*/
+
+/* 차트 래퍼 — 범례 공간(22cqw) 제외한 왼쪽 영역 */
+.main__chart-graphs {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(100% - 22cqw);
+  height: 100%;
+}
+
+/* 차트 이미지 공통: 부모 너비 100%, 명시적 height로 SVG 렌더 확정 */
+.main__chart-g {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  display: block;
+}
+.main__chart-g3 { top: 19%; height: 62%; }
+.main__chart-g2 { top: 28%; height: 64%; }
+.main__chart-g1 { top: 36%; height: 41%; }
+
+/* 범례: 오른쪽 22cqw 영역 — 흰색 pill + 색상 텍스트 */
+.main__legend {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 20cqw;
+  display: flex;
+  flex-direction: column;
+  gap: 3.2cqw;
+}
+
+/* Figma Union shape: h=57.127px→4.15cqw, rounded pill, white */
+.main__legend-item {
+  background: #ffffff;
+  border-radius: 4.15cqw;
+  height: 4.15cqw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main__legend-label {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 600;
+  font-size: 2.40cqw;
+  white-space: nowrap;
+}
+
+/* 차트 구분선 */
+.main__chart-divider {
+  border: none;
+  border-top: 1.5px solid rgba(255, 255, 255, 0.5);
+  margin: 0 0 3cqw;
+}
+
+/* ── 요일 행 ── */
+.main__weekdays {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main__weekday {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 원형 dot (Ellipse 189 에셋) */
+.main__weekday-dot {
+  width: 8.87cqw;
+  height: 8.87cqw;
+  display: block;
+}
+
+/* 요일 텍스트: 원 위에 absolute 중앙 정렬 */
+.main__weekday span {
+  position: absolute;
+  font-family: '온글잎 박다현체', sans-serif;
+  font-size: 5.28cqw;
+  color: #ffffff;
+  letter-spacing: 0.053cqw;
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* ── 하단 카드 ── */
+.main__bottom {
+  display: flex;
+  gap: 4.57cqw;
+  margin-top: 5cqw;
+}
+
+/* Figma: w=611.027→44.34cqw, h=644.443→46.76cqw, radius=47.736→3.46cqw */
+.main__bottom-card {
+  flex: 1;
+  border-radius: 3.46cqw;
+  padding: 5cqw 4cqw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4cqw;
+  min-height: 46.76cqw;
+  box-sizing: border-box;
+}
+.main__bottom-card--dark  { background: #5e5e5e; }
+.main__bottom-card--light { background: #ffffff; }
+
+/* RANK / GO! 텍스트: font-size=184.859→13.41cqw */
+.main__bottom-big {
+  margin: 0;
+  font-family: '온글잎 박다현체', sans-serif;
+  font-size: 13.41cqw;
+  color: #ffffff;
+  letter-spacing: 0.134cqw;
+  line-height: 1.1;
+}
+.main__bottom-big--blue { color: #0088ff; }
+
+/* 버튼: h=126.024→9.15cqw, radius=76.378→5.54cqw */
+.main__bottom-btn {
+  width: 25.57cqw;
+  height: 9.15cqw;
+  border: none;
+  border-radius: 5.54cqw;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 700;
+  font-size: 4.38cqw;
+  letter-spacing: 0.044cqw;
+  cursor: pointer;
+}
+.main__bottom-btn--white {
+  background: #ffffff;
+  color: #5e5e5e;
+}
+.main__bottom-btn--blue {
+  background: #0088ff;
+  color: #ffffff;
+}
