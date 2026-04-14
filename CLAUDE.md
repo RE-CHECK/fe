@@ -57,3 +57,4 @@ Figma에서 내보낸 차트 SVG(`chart-group1~3.svg`)는 `width="100%" height="
 
 ### 퍼블리싱
 - figma-desktop mcp 서버 사용하여 프레임대로 퍼블리싱
+- 이미지 파일은 recheck-fe/src/assets 파일에서 찾기

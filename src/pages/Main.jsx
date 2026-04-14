@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import './Main.css'
 import asset21    from '../assets/image/자산 21@4x 1.svg'
 import mascotImg  from '../assets/image/자산 11@4x 1.svg'
@@ -20,6 +21,7 @@ const LEGEND = [
 ]
 
 export default function Main() {
+  const navigate = useNavigate()
   return (
     <div className="main">
 
@@ -125,7 +127,7 @@ export default function Main() {
         </div>
         <div className="main__bottom-card main__bottom-card--light">
           <p className="main__bottom-big main__bottom-big--blue">GO!</p>
-          <button className="main__bottom-btn main__bottom-btn--blue">참여하기</button>
+          <button className="main__bottom-btn main__bottom-btn--blue" onClick={() => navigate('/receipt-upload')}>참여하기</button>
         </div>
       </div>
 

@@ -1,0 +1,267 @@
+/*
+  Figma 기준: 1412px  /  k = 100 / 1412
+*/
+
+.upload {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100svh;
+  container-type: inline-size;
+  position: relative;
+  background: linear-gradient(to bottom, #4585ff, #b2cbff);
+  padding: 7.18cqw 4.79cqw 10cqw;
+  box-sizing: border-box;
+}
+
+/* ── 헤더 ── */
+.upload__header {
+  margin-bottom: 2cqw;
+}
+
+.upload__title {
+  margin: 0;
+  font-family: '온글잎 박다현체', sans-serif;
+  font-size: 6.52cqw;
+  line-height: 9.35cqw;
+  color: #ffffff;
+  letter-spacing: 0.098cqw;
+}
+
+.upload__subtitle {
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 700;
+  font-size: 4.21cqw;
+  color: #ffffff;
+  letter-spacing: 0.042cqw;
+}
+
+.upload__divider {
+  border: none;
+  border-top: 2px dashed rgba(255, 255, 255, 0.6);
+  margin: 5cqw 0 0;
+}
+
+/* ── 히어로 텍스트 ── */
+.upload__hero {
+  margin-top: 8cqw;
+}
+
+.upload__hero-title {
+  margin: 0 0 3cqw;
+  font-family: '온글잎 박다현체', sans-serif;
+  font-size: 8.59cqw;
+  line-height: 1.2;
+  color: #ffffff;
+  letter-spacing: 0.129cqw;
+}
+
+.upload__hero-desc {
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 600;
+  font-size: 4.21cqw;
+  line-height: 1.8;
+  color: #ffffff;
+  letter-spacing: 0.042cqw;
+}
+
+/* ── 캐릭터 + 말풍선 씬 ──
+  Figma 씬 범위: y=946.78(버블 최상단) ~ y=1464.23(오른쪽 캐릭터 하단)
+  씬 높이: (1464.23-946.78)/1412*100 = 36.64cqw
+
+  카드 top=1269.55 → 씬 내 y=(1269.55-946.78)/1412*100 = 22.86cqw
+  → 씬과 카드 오버랩: 36.64-22.86 = 13.78cqw
+*/
+.upload__scene {
+  position: relative;
+  height: 36.64cqw;
+  margin-top: 6cqw;
+  /* 캐릭터가 카드 위에 겹치도록 아래 여백 제거 */
+  margin-bottom: -13.78cqw;
+  z-index: 1;
+}
+
+/* 말풍선 공통 */
+.upload__bubble {
+  position: absolute;
+}
+
+.upload__bubble-bg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 오른쪽 말풍선: Figma rotate(180deg)+scaleY(-1) = 좌우 반전(scaleX(-1))만 */
+.upload__bubble-bg--flip {
+  transform: scaleX(-1);
+}
+
+.upload__bubble-text {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  font-family: '온글잎 박다현체', sans-serif;
+  font-size: 3.99cqw;
+  line-height: 1.4;
+  color: #000000;
+  text-align: center;
+  letter-spacing: 0.060cqw;
+  white-space: nowrap;
+}
+
+/*
+  왼쪽 말풍선: Figma left=274.61, top=946.78
+  씬 기준: top=(946.78-946.78)/1412*100=0, left=274.61/1412*100=19.45cqw
+*/
+.upload__bubble--left {
+  top: 0;
+  left: 19.45cqw;
+  width: 39.69cqw;
+  height: 16.48cqw;
+}
+
+/*
+  오른쪽 말풍선: Figma left=903.75, top=1096.38
+  씬 기준: top=(1096.38-946.78)/1412*100=10.59cqw, left=903.75/1412*100=63.97cqw
+*/
+.upload__bubble--right {
+  top: 10.59cqw;
+  left: 63.97cqw;
+  width: 17.10cqw;
+  height: 9.11cqw;
+}
+
+/* 캐릭터 공통 */
+.upload__char {
+  position: absolute;
+  object-fit: contain;
+}
+
+/*
+  왼쪽 캐릭터: Figma left=85.05, top=1022.61, w=335.897, h=382.197
+  씬 기준: top=(1022.61-946.78)/1412*100=5.37cqw, left=85.05/1412*100=6.02cqw
+*/
+.upload__char--left {
+  top: 5.37cqw;
+  left: 6.02cqw;
+  width: 23.79cqw;
+  height: 27.07cqw;
+}
+
+/*
+  오른쪽 캐릭터: Figma left=1015.43, top=1067.69, w=279.601, h=396.542
+  씬 기준: top=(1067.69-946.78)/1412*100=8.56cqw, left=1015.43/1412*100=71.92cqw
+*/
+.upload__char--right {
+  top: 8.56cqw;
+  left: 71.92cqw;
+  width: 19.80cqw;
+  height: 28.08cqw;
+}
+
+/* ── 흰색 카드 ── */
+/*
+  Figma: left=85.05→6.02cqw, w=1242.907→88.02cqw,
+         h=1240.858→87.88cqw, radius=30.74→2.18cqw
+*/
+.upload__card {
+  position: relative;
+  z-index: 0;
+  background: rgba(255, 255, 255, 0.61);
+  border-radius: 2.18cqw;
+  padding: 5cqw 6cqw 6cqw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── 카메라 영역 ── */
+/*
+  Figma camera: size=320.717px→22.71cqw
+*/
+.upload__camera-wrap {
+  position: relative;
+  width: 22.71cqw;
+  height: 22.71cqw;
+  margin-bottom: 3cqw;
+  margin-top: 3cqw;
+}
+
+.upload__camera-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+/*
+  Figma shadow: left=134.06→within camera, top=234.34→within camera
+  h=40.945→2.90cqw, w=187.62→13.29cqw
+*/
+.upload__camera-shadow {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 68%;
+  height: auto;
+  z-index: 0;
+}
+
+/* ── 카드 텍스트 ── */
+/*
+  Figma "영수증 촬영/업로드": font=88.493→6.27cqw (bold)
+  Figma "카드번호...": font=51.233→3.63cqw (regular)
+*/
+.upload__card-title {
+  margin: 0 0 2cqw;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 700;
+  font-size: 6.27cqw;
+  color: #000000;
+  text-align: center;
+  letter-spacing: 0.094cqw;
+}
+
+.upload__card-desc {
+  margin: 0 0 7cqw;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 400;
+  font-size: 3.63cqw;
+  color: #000000;
+  text-align: center;
+  letter-spacing: 0.054cqw;
+}
+
+/* ── 버튼 공통 ── */
+/*
+  Figma: h=170.093→12.05cqw, radius=88.152→6.24cqw
+*/
+.upload__btn {
+  width: 100%;
+  height: 12.05cqw;
+  border: none;
+  border-radius: 6.24cqw;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 800;
+  font-size: 4.19cqw;
+  color: #ffffff;
+  letter-spacing: 0.042cqw;
+  cursor: pointer;
+}
+
+/* 파란 버튼 (사진 등록하기) */
+/*
+  Figma: bg=#679bff, w=954.979→67.63cqw
+*/
+.upload__btn--blue {
+  background: #679bff;
+  width: 67.63cqw;
+}
