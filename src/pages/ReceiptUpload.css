@@ -257,11 +257,38 @@
   cursor: pointer;
 }
 
-/* 파란 버튼 (사진 등록하기) */
+/* 파란 버튼 (사진 등록하기 / 업로드 중) */
 /*
   Figma: bg=#679bff, w=954.979→67.63cqw
 */
 .upload__btn--blue {
   background: #679bff;
   width: 67.63cqw;
+}
+
+.upload__btn--blue:disabled {
+  opacity: 0.8;
+  cursor: default;
+}
+
+/* ── 스피너 ── */
+.upload__spinner-wrap {
+  width: 22.71cqw;
+  height: 22.71cqw;
+  margin-bottom: 3cqw;
+  margin-top: 3cqw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes upload-spin {
+  to { transform: rotate(360deg); }
+}
+
+.upload__spinner {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: upload-spin 1s linear infinite;
 }
