@@ -1,8 +1,12 @@
 import './Main.css'
-import asset21   from '../assets/image/자산 21@4x 1.svg'
-import mascotImg from '../assets/image/자산 11@4x 1.svg'
-import group110  from '../assets/icon/Group110.svg'
-import group114  from '../assets/icon/Group114.svg'
+import asset21    from '../assets/image/자산 21@4x 1.svg'
+import mascotImg  from '../assets/image/자산 11@4x 1.svg'
+import group110   from '../assets/icon/Group110.svg'
+import group114   from '../assets/icon/Group114.svg'
+import ellipse189 from '../assets/icon/Ellipse 189.svg'
+import chartG1    from '../assets/image/chart-group1.svg'
+import chartG2    from '../assets/image/chart-group2.svg'
+import chartG3    from '../assets/image/chart-group3.svg'
 
 // TODO: API 연동 시 props 또는 전역 상태로 교체
 const USER = { name: '김아주', college: '경영대', spent: '230,000원' }
@@ -75,17 +79,24 @@ export default function Main() {
 
         {/* 차트 영역 (API 연동 예정) */}
         <div className="main__chart-area">
+          {/* 차트 라인 이미지 — 동일 좌상단 기준 절대 배치 */}
+          {/* 세로 점선 — 요일 중앙 정렬 */}
           {DAYS.map((_, i) => (
             <div
               key={i}
               className="main__chart-vline"
-              style={{ left: `${(i / 6) * 100}%` }}
+              style={{ left: `calc(${i} / 6 * (100% - 8.87cqw) + 4.435cqw)` }}
             />
           ))}
+          <div className="main__chart-graphs">
+            <img src={chartG2} className="main__chart-g main__chart-g2" alt="" />
+            <img src={chartG1} className="main__chart-g main__chart-g1" alt="" />
+            <img src={chartG3} className="main__chart-g main__chart-g3" alt="" />
+          </div>
+          {/* 범례: 흰색 pill + 색상 텍스트 */}
           <div className="main__legend">
             {LEGEND.map(({ label, color }) => (
               <div key={label} className="main__legend-item">
-                <span className="main__legend-dot" style={{ background: color }} />
                 <span className="main__legend-label" style={{ color }}>{label}</span>
               </div>
             ))}
@@ -98,7 +109,7 @@ export default function Main() {
         <div className="main__weekdays">
           {DAYS.map(day => (
             <div key={day} className="main__weekday">
-              <div className="main__weekday-dot" />
+              <img src={ellipse189} className="main__weekday-dot" alt="" />
               <span>{day}</span>
             </div>
           ))}
@@ -119,5 +130,5 @@ export default function Main() {
       </div>
 
     </div>
-  )
+  ) 
 }

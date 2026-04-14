@@ -13,7 +13,7 @@
   padding: 6.86cqw 4.57cqw 10cqw;
   box-sizing: border-box;
 
-  aspect-ratio: 430 / 932; /* 디자인 기준 비율*/
+  /* aspect-ratio 제거: 콘텐츠 높이보다 배경이 짧아 하단이 검게 보이는 문제 */
 }
 
 /* ── 헤더 ── */
@@ -261,38 +261,73 @@
   margin-bottom: 2cqw;
 }
 
-/* 세로 그리드 라인 */
+/* 요일별 세로 점선 */
 .main__chart-vline {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 1px;
-  background: rgba(80, 80, 80, 0.15);
+  width: 0;
+  border-left: 1.5px dashed rgba(255, 255, 255, 0.45);
   transform: translateX(-50%);
+  pointer-events: none;
 }
 
-/* 범례 */
+/*
+  Figma 차트 이미지 좌표 (1378px 기준 → ×430/1378)
+    chart-section top  = 3165.88px
+    chart-area 시작    ≈ section top + 26cqw(pill+텍스트+패딩)
+    group3: top=3686.21 → section 기준 520.33px → 37.76cqw / h=527.97px → 38.33cqw
+    group2: top=3760.68 → 594.80px → 43.16cqw / h=543.24px → 39.44cqw
+    group1: top=3831.33 → 665.45px → 48.28cqw / h=349.43px → 25.38cqw
+  chart-area top = 26cqw → 각 이미지의 chart-area 기준 top:
+    group3: 37.76-26 = 11.76cqw  → chart-area(61.73cqw) 대비 19%
+    group2: 43.16-26 = 17.16cqw  → 28%
+    group1: 48.28-26 = 22.28cqw  → 36%
+  height 비율(chart-area 61.73cqw 기준):
+    group3: 38.33/61.73 = 62%
+    group2: 39.44/61.73 = 64%
+    group1: 25.38/61.73 = 41%
+*/
+
+/* 차트 래퍼 — 범례 공간(22cqw) 제외한 왼쪽 영역 */
+.main__chart-graphs {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(100% - 22cqw);
+  height: 100%;
+}
+
+/* 차트 이미지 공통: 부모 너비 100%, 명시적 height로 SVG 렌더 확정 */
+.main__chart-g {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  display: block;
+}
+.main__chart-g3 { top: 19%; height: 62%; }
+.main__chart-g2 { top: 28%; height: 64%; }
+.main__chart-g1 { top: 36%; height: 41%; }
+
+/* 범례: 오른쪽 22cqw 영역 — 흰색 pill + 색상 텍스트 */
 .main__legend {
   position: absolute;
   right: 0;
   top: 0;
+  width: 20cqw;
   display: flex;
   flex-direction: column;
-  gap: 2.5cqw;
+  gap: 3.2cqw;
 }
 
+/* Figma Union shape: h=57.127px→4.15cqw, rounded pill, white */
 .main__legend-item {
+  background: #ffffff;
+  border-radius: 4.15cqw;
+  height: 4.15cqw;
   display: flex;
   align-items: center;
-  gap: 1.5cqw;
-}
-
-.main__legend-dot {
-  display: inline-block;
-  width: 2.8cqw;
-  height: 2.8cqw;
-  border-radius: 50%;
-  flex-shrink: 0;
+  justify-content: center;
 }
 
 .main__legend-label {
@@ -317,28 +352,28 @@
 }
 
 .main__weekday {
+  position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 1.5cqw;
+  justify-content: center;
 }
 
-/* 원형 dot */
+/* 원형 dot (Ellipse 189 에셋) */
 .main__weekday-dot {
   width: 8.87cqw;
   height: 8.87cqw;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  border: 1.5px solid rgba(255, 255, 255, 0.7);
-  box-sizing: border-box;
+  display: block;
 }
 
+/* 요일 텍스트: 원 위에 absolute 중앙 정렬 */
 .main__weekday span {
+  position: absolute;
   font-family: '온글잎 박다현체', sans-serif;
   font-size: 5.28cqw;
   color: #ffffff;
   letter-spacing: 0.053cqw;
   line-height: 1;
+  pointer-events: none;
 }
 
 /* ── 하단 카드 ── */
