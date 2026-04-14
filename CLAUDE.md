@@ -58,3 +58,13 @@ Figma에서 내보낸 차트 SVG(`chart-group1~3.svg`)는 `width="100%" height="
 ### 퍼블리싱
 - figma-desktop mcp 서버 사용하여 프레임대로 퍼블리싱
 - 이미지 파일은 recheck-fe/src/assets 파일에서 찾기
+
+## 🪴 Branch Convention (GitHub Flow)
+
+- `main`: 배포 가능한 브랜치, 항상 배포 가능한 상태를 유지
+- `develop`: default branch로 변경 (code space), 수정 완료된 코드를 합치는 브랜치
+- `page/명칭/#이슈번호`: 화면 UI구성 및 퍼블리싱 작업
+- `api/명칭/#이슈번호`: 통신, api연동, 비즈니스 로직 구현 작업
+- 브랜치 공유 X → 특수한 경우 팀원들에게 알리기
+- 팀원이 짠 코드 리뷰 없이 수정 X → 수정 시 PR 남기고 리뷰 필수
+- pr, issue 생성시 .github 파일에 있는 템플릿 형식에 알맞게 생성
