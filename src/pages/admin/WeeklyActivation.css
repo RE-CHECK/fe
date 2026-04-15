@@ -1,0 +1,107 @@
+/*
+  Figma 기준: 393px  /  k = 100 / 393
+  주차별 활성화 화면
+*/
+
+.weekly {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100svh;
+  container-type: inline-size;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+/* ── 헤더 (뒤로가기 버튼 영역) ── */
+/* Figma: back btn top=39px, left=19px, size=45px */
+.weekly__header {
+  display: flex;
+  align-items: center;
+  height: 11.45cqw;   /* 45/393 */
+  padding: 0 4.83cqw; /* 19/393 */
+  margin-top: 9.92cqw; /* 39/393 */
+}
+
+.weekly__back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 11.45cqw;
+  height: 11.45cqw;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.weekly__back svg {
+  width: 2.80cqw;
+  height: 5.09cqw;
+}
+
+/* ── 구분선 ── */
+/* Figma: top=98px */
+.weekly__divider {
+  border: none;
+  border-top: 1px solid #000000;
+  margin: 3.56cqw 0 0;
+}
+
+/* ── 타이틀 ── */
+/* Figma: left=62px, top=163px, font-size=30px */
+.weekly__title {
+  margin: 0;
+  padding-top: 16.54cqw;  /* (163-98)/393 */
+  padding-left: 15.77cqw; /* 62/393 */
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: 7.63cqw;  /* 30/393 */
+  color: #000000;
+  white-space: nowrap;
+}
+
+/* ── 버튼 목록 ── */
+/* Figma: 첫 버튼 top=340px, 버튼 간격 40px */
+.weekly__menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10.18cqw;     /* 40/393 */
+  padding: 37.40cqw 8.40cqw 10cqw; /* (340-193)/393 ≈ 37.40cqw 위 여백 */
+}
+
+/* ── 버튼 공통 ── */
+/* Figma: w=325px, h=48px, radius=30px, font-size=20px */
+.weekly__btn {
+  width: 100%;
+  height: 12.21cqw;   /* 48/393 */
+  border: 1px solid #000000;
+  border-radius: 7.63cqw; /* 30/393 */
+  background: #ffffff;
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: 5.09cqw;  /* 20/393 */
+  color: #000000;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.weekly__btn:hover {
+  background: #f5f5f5;
+}
+
+.weekly__btn:active {
+  background: #ebebeb;
+}
+
+/* ── 활성화된 버튼 ── */
+/* Figma: bg=#0088ff, border=black, text=black */
+.weekly__btn--active {
+  background: #0088ff;
+  color: #000000;
+}
+
+.weekly__btn--active:hover {
+  background: #006ee0;
+}

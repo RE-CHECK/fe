@@ -5,7 +5,9 @@ import AlertModal from '../components/AlertModal'
 
 // TODO: 실제 API 연동 시 교체하세요
 function verifyLogin(userId, password) {
-  return userId === 'wndyd2425' && password === '1234' // 사용자 정보 하드 코딩 
+  if (userId === 'admin' && password === '1234') return 'admin'
+  if (userId === 'wndyd2425' && password === '1234') return 'user'
+  return null
 }
 
 export default function Login() {
@@ -18,7 +20,10 @@ export default function Login() {
   function handleSubmit(e) {
     e.preventDefault()
     if (!isValid) return
-    if (verifyLogin(form.userId, form.password)) {
+    const role = verifyLogin(form.userId, form.password)
+    if (role === 'admin') {
+      navigate('/admin')
+    } else if (role === 'user') {
       navigate('/main')
     } else {
       setShowModal(true)
