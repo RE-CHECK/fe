@@ -68,3 +68,56 @@ Figma에서 내보낸 차트 SVG(`chart-group1~3.svg`)는 `width="100%" height="
 - 브랜치 공유 X → 특수한 경우 팀원들에게 알리기
 - 팀원이 짠 코드 리뷰 없이 수정 X → 수정 시 PR 남기고 리뷰 필수
 - pr, issue 생성시 .github 파일에 있는 템플릿 형식에 알맞게 생성
+
+### 데이터 추적(GA/GTM) 기술 요구사항
+### **1. GTM 스크립트 설치**
+
+- **이유**: 마케터가 개발 도움 없이 버튼 클릭 추적 등을 직접 설정하기 위한 필수 하드웨어 작업입니다.
+- **설치 위치**: 모든 페이지의 **`<head>` 최상단**과 **`<body>` 바로 아래**에 각각 GTM 코드 뭉치를 삽입해 주세요.
+- **스크립트**
+    
+    <head>
+    
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '[https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f)](https://www.googletagmanager.com/gtm.js?id=%27+i+dl;f.parentNode.insertBefore(j,f));
+    })(window,document,'script','dataLayer','GTM-PMK9TW4T');</script>
+    <!-- End Google Tag Manager -->
+    
+    <body>
+    
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PMK9TW4T"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+
+### **2. 버튼별 고유 ID 부여**
+
+- **이유**: GTM이 웹사이트 수많은 버튼 중 "어떤 버튼"이 클릭되었는지 인식하기 위한 이름표(ID)입니다.
+- **실행 사항**: 아래 명세서의 `버튼 id`를 해당 HTML `<button>` 태그에 `id` 속성으로 정확히 기입해 주세요.
+
+| **버튼 구분** | **부여할 HTML id 값**  |
+| --- | --- |
+| 메인화면 회원가입 버튼 | `id="btn-go-signup"` |
+| 정보입력 다음 버튼 | `id="btn-signup-step1"` |
+| 계정설정 완료 버튼 | `id="btn-signup-finish"` |
+| 메인화면 참여하기 버튼 | `id="btn-go-challenge"` |
+| 영수증 사진등록 버튼 | `id="btn-upload-receipt"` |
+| 영수증 사진 입력하기 버튼 | `id="btn-upload-finish"` |
+
+### **3. User ID 연동**
+
+- **이유**: 가입만 하고 도망가는 유저와, 실제로 영수증을 올려 챌린지에 참여하는 유저를 구분하여 분석하기 위해 필수입니다.
+- **실행 사항**: 회원가입 완료 및 로그인 **성공** 시점에 아래 스크립트를 호출해 주세요. (개인정보가 아닌 DB 고유 ID값 전송부탁드립니다) > key값(event, user_id)은 아래랑 똑같이 작성해주세요
+
+```jsx
+// 가입/로그인 성공 시점에 실행
+window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({
+  'event': 'user_auth_success',
+  'user_id': '유저_고유_ID'   // 예: DB Index 숫자 '405'
+});
+```
