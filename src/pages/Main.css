@@ -53,17 +53,19 @@
 .main__star img { width: 100%; height: 100%; object-fit: contain; display: block; }
 
 .main__star--r {
-  top: 19.89%;
-  right: 8.68%;
-  width: 9.08%;
-  aspect-ratio: 141.299 / 202.669;
+  /* Figma: Group110 top=633px→45.89cqw, right=78.35px→5.68cqw, w=152.79px→11.08cqw, h=183.87px→13.34cqw */
+  top: 49.89cqw;
+  right: 10.68cqw;
+  width: 11.08cqw;
+  height: 13.34cqw;
 }
 
 .main__star--m {
-  top: 19.77%;
-  right: 34.81%;
-  width: 10%;
-  aspect-ratio: 141.299 / 202.669;
+  /* Figma: Group114 top=635px→46.08cqw, right=493.66px→35.81cqw, w=137.87px→10cqw, h=199.32px→14.46cqw */
+  top: 50.08cqw;
+  right: 39.81cqw;
+  width: 10cqw;
+  height: 14.46cqw;
 }
 
 /* 점선 구분선 */

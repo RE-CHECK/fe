@@ -1,0 +1,141 @@
+/*
+  Figma 기준: 393px  /  k = 100 / 393
+  유저 대시보드
+*/
+
+.user-dashboard {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100svh;
+  container-type: inline-size;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+/* ── 헤더 (뒤로가기 버튼 영역) ── */
+/* Figma: back btn top=39px, left=19px, size=45px */
+.user-dashboard__header {
+  display: flex;
+  align-items: center;
+  height: 11.45cqw;    /* 45/393 */
+  padding: 0 4.83cqw;  /* 19/393 */
+  margin-top: 9.92cqw; /* 39/393 */
+}
+
+.user-dashboard__back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 11.45cqw;
+  height: 11.45cqw;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.user-dashboard__back svg {
+  width: 2.80cqw;
+  height: 5.09cqw;
+}
+
+/* ── 구분선 ── */
+/* Figma: top=98px */
+.user-dashboard__divider {
+  border: none;
+  border-top: 1px solid #000000;
+  margin: 3.56cqw 0 0;
+}
+
+/* ── 타이틀 ── */
+/* Figma: center, top=163px, font-size=30px */
+.user-dashboard__title {
+  margin: 0;
+  padding-top: 16.54cqw; /* (163-98)/393 */
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: 7.63cqw;   /* 30/393 */
+  color: #000000;
+  text-align: center;
+}
+
+/* ── 통계 영역 ── */
+/* Figma: 첫 라벨 top=251px */
+.user-dashboard__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 5.34cqw;           /* 박스 하단~다음 라벨 간격 21px/393 */
+  padding: 12.21cqw 9.16cqw 0; /* (251-203)/393≈12.21cqw 위 여백 */
+}
+
+/* ── 라벨 + 박스 묶음 ── */
+.user-dashboard__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 5.34cqw; /* 라벨~박스 간격 21px/393 */
+}
+
+/* ── 라벨 ── */
+/* Figma: left=41px, font-size=20px */
+.user-dashboard__stat-label {
+  margin: 0;
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: 5.09cqw; /* 20/393 */
+  color: #000000;
+}
+
+/* ── 수치 박스 ── */
+/* Figma: w=325px, h=48px, radius=30px, white bg, black border */
+.user-dashboard__stat-box {
+  width: 100%;
+  height: 12.21cqw;      /* 48/393 */
+  border: 1px solid #000000;
+  border-radius: 7.63cqw; /* 30/393 */
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── 수치 텍스트 ── */
+/* Figma: font-size=20px, center */
+.user-dashboard__stat-value {
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: 5.09cqw; /* 20/393 */
+  color: #000000;
+}
+
+/* ── CSV 버튼 래퍼 ── */
+/* Figma: btn top=548px, 박스 하단(410+48=458px) → gap=90px/393=22.90cqw */
+.user-dashboard__csv-wrap {
+  display: flex;
+  justify-content: center;
+  padding-top: 22.90cqw; /* (548-458)/393 */
+}
+
+/* ── CSV 다운로드 버튼 ── */
+/* Figma: w=231px, h=55px, radius=30px, bg=#0088ff */
+.user-dashboard__csv-btn {
+  width: 58.78cqw;        /* 231/393 */
+  height: 13.99cqw;       /* 55/393 */
+  border: 1px solid #000000;
+  border-radius: 7.63cqw; /* 30/393 */
+  background: #0088ff;
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: 5.09cqw;     /* 20/393 */
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.user-dashboard__csv-btn:hover {
+  background: #006ee0;
+}
+
+.user-dashboard__csv-btn:active {
+  background: #005bbf;
+}

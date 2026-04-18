@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Main.css'
+import AlertModal from '../components/AlertModal'
 import asset21    from '../assets/image/자산 21@4x 1.svg'
 import mascotImg  from '../assets/image/자산 11@4x 1.svg'
 import group110   from '../assets/icon/Group110.svg'
@@ -22,6 +24,7 @@ const LEGEND = [
 
 export default function Main() {
   const navigate = useNavigate()
+  const [showBattleModal, setShowBattleModal] = useState(false)
   return (
     <div className="main">
 
@@ -123,7 +126,7 @@ export default function Main() {
       <div className="main__bottom">
         <div className="main__bottom-card main__bottom-card--dark">
           <p className="main__bottom-big">RANK</p>
-          <button className="main__bottom-btn main__bottom-btn--white">대결현황</button>
+          <button className="main__bottom-btn main__bottom-btn--white" onClick={() => setShowBattleModal(true)}>대결현황</button>
         </div>
         <div className="main__bottom-card main__bottom-card--light">
           <p className="main__bottom-big main__bottom-big--blue">GO!</p>
@@ -131,6 +134,14 @@ export default function Main() {
         </div>
       </div>
 
+      {showBattleModal && (
+        <AlertModal
+          title="추후 오픈 예정!"
+          desc="조금만 기다려주세요"
+          btnVariant="yellow"
+          onClose={() => setShowBattleModal(false)}
+        />
+      )}
     </div>
-  ) 
+  )
 }

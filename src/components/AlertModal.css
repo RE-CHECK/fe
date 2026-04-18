@@ -56,3 +56,6 @@
   font-size: 16px;
   cursor: pointer;
 }
+.alert-modal__btn--yellow {
+  background: #fdbd28;
+}
