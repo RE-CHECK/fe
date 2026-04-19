@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './ReceiptUpload.css'
 import cameraImg    from '../assets/image/camera.png'
 import spinnerImg   from '../assets/image/image 91.svg'
@@ -8,9 +9,11 @@ import char1        from '../assets/image/3.서브 캐릭터 기본형1 1.svg'
 import char2        from '../assets/image/4.서브 캐릭터 기본형2 1.svg'
 
 export default function ReceiptUpload() {
+  const navigate = useNavigate()
   const fileInputRef = useRef(null)
   const [isLoading, setIsLoading] = useState(false)
   const [receiptData, setReceiptData] = useState(null)
+  const [isConfirmed, setIsConfirmed] = useState(false)
 
   function handleFile(e) {
     const file = e.target.files[0]
@@ -29,8 +32,9 @@ export default function ReceiptUpload() {
   }
 
   function handleRetake() {
-    setReceiptData(null)
     setIsLoading(false)
+    setReceiptData(null)
+    setIsConfirmed(false)
     if (fileInputRef.current) fileInputRef.current.value = ''
   }
 
@@ -78,8 +82,25 @@ export default function ReceiptUpload() {
 
       {/* ── 흰색 카드 ── */}
       <div className="upload__card">
-        {receiptData ? (
-          /* ── 결과 상태: API 응답 후 영수증 정보 표시 ── */
+        {isConfirmed ? (
+          /* ── 완료 상태: 업로드 완료 화면 ── */
+          <>
+            <div className="upload__camera-wrap">
+              <img src={cameraImg} className="upload__camera-img" alt="카메라" />
+            </div>
+
+            <p className="upload__card-title">영수증 업로드 완료!</p>
+            <p className="upload__card-desc">참여해주셔서 감사합니다</p>
+
+            <button
+              className="upload__btn upload__btn--blue"
+              onClick={() => navigate('/main')}
+            >
+              소비 현황 확인하러 가기
+            </button>
+          </>
+        ) : receiptData ? (
+          /* ── 확인 상태: API 응답 후 영수증 정보 표시 ── */
           <>
             <div className="upload__camera-wrap">
               <img src={cameraImg} className="upload__camera-img" alt="카메라" />
@@ -118,6 +139,7 @@ export default function ReceiptUpload() {
             <button
               id="btn-upload-finish"
               className="upload__btn upload__btn--blue upload__btn--wide"
+              onClick={() => setIsConfirmed(true)}
             >
               네, 맞아요
             </button>
