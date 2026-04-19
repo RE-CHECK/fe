@@ -2,6 +2,7 @@ import { apiRequest } from './client'
 
 export async function login(username, password) {
   const data = await apiRequest('/api/auth/login', {
+    skipAuth: true,
     method: 'POST',
     body: JSON.stringify({ username, password }),
   })
@@ -11,8 +12,9 @@ export async function login(username, password) {
 }
 
 export async function checkUsername(username) {
-  // 200이면 사용 가능, 409면 중복 (apiRequest에서 에러 throw)
-  await apiRequest(`/api/auth/check-username?username=${encodeURIComponent(username)}`)
+  await apiRequest(`/api/auth/check-username?username=${encodeURIComponent(username)}`, {
+    skipAuth: true,
+  })
 }
 
 export async function register({ username, password, passwordConfirm, name, phoneNumber, studentNumber, departmentId, studentCardImage }) {
@@ -26,6 +28,7 @@ export async function register({ username, password, passwordConfirm, name, phon
   formData.append('studentCardImage', studentCardImage)
 
   return apiRequest('/api/auth/register', {
+    skipAuth: true,
     method: 'POST',
     body: formData,
   })

@@ -24,7 +24,7 @@
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
-  color-scheme: light dark;
+  color-scheme: light;
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
@@ -59,13 +59,13 @@
 
 html {
   min-height: 100%;
-  background: linear-gradient(to bottom, #4585ff, #b2cbff) no-repeat;
-  background-attachment: fixed;
+  background: #b2cbff; /* 하단 overscroll — 그라디언트 끝 색상 */
 }
 
 body {
   margin: 0;
-  background: transparent;
+  min-height: 100%;
+  background: linear-gradient(to bottom, #4585ff, #b2cbff);
 }
 
 #root {
