@@ -59,6 +59,10 @@ Figma에서 내보낸 차트 SVG(`chart-group1~3.svg`)는 `width="100%" height="
 - figma-desktop mcp 서버 사용하여 프레임대로 퍼블리싱
 - 이미지 파일은 recheck-fe/src/assets 파일에서 찾기
 
+## API 연동
+- swagger url : https://api.reajoucheck.site/swagger-ui/index.html#
+- bacjend server url : api.reajoucheck.site
+
 ## 🪴 Branch Convention (GitHub Flow)
 
 - `main`: 배포 가능한 브랜치, 항상 배포 가능한 상태를 유지
