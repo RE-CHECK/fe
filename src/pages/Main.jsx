@@ -11,6 +11,8 @@ import chartG1    from '../assets/image/chart-group1.svg'
 import chartG2    from '../assets/image/chart-group2.svg'
 import chartG3    from '../assets/image/chart-group3.svg'
 import { getMyDashboard } from '../api/users'
+import { getTotalParticipation, getTotalAllPayment, getCollegeTotalPayment } from '../api/receipts'
+import { getCurrentWeek } from '../api/weeks'
 
 const DAYS   = ['월', '화', '수', '목', '금', '토', '일']
 const LEGEND = [
@@ -23,15 +25,35 @@ const LEGEND = [
 export default function Main() {
   const navigate = useNavigate()
   const [showBattleModal, setShowBattleModal] = useState(false)
+  const [currentWeek, setCurrentWeek] = useState(null)
   const [user, setUser] = useState({ name: '', college: '', spent: '' })
+  const [totalParticipation, setTotalParticipation] = useState('')
+  const [totalAllPayment, setTotalAllPayment] = useState('')
+  const [collegeTotalPayment, setCollegeTotalPayment] = useState('')
 
   useEffect(() => {
+    getCurrentWeek()
+      .then(data => setCurrentWeek(data.weekNumber))
+      .catch(() => {})
+
     getMyDashboard()
       .then(data => setUser({
         name: data.name,
         college: data.collegeName,
         spent: `${data.totalPaymentAmount.toLocaleString()}원`,
       }))
+      .catch(() => {})
+
+    getTotalParticipation()
+      .then(data => setTotalParticipation(data.totalParticipationCount.toLocaleString()))
+      .catch(() => {})
+
+    getTotalAllPayment()
+      .then(data => setTotalAllPayment(data.totalAllPaymentAmount.toLocaleString()))
+      .catch(() => {})
+
+    getCollegeTotalPayment()
+      .then(data => setCollegeTotalPayment(data.totalPaymentAmount.toLocaleString()))
       .catch(() => {})
   }, [])
 
@@ -64,14 +86,14 @@ export default function Main() {
       <div className="main__stat-block">
         <div className="main__pill main__pill--yellow">총 누적 참여 횟수</div>
         <p className="main__stat-num">
-          7,191,475<span className="main__stat-unit">명</span>
+          {totalParticipation}<span className="main__stat-unit">명</span>
         </p>
       </div>
 
       <div className="main__stat-block">
         <div className="main__pill main__pill--red">총 누적 소비 금액</div>
         <p className="main__stat-num">
-          27,191,475<span className="main__stat-unit">원</span>
+          {totalAllPayment}<span className="main__stat-unit">원</span>
         </p>
       </div>
 
@@ -80,7 +102,7 @@ export default function Main() {
           총 {user.college} 누적 소비 금액
         </div>
         <p className="main__stat-num">
-          91,475<span className="main__stat-unit">원</span>
+          {collegeTotalPayment}<span className="main__stat-unit">원</span>
         </p>
       </div>
 
@@ -136,7 +158,11 @@ export default function Main() {
       <div className="main__bottom">
         <div className="main__bottom-card main__bottom-card--dark">
           <p className="main__bottom-big">RANK</p>
-          <button className="main__bottom-btn main__bottom-btn--white" onClick={() => setShowBattleModal(true)}>대결현황</button>
+          <button className="main__bottom-btn main__bottom-btn--white" onClick={() => {
+            if (currentWeek === 2) navigate('/battle/week2')
+            else if (currentWeek === 3) navigate('/battle/week3')
+            else setShowBattleModal(true)
+          }}>대결현황</button>
         </div>
         <div className="main__bottom-card main__bottom-card--light">
           <p className="main__bottom-big main__bottom-big--blue">GO!</p>
