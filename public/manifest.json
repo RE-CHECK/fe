@@ -1,0 +1,16 @@
+{
+  "name": "RE : AJOU CHECK",
+  "short_name": "RE:AJOU CHECK",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#4585ff",
+  "theme_color": "#4585ff",
+  "icons": [
+    {
+      "src": "/파비콘.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
