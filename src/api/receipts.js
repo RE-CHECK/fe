@@ -11,6 +11,18 @@ export async function analyzeReceipt(imageFile) {
   })
 }
 
+export async function getTotalParticipation() {
+  return apiRequest('/api/receipts/total-participation')
+}
+
+export async function getTotalAllPayment() {
+  return apiRequest('/api/receipts/total-all-payment')
+}
+
+export async function getCollegeTotalPayment() {
+  return apiRequest('/api/receipts/college-total-payment')
+}
+
 // 사용자 확인 후 최종 저장 — S3 업로드 + DB 저장
 export async function confirmReceipt(imageFile, ocrData) {
   const formData = new FormData()
