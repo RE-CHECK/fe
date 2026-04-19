@@ -7,39 +7,76 @@ import bubbleLeft   from '../assets/icon/bubble-left.svg'
 import bubbleRight  from '../assets/icon/bubble-right.svg'
 import char1        from '../assets/image/3.서브 캐릭터 기본형1 1.svg'
 import char2        from '../assets/image/4.서브 캐릭터 기본형2 1.svg'
+import AlertModal   from '../components/AlertModal'
+import { analyzeReceipt, confirmReceipt } from '../api/receipts'
 
 export default function ReceiptUpload() {
   const navigate = useNavigate()
   const fileInputRef = useRef(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [receiptData, setReceiptData] = useState(null)
+  const [isConfirming, setIsConfirming] = useState(false)
+  const [receiptData, setReceiptData] = useState(null)  // OCR 분석 결과
+  const [imageFile, setImageFile] = useState(null)      // confirm 때 재사용
   const [isConfirmed, setIsConfirmed] = useState(false)
+  const [errorModal, setErrorModal] = useState(null)
 
-  function handleFile(e) {
+  // 1단계: 이미지 선택 → OCR 분석
+  async function handleFile(e) {
     const file = e.target.files[0]
-    if (file) {
-      setIsLoading(true)
-      // TODO: API 연동 — 아래 setTimeout을 실제 API 호출로 교체
-      setTimeout(() => {
-        setReceiptData({
-          storeName: '사랑집',
-          amount: '20,000원',
-          cardCompany: '국민은행',
-        })
-        setIsLoading(false)
-      }, 3000)
+    if (!file) return
+
+    setIsLoading(true)
+    try {
+      const data = await analyzeReceipt(file)
+      setImageFile(file)
+      setReceiptData({
+        storeName: data.storeName,
+        amount: `${data.paymentAmount.toLocaleString()}원`,
+        cardCompany: data.cardCompany,
+        raw: data,  // confirm 전송용 원본 보관
+      })
+    } catch (err) {
+      if (fileInputRef.current) fileInputRef.current.value = ''
+      setErrorModal({ title: '분석 실패', desc: err.message || '잠시 후 다시 시도해주세요' })
+    } finally {
+      setIsLoading(false)
     }
   }
 
+  // 2단계: 사용자 확인 → 최종 저장
+  async function handleConfirm() {
+    if (!imageFile || !receiptData || isConfirming) return
+
+    setIsConfirming(true)
+    try {
+      await confirmReceipt(imageFile, receiptData.raw)
+      setIsConfirmed(true)
+    } catch (err) {
+      setErrorModal({ title: '업로드 실패', desc: err.message || '잠시 후 다시 시도해주세요' })
+    } finally {
+      setIsConfirming(false)
+    }
+  }
+
+  // 다시 찍기: API 호출 없이 상태만 초기화
   function handleRetake() {
     setIsLoading(false)
     setReceiptData(null)
+    setImageFile(null)
     setIsConfirmed(false)
     if (fileInputRef.current) fileInputRef.current.value = ''
   }
 
   return (
     <div className="upload">
+
+      {errorModal && (
+        <AlertModal
+          title={errorModal.title}
+          desc={errorModal.desc}
+          onClose={() => setErrorModal(null)}
+        />
+      )}
 
       {/* ── 헤더 ── */}
       <div className="upload__header">
@@ -139,9 +176,10 @@ export default function ReceiptUpload() {
             <button
               id="btn-upload-finish"
               className="upload__btn upload__btn--blue upload__btn--wide"
-              onClick={() => setIsConfirmed(true)}
+              onClick={handleConfirm}
+              disabled={isConfirming}
             >
-              네, 맞아요
+              {isConfirming ? '저장 중...' : '네, 맞아요'}
             </button>
           </>
         ) : isLoading ? (
