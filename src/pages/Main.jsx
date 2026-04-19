@@ -12,6 +12,7 @@ import chartG2    from '../assets/image/chart-group2.svg'
 import chartG3    from '../assets/image/chart-group3.svg'
 import { getMyDashboard } from '../api/users'
 import { getTotalParticipation, getTotalAllPayment, getCollegeTotalPayment } from '../api/receipts'
+import { getCurrentWeek } from '../api/weeks'
 
 const DAYS   = ['월', '화', '수', '목', '금', '토', '일']
 const LEGEND = [
@@ -24,12 +25,17 @@ const LEGEND = [
 export default function Main() {
   const navigate = useNavigate()
   const [showBattleModal, setShowBattleModal] = useState(false)
+  const [currentWeek, setCurrentWeek] = useState(null)
   const [user, setUser] = useState({ name: '', college: '', spent: '' })
   const [totalParticipation, setTotalParticipation] = useState('')
   const [totalAllPayment, setTotalAllPayment] = useState('')
   const [collegeTotalPayment, setCollegeTotalPayment] = useState('')
 
   useEffect(() => {
+    getCurrentWeek()
+      .then(data => setCurrentWeek(data.weekNumber))
+      .catch(() => {})
+
     getMyDashboard()
       .then(data => setUser({
         name: data.name,
@@ -152,7 +158,11 @@ export default function Main() {
       <div className="main__bottom">
         <div className="main__bottom-card main__bottom-card--dark">
           <p className="main__bottom-big">RANK</p>
-          <button className="main__bottom-btn main__bottom-btn--white" onClick={() => setShowBattleModal(true)}>대결현황</button>
+          <button className="main__bottom-btn main__bottom-btn--white" onClick={() => {
+            if (currentWeek === 2) navigate('/battle/week2')
+            else if (currentWeek === 3) navigate('/battle/week3')
+            else setShowBattleModal(true)
+          }}>대결현황</button>
         </div>
         <div className="main__bottom-card main__bottom-card--light">
           <p className="main__bottom-big main__bottom-big--blue">GO!</p>
