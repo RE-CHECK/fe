@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Main.css'
 import AlertModal from '../components/AlertModal'
@@ -10,9 +10,7 @@ import ellipse189 from '../assets/icon/Ellipse 189.svg'
 import chartG1    from '../assets/image/chart-group1.svg'
 import chartG2    from '../assets/image/chart-group2.svg'
 import chartG3    from '../assets/image/chart-group3.svg'
-
-// TODO: API 연동 시 props 또는 전역 상태로 교체
-const USER = { name: '김아주', college: '경영대', spent: '230,000원' }
+import { getMyDashboard } from '../api/users'
 
 const DAYS   = ['월', '화', '수', '목', '금', '토', '일']
 const LEGEND = [
@@ -25,6 +23,18 @@ const LEGEND = [
 export default function Main() {
   const navigate = useNavigate()
   const [showBattleModal, setShowBattleModal] = useState(false)
+  const [user, setUser] = useState({ name: '', college: '', spent: '' })
+
+  useEffect(() => {
+    getMyDashboard()
+      .then(data => setUser({
+        name: data.name,
+        college: data.collegeName,
+        spent: `${data.totalPaymentAmount.toLocaleString()}원`,
+      }))
+      .catch(() => {})
+  }, [])
+
   return (
     <div className="main">
 
@@ -44,10 +54,10 @@ export default function Main() {
       <div className="main__card">
         <img className="main__card-asset" src={asset21} alt="" />
         <div className="main__card-mascot"><img src={mascotImg} alt="" /></div>
-        <p className="main__card-name">{USER.name}</p>
-        <p className="main__card-college">{USER.college}</p>
+        <p className="main__card-name">{user.name}</p>
+        <p className="main__card-college">{user.college}</p>
         <p className="main__card-label">지금까지 얼마 썼나요?</p>
-        <p className="main__card-amount">{USER.spent}</p>
+        <p className="main__card-amount">{user.spent}</p>
       </div>
 
       {/* ── 통계 ── */}
@@ -67,7 +77,7 @@ export default function Main() {
 
       <div className="main__stat-block main__stat-block--last">
         <div className="main__pill main__pill--green">
-          총 {USER.college} 누적 소비 금액
+          총 {user.college} 누적 소비 금액
         </div>
         <p className="main__stat-num">
           91,475<span className="main__stat-unit">원</span>
