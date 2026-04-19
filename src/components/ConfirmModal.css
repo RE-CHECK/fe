@@ -1,0 +1,75 @@
+/* 피그마: 흰 배경 + 검정 테두리, X 닫기, "바꾸시겠습니까?", 네/아니오 */
+
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.confirm-modal {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #000000;
+  width: min(76vw, 300px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── 닫기 버튼 ── */
+.confirm-modal__close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #000000;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+/* ── 메시지 ── */
+.confirm-modal__message {
+  margin: 0;
+  padding: 40px 16px 28px;
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #000000;
+  text-align: center;
+}
+
+/* ── 하단 버튼 영역 ── */
+.confirm-modal__footer {
+  display: flex;
+  border-top: 1px solid #000000;
+}
+
+.confirm-modal__btn {
+  flex: 1;
+  height: 44px;
+  background: none;
+  border: none;
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  color: #000000;
+  cursor: pointer;
+}
+
+.confirm-modal__btn:hover {
+  background: #f5f5f5;
+}
+
+/* 네 | 아니오 사이 세로 구분선 */
+.confirm-modal__divider {
+  width: 1px;
+  background: #000000;
+  flex-shrink: 0;
+}

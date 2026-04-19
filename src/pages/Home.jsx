@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import './Home.css'
 
 import img244X1    from '../assets/image/자산 24@4x 1.svg'
@@ -9,6 +10,7 @@ import group110    from '../assets/icon/Group110.svg'
 import group114    from '../assets/icon/Group114.svg'
 
 export default function Home() {
+  const navigate = useNavigate()
   return (
     <div className="home">
 
@@ -40,12 +42,12 @@ export default function Home() {
       </div>
 
       {/* START! 버튼 배경 */}
-      <div className="home__btn-bg home__btn-bg--start" />
-      <p className="home__btn-text home__btn-text--start">START!</p>
+      <button className="home__btn-bg home__btn-bg--start" onClick={() => navigate('/login')} />
+      <p className="home__btn-text home__btn-text--start" onClick={() => navigate('/login')}>START!</p>
 
       {/* 회원가입 버튼 배경 */}
-      <div className="home__btn-bg home__btn-bg--signup" />
-      <p className="home__btn-text home__btn-text--signup">회원가입</p>
+      <button className="home__btn-bg home__btn-bg--signup" onClick={() => navigate('/signup')} />
+      <p className="home__btn-text home__btn-text--signup" onClick={() => navigate('/signup')}>회원가입</p>
 
       {/* RE:AJOU CHECK 마스코트 이미지 */}
       <div className="home__mascot-wrap">
