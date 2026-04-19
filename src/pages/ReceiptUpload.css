@@ -271,6 +271,89 @@
   cursor: default;
 }
 
+/* 파란 버튼 넓은 버전 (소비금액 입력하기) */
+/*
+  Figma: w=1211→85.76cqw, h=222→15.72cqw, radius=88.152→6.24cqw
+*/
+.upload__btn--wide {
+  width: 85.76cqw;
+  height: 15.72cqw;
+  font-size: 5.67cqw;
+  letter-spacing: 0.057cqw;
+  margin-top: 3cqw;
+}
+
+/* 노란 버튼 (다시 찍을래요) */
+/*
+  Figma: bg=#fdbd28, w=478.514→33.89cqw, h=170.093→12.05cqw
+*/
+.upload__btn--yellow {
+  background: #fdbd28;
+  width: 33.89cqw;
+  margin-bottom: 2cqw;
+}
+
+/* ── 영수증 결과 행 목록 ── */
+.upload__receipt-rows {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5cqw;
+  margin: 4cqw 0 5cqw;
+}
+
+/* ── 영수증 결과 행 (라벨 + 값) ── */
+/*
+  Figma 행 높이: 159.131→11.27cqw
+  라벨: w=344.784→24.42cqw, radius=33.152→2.35cqw
+  값 박스: w=640.41→45.35cqw, radius=33.152→2.35cqw, border-dashed 3.074px→0.22cqw
+  라벨-값 간격: ~3.88cqw
+*/
+.upload__receipt-row {
+  display: flex;
+  align-items: center;
+  gap: 3.88cqw;
+}
+
+.upload__receipt-label {
+  flex-shrink: 0;
+  width: 24.42cqw;
+  height: 11.27cqw;
+  border-radius: 2.35cqw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 600;
+  font-size: 4.31cqw;
+  text-align: center;
+}
+
+.upload__receipt-label--green  { background: #ecf4eb; color: #486532; }
+.upload__receipt-label--orange { background: #f3e9d1; color: #ba7526; }
+.upload__receipt-label--red    { background: #f2dbda; color: #ab4b4f; }
+
+.upload__receipt-value {
+  flex: 1;
+  height: 11.27cqw;
+  border-radius: 2.35cqw;
+  border-width: 0.22cqw;
+  border-style: dashed;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 600;
+  font-size: 4.31cqw;
+  color: #000000;
+  text-align: center;
+}
+
+.upload__receipt-value--green  { border-color: #486532; }
+.upload__receipt-value--orange { border-color: #ba7526; }
+.upload__receipt-value--red    { border-color: #ab4b4f; }
+
 /* ── 스피너 ── */
 .upload__spinner-wrap {
   width: 22.71cqw;

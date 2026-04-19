@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './ReceiptUpload.css'
 import cameraImg    from '../assets/image/camera.png'
 import spinnerImg   from '../assets/image/image 91.svg'
@@ -8,16 +9,33 @@ import char1        from '../assets/image/3.서브 캐릭터 기본형1 1.svg'
 import char2        from '../assets/image/4.서브 캐릭터 기본형2 1.svg'
 
 export default function ReceiptUpload() {
+  const navigate = useNavigate()
   const fileInputRef = useRef(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [receiptData, setReceiptData] = useState(null)
+  const [isConfirmed, setIsConfirmed] = useState(false)
 
   function handleFile(e) {
     const file = e.target.files[0]
     if (file) {
       setIsLoading(true)
-      // TODO: API 연동 — 파일 업로드 처리
-      console.log('선택된 파일:', file.name)
+      // TODO: API 연동 — 아래 setTimeout을 실제 API 호출로 교체
+      setTimeout(() => {
+        setReceiptData({
+          storeName: '사랑집',
+          amount: '20,000원',
+          cardCompany: '국민은행',
+        })
+        setIsLoading(false)
+      }, 3000)
     }
+  }
+
+  function handleRetake() {
+    setIsLoading(false)
+    setReceiptData(null)
+    setIsConfirmed(false)
+    if (fileInputRef.current) fileInputRef.current.value = ''
   }
 
   return (
@@ -64,7 +82,70 @@ export default function ReceiptUpload() {
 
       {/* ── 흰색 카드 ── */}
       <div className="upload__card">
-        {isLoading ? (
+        {isConfirmed ? (
+          /* ── 완료 상태: 업로드 완료 화면 ── */
+          <>
+            <div className="upload__camera-wrap">
+              <img src={cameraImg} className="upload__camera-img" alt="카메라" />
+            </div>
+
+            <p className="upload__card-title">영수증 업로드 완료!</p>
+            <p className="upload__card-desc">참여해주셔서 감사합니다</p>
+
+            <button
+              className="upload__btn upload__btn--blue"
+              onClick={() => navigate('/main')}
+            >
+              소비 현황 확인하러 가기
+            </button>
+          </>
+        ) : receiptData ? (
+          /* ── 확인 상태: API 응답 후 영수증 정보 표시 ── */
+          <>
+            <div className="upload__camera-wrap">
+              <img src={cameraImg} className="upload__camera-img" alt="카메라" />
+            </div>
+
+            <p className="upload__card-title">영수증 정보가 맞나요?</p>
+
+            <div className="upload__receipt-rows">
+              <div className="upload__receipt-row">
+                <span className="upload__receipt-label upload__receipt-label--green">매장</span>
+                <span className="upload__receipt-value upload__receipt-value--green">
+                  {receiptData.storeName}
+                </span>
+              </div>
+              <div className="upload__receipt-row">
+                <span className="upload__receipt-label upload__receipt-label--orange">결제 금액</span>
+                <span className="upload__receipt-value upload__receipt-value--orange">
+                  {receiptData.amount}
+                </span>
+              </div>
+              <div className="upload__receipt-row">
+                <span className="upload__receipt-label upload__receipt-label--red">카드사</span>
+                <span className="upload__receipt-value upload__receipt-value--red">
+                  {receiptData.cardCompany}
+                </span>
+              </div>
+            </div>
+
+            <button
+              className="upload__btn upload__btn--yellow"
+              onClick={handleRetake}
+            >
+              다시 찍을래요
+            </button>
+
+            <button
+              id="btn-upload-finish"
+              className="upload__btn upload__btn--blue upload__btn--wide"
+              onClick={() => setIsConfirmed(true)}
+            >
+              네, 맞아요
+            </button>
+          </>
+        ) : isLoading ? (
+          /* ── 로딩 상태: 스피너 ── */
           <>
             <div className="upload__spinner-wrap">
               <img src={spinnerImg} className="upload__spinner" alt="로딩중" />
@@ -76,8 +157,8 @@ export default function ReceiptUpload() {
             </button>
           </>
         ) : (
+          /* ── 초기 상태: 업로드 폼 ── */
           <>
-            {/* 카메라 아이콘 */}
             <div className="upload__camera-wrap">
               <img src={cameraImg} className="upload__camera-img" alt="카메라" />
             </div>
@@ -85,8 +166,8 @@ export default function ReceiptUpload() {
             <p className="upload__card-title">영수증 촬영/업로드</p>
             <p className="upload__card-desc">카드번호와 이름은 자동으로 가려집니다</p>
 
-            {/* 사진 등록 버튼 */}
             <button
+              id="btn-upload-receipt"
               className="upload__btn upload__btn--blue"
               onClick={() => fileInputRef.current.click()}
             >
