@@ -2,31 +2,39 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Login.css'
 import AlertModal from '../components/AlertModal'
-
-// TODO: 실제 API 연동 시 교체하세요
-function verifyLogin(userId, password) {
-  if (userId === 'admin' && password === '1234') return 'admin'
-  if (userId === 'wndyd2425' && password === '1234') return 'user'
-  return null
-}
+import { login } from '../api/auth'
 
 export default function Login() {
   const navigate = useNavigate()
   const [form, setForm] = useState({ userId: '', password: '' })
   const [showModal, setShowModal] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const isValid = form.userId && form.password
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    if (!isValid) return
-    const role = verifyLogin(form.userId, form.password)
-    if (role === 'admin') {
-      navigate('/admin')
-    } else if (role === 'user') {
-      navigate('/main')
-    } else {
+    if (!isValid || isLoading) return
+
+    setIsLoading(true)
+    try {
+      await login(form.userId, form.password)
+
+      window.dataLayer = window.dataLayer || []
+      window.dataLayer.push({ event: 'user_auth_success', user_id: form.userId })
+
+      // 관리자 계정은 /admin, 일반 유저는 /main
+      if (form.userId === 'admin') {
+        navigate('/admin')
+      } else {
+        navigate('/main')
+      }
+    } catch (err) {
+      setErrorMsg(err.message || '아이디 또는 비밀번호를 확인해주세요')
       setShowModal(true)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -36,7 +44,7 @@ export default function Login() {
       {showModal && (
         <AlertModal
           title="로그인 정보가 올바르지 않습니다"
-          desc="아이디 또는 비밀번호를 확인해주세요"
+          desc={errorMsg}
           onClose={() => setShowModal(false)}
         />
       )}
@@ -76,9 +84,9 @@ export default function Login() {
         <button
           type="submit"
           className={`login__submit-btn${isValid ? ' login__submit-btn--active' : ''}`}
-          disabled={!isValid}
+          disabled={!isValid || isLoading}
         >
-          확인
+          {isLoading ? '로그인 중...' : '확인'}
         </button>
 
       </form>

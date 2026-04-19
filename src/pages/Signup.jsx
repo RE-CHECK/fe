@@ -1,8 +1,8 @@
 import { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Signup.css'
-import { colleges, departments } from '../data/academicData'
 import arrowIcon from '../assets/icon/arrow-drop-down.svg'
+import { colleges, departments } from '../data/academicData'
 
 function formatPhone(value) {
   const digits = value.replace(/\D/g, '').slice(0, 11)
@@ -85,6 +85,19 @@ export default function Signup() {
     form.college &&
     form.department &&
     form.agreed
+
+  function handleNext() {
+    if (!isValid) return
+    navigate('/signup2', {
+      state: {
+        phone: form.phone,
+        name: form.name,
+        studentId: form.studentId,
+        departmentId: form.department.id,
+        photo: form.photo,
+      },
+    })
+  }
 
   return (
     <div className="signup">
@@ -204,10 +217,11 @@ export default function Signup() {
 
         {/* 다음 버튼 */}
         <button
+          id="btn-signup-step1"
           type="button"
           className={`signup__next-btn${isValid ? ' signup__next-btn--active' : ''}`}
           disabled={!isValid}
-          onClick={() => isValid && navigate('/signup2')}
+          onClick={handleNext}
         >
           다음
         </button>

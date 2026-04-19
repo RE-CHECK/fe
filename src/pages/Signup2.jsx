@@ -1,36 +1,39 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import './Signup2.css'
 import AlertModal from '../components/AlertModal'
-
-// TODO: 실제 API 연동 시 아래 함수를 교체하세요
-function checkIdDuplicate(userId) {
-  const DUPLICATE_IDS = ['test', 'admin', 'user']
-  return DUPLICATE_IDS.includes(userId.toLowerCase())
-}
+import { checkUsername, register } from '../api/auth'
 
 export default function Signup2() {
   const navigate = useNavigate()
+  const { state: step1 } = useLocation()
+
   const [form, setForm] = useState({
     userId: '',
     password: '',
     passwordConfirm: '',
   })
   const [idStatus, setIdStatus] = useState(null) // null | 'available' | 'duplicate'
-  const [showModal, setShowModal] = useState(false)
+  const [isCheckingId, setIsCheckingId] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [modal, setModal] = useState(null) // { title, desc }
 
   function handleUserIdChange(e) {
     setForm(f => ({ ...f, userId: e.target.value }))
     setIdStatus(null)
   }
 
-  function handleCheckId() {
-    if (!form.userId) return
-    if (checkIdDuplicate(form.userId)) {
-      setIdStatus('duplicate')
-      setShowModal(true)
-    } else {
+  async function handleCheckId() {
+    if (!form.userId || isCheckingId) return
+    setIsCheckingId(true)
+    try {
+      await checkUsername(form.userId)
       setIdStatus('available')
+    } catch (err) {
+      setIdStatus('duplicate')
+      setModal({ title: '이미 사용 중인 아이디입니다', desc: '다른 아이디를 입력해주세요' })
+    } finally {
+      setIsCheckingId(false)
     }
   }
 
@@ -39,15 +42,44 @@ export default function Signup2() {
 
   const isValid = form.userId && idStatus === 'available' && form.password && passwordMatch
 
+  async function handleSubmit(e) {
+    e.preventDefault()
+    if (!isValid || isSubmitting) return
+    setIsSubmitting(true)
+    try {
+      await register({
+        username: form.userId,
+        password: form.password,
+        passwordConfirm: form.passwordConfirm,
+        name: step1.name,
+        phoneNumber: step1.phone,
+        studentNumber: Number(step1.studentId),
+        departmentId: step1.departmentId,
+        studentCardImage: step1.photo,
+      })
+
+      window.dataLayer = window.dataLayer || []
+      window.dataLayer.push({ event: 'user_auth_success', user_id: form.userId })
+
+      navigate('/')
+    } catch (err) {
+      setModal({
+        title: '회원가입에 실패했습니다',
+        desc: err.message || '잠시 후 다시 시도해주세요',
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <div className="s2">
 
-      {/* ── 중복 모달 ── */}
-      {showModal && (
+      {modal && (
         <AlertModal
-          title="이미 사용 중인 아이디입니다"
-          desc="다른 아이디를 입력해주세요"
-          onClose={() => setShowModal(false)}
+          title={modal.title}
+          desc={modal.desc}
+          onClose={() => setModal(null)}
         />
       )}
 
@@ -66,7 +98,7 @@ export default function Signup2() {
       </section>
 
       {/* ── 폼 ── */}
-      <form className="s2__form" onSubmit={e => e.preventDefault()}>
+      <form className="s2__form" onSubmit={handleSubmit}>
 
         {/* 아이디 */}
         <div className="s2__field">
@@ -82,8 +114,9 @@ export default function Signup2() {
               type="button"
               className={`s2__check-btn${idStatus === 'available' ? ' s2__check-btn--done' : ''}`}
               onClick={handleCheckId}
+              disabled={isCheckingId}
             >
-              {idStatus === 'available' ? '확인완료' : '중복확인'}
+              {idStatus === 'available' ? '확인완료' : isCheckingId ? '확인 중...' : '중복확인'}
             </button>
           </div>
           {idStatus === 'available' && (
@@ -120,12 +153,12 @@ export default function Signup2() {
 
         {/* 완료 버튼 */}
         <button
+          id="btn-signup-finish"
           type="submit"
           className={`s2__submit-btn${isValid ? ' s2__submit-btn--active' : ''}`}
-          disabled={!isValid}
-          onClick={() => isValid && navigate('/')}
+          disabled={!isValid || isSubmitting}
         >
-          완료
+          {isSubmitting ? '처리 중...' : '완료'}
         </button>
 
       </form>
