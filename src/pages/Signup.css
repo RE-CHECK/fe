@@ -21,6 +21,22 @@
   margin-bottom: 2.91cqw;
 }
 
+.signup__back {
+  display: flex;
+  align-items: center;
+  height: 11.45cqw;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  margin-bottom: 2cqw;
+}
+
+.signup__back svg {
+  width: 2.80cqw;
+  height: 5.09cqw;
+}
+
 .signup__title {
   margin: 0;
   font-family: '온글잎 박다현체', sans-serif;
