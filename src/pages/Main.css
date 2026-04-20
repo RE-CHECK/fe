@@ -370,7 +370,7 @@
   min-height: 46.76cqw;
   box-sizing: border-box;
 }
-.main__bottom-card--dark  { background: #5e5e5e; }
+.main__bottom-card--dark  { background: #0088ff; }
 .main__bottom-card--light { background: #ffffff; }
 
 /* RANK / GO! 텍스트: font-size=184.859→13.41cqw */
@@ -398,7 +398,7 @@
 }
 .main__bottom-btn--white {
   background: #ffffff;
-  color: #5e5e5e;
+  color: #0088ff;
 }
 .main__bottom-btn--blue {
   background: #0088ff;
