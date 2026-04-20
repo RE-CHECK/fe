@@ -69,7 +69,9 @@ Figma에서 내보낸 차트 SVG(`chart-group1~3.svg`)는 `width="100%" height="
   - 의과대학 : 검정
 
 # API 연동
-## ReCheck API 명세서
+# ReCheck API 명세서
+
+> **docs/API.md 참고**
 
 > **Base URL**: `https://api.reajoucheck.site` 
 > **Content-Type**: `application/json` (파일 업로드 제외)
