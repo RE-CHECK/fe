@@ -4,8 +4,6 @@ import './Main.css'
 import AlertModal from '../components/AlertModal'
 import asset21    from '../assets/image/자산 21@4x 1.svg'
 import mascotImg  from '../assets/image/자산 11@4x 1.svg'
-import group110   from '../assets/icon/Group110.svg'
-import group114   from '../assets/icon/Group114.svg'
 import ellipse189 from '../assets/icon/Ellipse 189.svg'
 import chartG1    from '../assets/image/chart-group1.svg'
 import chartG2    from '../assets/image/chart-group2.svg'
@@ -65,10 +63,6 @@ export default function Main() {
         <p className="main__title">RE : AJOU CHECK</p>
         <p className="main__subtitle">캠퍼스 챌린지</p>
       </div>
-
-      {/* 별 장식 — .main 기준 absolute (카드 상단 오버랩) */}
-      <div className="main__star main__star--r"><img src={group110} alt="" /></div>
-      <div className="main__star main__star--m"><img src={group114} alt="" /></div>
 
       <hr className="main__divider" />
 
