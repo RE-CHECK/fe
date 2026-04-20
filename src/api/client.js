@@ -15,12 +15,21 @@ export async function apiRequest(path, options = {}) {
     headers['Content-Type'] = 'application/json'
   }
 
-  const res = await fetch(`${BASE_URL}${path}`, { ...fetchOptions, headers })
+  const res = await fetch(`${BASE_URL}${path}`, {
+    ...fetchOptions,
+    headers,
+    credentials: 'include', // httpOnly 쿠키(refreshToken) 전송
+  })
 
-  // 401: 토큰 만료 → 로컬스토리지 초기화 후 로그인 페이지로 이동
+  // 서버가 새 액세스 토큰을 발급한 경우 응답 헤더에서 저장
+  const newToken = res.headers.get('Authorization')
+  if (newToken) {
+    localStorage.setItem('accessToken', newToken.replace('Bearer ', ''))
+  }
+
+  // 401: 리프레시 토큰도 만료 → 로그인 페이지로 이동
   if (res.status === 401 && !skipAuth) {
     localStorage.removeItem('accessToken')
-    localStorage.removeItem('refreshToken')
     window.location.href = '/login'
     return
   }

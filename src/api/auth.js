@@ -7,7 +7,6 @@ export async function login(username, password) {
     body: JSON.stringify({ username, password }),
   })
   localStorage.setItem('accessToken', data.accessToken)
-  localStorage.setItem('refreshToken', data.refreshToken)
   return data
 }
 
@@ -15,6 +14,12 @@ export async function checkUsername(username) {
   await apiRequest(`/api/auth/check-username?username=${encodeURIComponent(username)}`, {
     skipAuth: true,
   })
+}
+
+export async function logout() {
+  await apiRequest('/api/auth/logout', { method: 'POST' })
+  localStorage.removeItem('accessToken')
+  window.location.href = '/login'
 }
 
 export async function register({ username, password, passwordConfirm, name, phoneNumber, studentNumber, departmentId, studentCardImage }) {
