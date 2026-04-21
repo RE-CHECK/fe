@@ -134,8 +134,8 @@ Figma에서 내보낸 차트 SVG(`chart-group1~3.svg`)는 `width="100%" height="
   "code": 200,
   "message": "요청이 성공적으로 처리되었습니다.",
   "data": {
-    "accessToken": "eyJhbGciOiJIUzI1NiJ9...",
-    "refreshToken": "eyJhbGciOiJIUzI1NiJ9..."
+    "id": 2,
+    "accessToken": "eyJhbGciOiJIUzI1NiJ9..."
   }
 }
 ```
@@ -179,7 +179,9 @@ Figma에서 내보낸 차트 SVG(`chart-group1~3.svg`)는 `width="100%" height="
   "success": true,
   "code": 200,
   "message": "요청이 성공적으로 처리되었습니다.",
-  "data": null
+  "data": {
+    "id": 405
+  }
 }
 ```
 

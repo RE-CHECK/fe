@@ -19,10 +19,10 @@ export default function Login() {
 
     setIsLoading(true)
     try {
-      await login(form.userId, form.password)
+      const data = await login(form.userId, form.password)
 
       window.dataLayer = window.dataLayer || []
-      window.dataLayer.push({ event: 'user_auth_success', user_id: form.userId })
+      window.dataLayer.push({ event: 'user_auth_success', user_id: String(data.id) })
 
       // 관리자 계정은 /admin, 일반 유저는 /main
       if (form.userId === 'admin') {
