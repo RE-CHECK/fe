@@ -58,7 +58,7 @@ Figma에서 내보낸 차트 SVG(`chart-group1~3.svg`)는 `width="100%" height="
 ### 퍼블리싱
 - figma-desktop mcp 서버 사용하여 프레임대로 퍼블리싱
 - 이미지 파일은 recheck-fe/src/assets 파일에서 찾기
-- 단과대별 마스코트는 전부 다름
+- 2주차 대진의 단과대별 마스코트는 전부 다름
   - 경영대학 : 하늘색 
   - 공과대학 : 회색
   - 소프트웨어융합대학 : 남색

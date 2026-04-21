@@ -213,13 +213,13 @@ export default function Signup() {
         {/* 학생증 사진 등록 */}
         <div className="signup__field">
           <label className="signup__label">학생증 사진 등록</label>
-          <p className="signup__field-desc">모바일 학생증 혹은 실물 학생증 사진을 업로드 해주세요</p>
+          <p className="signup__field-desc">실물 학생증 사진을 업로드 해주세요</p>
           <button
             type="button"
             className="signup__upload-btn"
             onClick={handleUploadClick}
           >
-            {form.photo ? form.photo.name : '사진 등록하기'}
+            {form.photo ? '다시찍기' : '사진 등록하기'}
           </button>
           <input
             ref={fileInputRef}

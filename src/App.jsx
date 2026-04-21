@@ -9,6 +9,8 @@ import AdminMain from './pages/admin/AdminMain'
 import WeeklyActivation from './pages/admin/WeeklyActivation'
 import UserDashboard from './pages/admin/UserDashboard'
 import CollegeSpending from './pages/admin/CollegeSpending'
+import BattleWeek2 from './pages/BattleWeek2'
+import BattleWeek3 from './pages/BattleWeek3'
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
       <Route path="/admin/weekly-activation" element={<WeeklyActivation />} />
       <Route path="/admin/user-dashboard" element={<UserDashboard />} />
       <Route path="/admin/college-spending" element={<CollegeSpending />} />
+      <Route path="/battle/week2" element={<BattleWeek2 />} />
+      <Route path="/battle/week3" element={<BattleWeek3 />} />
     </Routes>
   )
 }

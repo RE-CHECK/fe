@@ -23,6 +23,14 @@ export async function getCollegeTotalPayment() {
   return apiRequest('/api/receipts/college-total-payment')
 }
 
+export async function getWeek2Ranking() {
+  return apiRequest('/api/receipts/week2-ranking')
+}
+
+export async function getWeek3Challenge() {
+  return apiRequest('/api/receipts/week3-challenge')
+}
+
 // 사용자 확인 후 최종 저장 — S3 업로드 + DB 저장
 export async function confirmReceipt(imageFile, ocrData) {
   const formData = new FormData()
