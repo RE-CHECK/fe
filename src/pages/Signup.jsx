@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import './Signup.css'
 import arrowIcon from '../assets/icon/arrow-drop-down.svg'
 import { colleges, departments } from '../data/academicData'
+import CameraOverlay from '../components/CameraOverlay'
 
 function formatPhone(value) {
   const digits = value.replace(/\D/g, '').slice(0, 11)
@@ -64,6 +65,7 @@ export default function Signup() {
     agreed: false,
   })
   const fileInputRef = useRef(null)
+  const [showCamera, setShowCamera] = useState(false)
 
   const filteredDepts = form.college
     ? departments.filter(d => d.collegeId === form.college.id)
@@ -76,6 +78,24 @@ export default function Signup() {
   function handlePhotoChange(e) {
     const file = e.target.files[0]
     if (file) setForm(f => ({ ...f, photo: file }))
+  }
+
+  function handleUploadClick() {
+    if (navigator.mediaDevices?.getUserMedia) {
+      setShowCamera(true)
+    } else {
+      fileInputRef.current.click()
+    }
+  }
+
+  function handleCameraCapture(file) {
+    setForm(f => ({ ...f, photo: file }))
+    setShowCamera(false)
+  }
+
+  function handleGallery() {
+    setShowCamera(false)
+    setTimeout(() => fileInputRef.current.click(), 100)
   }
 
   const isValid =
@@ -101,9 +121,21 @@ export default function Signup() {
 
   return (
     <div className="signup">
+      {showCamera && (
+        <CameraOverlay
+          onCapture={handleCameraCapture}
+          onClose={() => setShowCamera(false)}
+          onGallery={handleGallery}
+        />
+      )}
 
       {/* ── 헤더 ── */}
       <header className="signup__header">
+        <button className="signup__back" onClick={() => navigate(-1)} aria-label="뒤로가기">
+          <svg width="11" height="20" viewBox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.5 1.5L1.5 10L9.5 18.5" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
         <p className="signup__title">RE : AJOU CHECK</p>
         <p className="signup__subtitle">캠퍼스 챌린지</p>
         <hr className="signup__divider" />
@@ -185,7 +217,7 @@ export default function Signup() {
           <button
             type="button"
             className="signup__upload-btn"
-            onClick={() => fileInputRef.current.click()}
+            onClick={handleUploadClick}
           >
             {form.photo ? form.photo.name : '사진 등록하기'}
           </button>

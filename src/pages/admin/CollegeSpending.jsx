@@ -1,15 +1,27 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import AlertModal from '../../components/AlertModal'
+import { downloadReceiptsCsv } from '../../api/admin'
 import './CollegeSpending.css'
 
 export default function CollegeSpending() {
   const navigate = useNavigate()
+  const [errorMsg, setErrorMsg] = useState('')
 
-  function handleCsvDownload() {
-    // TODO: API 연동 후 단과대별 소비금액 CSV 다운로드 구현
+  async function handleCsvDownload() {
+    try {
+      await downloadReceiptsCsv()
+    } catch (e) {
+      setErrorMsg(e.message)
+    }
   }
 
   return (
     <div className="college-spending">
+
+      {errorMsg && (
+        <AlertModal title="오류" desc={errorMsg} onClose={() => setErrorMsg('')} />
+      )}
 
       {/* ── 헤더 ── */}
       <div className="college-spending__header">
@@ -22,10 +34,8 @@ export default function CollegeSpending() {
 
       <hr className="college-spending__divider" />
 
-      {/* ── 타이틀 ── */}
       <p className="college-spending__title">단과대 소비금액</p>
 
-      {/* ── CSV 다운로드 버튼 ── */}
       <div className="college-spending__csv-wrap">
         <button className="college-spending__csv-btn" onClick={handleCsvDownload}>
           CSV 다운
