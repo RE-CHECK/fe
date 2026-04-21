@@ -1,0 +1,61 @@
+.su-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.52);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.su-modal {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 40px 28px 32px;
+  width: min(80vw, 320px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.18);
+}
+
+.su-modal__img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 6px;
+}
+
+.su-modal__title {
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: #222222;
+  text-align: center;
+}
+
+.su-modal__desc {
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #888888;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.su-modal__btn {
+  margin-top: 14px;
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: 24px;
+  background: #4585ff;
+  color: #ffffff;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+}

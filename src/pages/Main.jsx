@@ -88,8 +88,19 @@ export default function Main() {
 
       {/* ── 헤더 ── */}
       <div className="main__header">
-        <p className="main__title">RE : AJOU CHECK</p>
-        <p className="main__subtitle">캠퍼스 챌린지</p>
+        <div>
+          <p className="main__title">RE : AJOU CHECK</p>
+          <p className="main__subtitle">캠퍼스 챌린지</p>
+        </div>
+        <button
+          className="main__logout-btn"
+          onClick={() => {
+            localStorage.removeItem('accessToken')
+            navigate('/')
+          }}
+        >
+          로그아웃
+        </button>
       </div>
 
       <hr className="main__divider" />

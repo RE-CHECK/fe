@@ -136,11 +136,8 @@
 }
 
 .bw3__slot--draw {
-  padding-top: 12.3cqw;
-}
-
-.bw3__slot--pending {
-  padding-top: 12.3cqw;
+  /* Figma: char top=927, card top=1414 → 487px 노출 → 487/1378×100 */
+  padding-top: 35.34cqw;
 }
 
 /* ── 캐릭터 이미지 ── */
@@ -182,15 +179,10 @@
   min-height: 37.95cqw;
 }
 
-/* ── DRAW 카드 (임시 디자인 — 별도 피그마 프레임 대기 중) ── */
+/* ── DRAW 카드 ── */
+/* Figma: bg=#d8d8d8, h=523px → 37.95cqw (LOSE와 동일) */
 .bw3__card--draw {
-  background: #b0b8c8;
-  min-height: 42cqw;
-}
-
-/* ── PENDING 카드 ── */
-.bw3__card--pending {
-  background: #b0b8c8;
+  background: #d8d8d8;
   min-height: 37.95cqw;
 }
 
@@ -229,11 +221,7 @@
 }
 
 .bw3__result-text--draw {
-  color: #ffffff;
-}
-
-.bw3__result-text--pending {
-  color: rgba(255, 255, 255, 0.5);
+  color: #000000;
 }
 
 /* ── 금액 ── */
@@ -248,8 +236,7 @@
 }
 
 .bw3__card--lose .bw3__amount,
-.bw3__card--draw .bw3__amount,
-.bw3__card--pending .bw3__amount {
+.bw3__card--draw .bw3__amount {
   color: #444444;
 }
 
@@ -260,8 +247,7 @@
   vertical-align: baseline;
 }
 
-.bw3__amount--pending {
-  font-size: 3.5cqw;
-  font-weight: 600;
-  opacity: 0.55;
+/* DRAW 슬롯에서는 캐릭터가 슬롯보다 약간 더 넓음 (Figma: char 600px, card 557px) */
+.bw3__slot--draw .bw3__char {
+  width: 95%;
 }

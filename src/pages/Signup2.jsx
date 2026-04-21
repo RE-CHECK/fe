@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import './Signup2.css'
 import AlertModal from '../components/AlertModal'
+import SignupSuccessModal from '../components/SignupSuccessModal'
 import { checkUsername, register } from '../api/auth'
 
 export default function Signup2() {
@@ -17,6 +18,7 @@ export default function Signup2() {
   const [isCheckingId, setIsCheckingId] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [modal, setModal] = useState(null) // { title, desc }
+  const [showSuccess, setShowSuccess] = useState(false)
 
   function handleUserIdChange(e) {
     setForm(f => ({ ...f, userId: e.target.value }))
@@ -61,7 +63,7 @@ export default function Signup2() {
       window.dataLayer = window.dataLayer || []
       window.dataLayer.push({ event: 'user_auth_success', user_id: form.userId })
 
-      navigate('/')
+      setShowSuccess(true)
     } catch (err) {
       setModal({
         title: '회원가입에 실패했습니다',
@@ -74,6 +76,8 @@ export default function Signup2() {
 
   return (
     <div className="s2">
+
+      {showSuccess && <SignupSuccessModal />}
 
       {modal && (
         <AlertModal

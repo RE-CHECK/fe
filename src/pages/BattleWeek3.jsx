@@ -5,6 +5,7 @@ import { getWeek3Challenge } from '../api/receipts'
 
 import char1 from '../assets/image/3주차_1.svg'
 import char2 from '../assets/image/3주차_2.svg'
+import charDraw from '../assets/image/3주차_무승부.svg'
 
 // ── 하드코딩 대진표 (3주차 고정) ────────────────────────────
 // API는 matchup 인덱스 순서대로 응답 (0: 23vs24, 1: 25vs26)
@@ -26,12 +27,9 @@ const MATCHUPS_CONFIG = [
 ]
 
 // ── 한 대진 카드 슬롯 (캐릭터 + 컬러박스) ────────────────────
+// result: 'win' | 'lose' | 'draw'
 function BattleSlot({ charSrc, label, result, amount }) {
-  // result: 'win' | 'lose' | 'draw' | 'pending'
-  const isWin = result === 'win'
-  const isLose = result === 'lose'
-
-  const resultText = isWin ? 'WIN' : isLose ? 'LOSE' : 'DRAW'
+  const resultText = result === 'win' ? 'WIN' : result === 'lose' ? 'LOSE' : 'DRAW'
 
   return (
     <div className={`bw3__slot bw3__slot--${result}`}>
@@ -40,10 +38,7 @@ function BattleSlot({ charSrc, label, result, amount }) {
         <span className="bw3__badge">{label}</span>
         <p className={`bw3__result-text bw3__result-text--${result}`}>{resultText}</p>
         <p className="bw3__amount">
-          {amount !== null
-            ? <>{amount.toLocaleString('ko-KR')}<span className="bw3__won">원</span></>
-            : <span className="bw3__amount--pending">집계 중</span>
-          }
+          {amount.toLocaleString('ko-KR')}<span className="bw3__won">원</span>
         </p>
       </div>
     </div>
@@ -52,18 +47,25 @@ function BattleSlot({ charSrc, label, result, amount }) {
 
 // ── 대진 섹션 ────────────────────────────────────────────────
 function MatchupSection({ config, data }) {
-  let year1Result, year2Result
+  // API가 항상 데이터를 반환 (집계 없으면 0 반환 → isDraw=true로 처리됨)
+  if (!data) return (
+    <section className="bw3__section">
+      <div className="bw3__store-badge" style={{ background: config.storeColor }}>
+        {config.storeName} 대결
+      </div>
+      <div className="bw3__standings">
+        <span className="bw3__year-name">{config.year1Label}</span>
+        <span className="bw3__vs">vs</span>
+        <span className="bw3__year-name">{config.year2Label}</span>
+      </div>
+    </section>
+  )
 
-  if (!data) {
-    year1Result = 'pending'
-    year2Result = 'pending'
-  } else if (data.isDraw) {
-    year1Result = 'draw'
-    year2Result = 'draw'
-  } else {
-    year1Result = data.year1Total >= data.year2Total ? 'win' : 'lose'
-    year2Result = data.year2Total > data.year1Total ? 'win' : 'lose'
-  }
+  const isDraw = data.isDraw
+  const year1Result = isDraw ? 'draw' : (data.year1Total >= data.year2Total ? 'win' : 'lose')
+  const year2Result = isDraw ? 'draw' : (data.year2Total > data.year1Total ? 'win' : 'lose')
+  const year1Char = isDraw ? charDraw : char1
+  const year2Char = isDraw ? charDraw : char2
 
   return (
     <section className="bw3__section">
@@ -82,16 +84,16 @@ function MatchupSection({ config, data }) {
       {/* 카드 대결 */}
       <div className="bw3__matchup">
         <BattleSlot
-          charSrc={char1}
+          charSrc={year1Char}
           label={config.year1Label}
           result={year1Result}
-          amount={data ? data.year1Total : null}
+          amount={data.year1Total}
         />
         <BattleSlot
-          charSrc={char2}
+          charSrc={year2Char}
           label={config.year2Label}
           result={year2Result}
-          amount={data ? data.year2Total : null}
+          amount={data.year2Total}
         />
       </div>
     </section>
