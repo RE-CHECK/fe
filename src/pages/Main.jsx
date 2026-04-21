@@ -108,7 +108,7 @@ export default function Main() {
       <div className="main__stat-block">
         <div className="main__pill main__pill--yellow">총 누적 참여 횟수</div>
         <p className="main__stat-num">
-          {totalParticipation}<span className="main__stat-unit">명</span>
+          {totalParticipation}<span className="main__stat-unit">회</span>
         </p>
       </div>
 

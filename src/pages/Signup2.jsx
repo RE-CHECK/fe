@@ -29,7 +29,7 @@ export default function Signup2() {
     try {
       await checkUsername(form.userId)
       setIdStatus('available')
-    } catch (err) {
+    } catch {
       setIdStatus('duplicate')
       setModal({ title: '이미 사용 중인 아이디입니다', desc: '다른 아이디를 입력해주세요' })
     } finally {
@@ -65,7 +65,7 @@ export default function Signup2() {
     } catch (err) {
       setModal({
         title: '회원가입에 실패했습니다',
-        desc: err.message || '잠시 후 다시 시도해주세요',
+        desc: (err instanceof Error ? err.message : null) || '잠시 후 다시 시도해주세요',
       })
     } finally {
       setIsSubmitting(false)
