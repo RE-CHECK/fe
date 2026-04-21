@@ -1,40 +1,48 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ConfirmModal from '../../components/ConfirmModal'
+import AlertModal from '../../components/AlertModal'
+import { getCurrentWeek, activateWeek, deactivateWeek } from '../../api/weeks'
 import './WeeklyActivation.css'
 
 const WEEKS = [
+  { id: 1, label: '1주차 활성화' },
   { id: 2, label: '2주차 활성화' },
   { id: 3, label: '3주차 활성화' },
 ]
 
 export default function WeeklyActivation() {
   const navigate = useNavigate()
-  // 현재 활성화된 주차 (null이면 전체 비활성화)
   const [activeWeek, setActiveWeek] = useState(null)
-  // 모달에서 확인 대기 중인 주차
   const [pendingWeek, setPendingWeek] = useState(null)
+  const [errorMsg, setErrorMsg] = useState('')
 
-  function handleWeekClick(weekId) {
-    setPendingWeek(weekId)
+  useEffect(() => {
+    getCurrentWeek()
+      .then(data => setActiveWeek(data.weekNumber))
+      .catch(() => {})
+  }, [])
+
+  async function handleConfirm() {
+    try {
+      const data = await activateWeek(pendingWeek)
+      setActiveWeek(data.weekNumber)
+    } catch (e) {
+      setErrorMsg(e.message)
+    } finally {
+      setPendingWeek(null)
+    }
   }
 
-  function handleConfirm() {
-    setActiveWeek(pendingWeek)
-    setPendingWeek(null)
-  }
-
-  function handleCancel() {
-    setPendingWeek(null)
-  }
-
-  function handleDeactivateAll() {
-    setPendingWeek('all')
-  }
-
-  function handleConfirmAll() {
-    setActiveWeek(null)
-    setPendingWeek(null)
+  async function handleConfirmAll() {
+    try {
+      const data = await deactivateWeek()
+      setActiveWeek(data.weekNumber)
+    } catch (e) {
+      setErrorMsg(e.message)
+    } finally {
+      setPendingWeek(null)
+    }
   }
 
   const pendingLabel = WEEKS.find(w => w.id === pendingWeek)?.label ?? ''
@@ -42,13 +50,16 @@ export default function WeeklyActivation() {
   return (
     <div className="weekly">
 
-      {/* ── 확인 모달 ── */}
       {pendingWeek !== null && (
         <ConfirmModal
           message={pendingWeek === 'all' ? '전체 비활성화 하시겠습니까?' : `${pendingLabel}로 바꾸시겠습니까?`}
           onConfirm={pendingWeek === 'all' ? handleConfirmAll : handleConfirm}
-          onCancel={handleCancel}
+          onCancel={() => setPendingWeek(null)}
         />
+      )}
+
+      {errorMsg && (
+        <AlertModal title="오류" desc={errorMsg} onClose={() => setErrorMsg('')} />
       )}
 
       {/* ── 헤더 ── */}
@@ -62,22 +73,20 @@ export default function WeeklyActivation() {
 
       <hr className="weekly__divider" />
 
-      {/* ── 타이틀 ── */}
       <p className="weekly__title">주차별 활성화 버튼</p>
 
-      {/* ── 버튼 목록 ── */}
       <div className="weekly__menu">
         {WEEKS.map(({ id, label }) => (
           <button
             key={id}
             className={`weekly__btn${activeWeek === id ? ' weekly__btn--active' : ''}`}
-            onClick={() => handleWeekClick(id)}
+            onClick={() => setPendingWeek(id)}
           >
             {label}
           </button>
         ))}
 
-        <button className="weekly__btn" onClick={handleDeactivateAll}>
+        <button className="weekly__btn" onClick={() => setPendingWeek('all')}>
           전체 비활성화
         </button>
       </div>

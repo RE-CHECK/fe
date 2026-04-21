@@ -85,6 +85,11 @@ export default function Signup2() {
 
       {/* ── 헤더 ── */}
       <header className="s2__header">
+        <button className="s2__back" onClick={() => navigate(-1)} aria-label="뒤로가기">
+          <svg width="11" height="20" viewBox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.5 1.5L1.5 10L9.5 18.5" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
         <p className="s2__title">RE : AJOU CHECK</p>
         <p className="s2__subtitle">캠퍼스 챌린지</p>
         <hr className="s2__divider" />

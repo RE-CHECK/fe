@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Main.css'
 import AlertModal from '../components/AlertModal'
+import WeekStartModal from '../components/WeekStartModal'
 import asset21    from '../assets/image/자산 21@4x 1.svg'
 import mascotImg  from '../assets/image/자산 11@4x 1.svg'
 import ellipse189 from '../assets/icon/Ellipse 189.svg'
@@ -23,6 +24,7 @@ const LEGEND = [
 export default function Main() {
   const navigate = useNavigate()
   const [showBattleModal, setShowBattleModal] = useState(false)
+  const [showWeekModal, setShowWeekModal] = useState(false)
   const [currentWeek, setCurrentWeek] = useState(null)
   const [user, setUser] = useState({ name: '', college: '', spent: '' })
   const [totalParticipation, setTotalParticipation] = useState('')
@@ -31,8 +33,29 @@ export default function Main() {
 
   useEffect(() => {
     getCurrentWeek()
-      .then(data => setCurrentWeek(data.weekNumber))
-      .catch(() => {})
+      .then(data => {
+        const week = data.weekNumber
+        console.log('[WeekModal] API 응답 weekNumber:', week)
+        setCurrentWeek(week)
+
+        const prevWeek = localStorage.getItem('prevActiveWeek')
+        const weekKey = week === null ? 'null' : String(week)
+        console.log('[WeekModal] prevActiveWeek:', prevWeek, '→', weekKey, '/ weekModalSeen:', localStorage.getItem('weekModalSeen'))
+
+        if (week === 2 || week === 3) {
+          if (prevWeek !== weekKey) {
+            localStorage.removeItem('weekModalSeen')
+            console.log('[WeekModal] 주차 변경 감지 → weekModalSeen 초기화')
+          }
+          if (!localStorage.getItem('weekModalSeen')) {
+            console.log('[WeekModal] 모달 표시')
+            setShowWeekModal(true)
+          }
+        }
+
+        localStorage.setItem('prevActiveWeek', weekKey)
+      })
+      .catch(err => console.error('[WeekModal] getCurrentWeek 실패:', err))
 
     getMyDashboard()
       .then(data => setUser({
@@ -54,6 +77,11 @@ export default function Main() {
       .then(data => setCollegeTotalPayment(data.totalPaymentAmount.toLocaleString()))
       .catch(() => {})
   }, [])
+
+  function handleWeekModalClose() {
+    localStorage.setItem('weekModalSeen', '1')
+    setShowWeekModal(false)
+  }
 
   return (
     <div className="main">
@@ -163,6 +191,10 @@ export default function Main() {
           <button className="main__bottom-btn main__bottom-btn--blue" onClick={() => navigate('/receipt-upload')}>참여하기</button>
         </div>
       </div>
+
+      {showWeekModal && (
+        <WeekStartModal week={currentWeek} onClose={handleWeekModalClose} />
+      )}
 
       {showBattleModal && (
         <AlertModal
