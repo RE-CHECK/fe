@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import './Signup.css'
 import arrowIcon from '../assets/icon/arrow-drop-down.svg'
 import { colleges, departments } from '../data/academicData'
+import CameraOverlay from '../components/CameraOverlay'
 
 function formatPhone(value) {
   const digits = value.replace(/\D/g, '').slice(0, 11)
@@ -64,6 +65,7 @@ export default function Signup() {
     agreed: false,
   })
   const fileInputRef = useRef(null)
+  const [showCamera, setShowCamera] = useState(false)
 
   const filteredDepts = form.college
     ? departments.filter(d => d.collegeId === form.college.id)
@@ -76,6 +78,24 @@ export default function Signup() {
   function handlePhotoChange(e) {
     const file = e.target.files[0]
     if (file) setForm(f => ({ ...f, photo: file }))
+  }
+
+  function handleUploadClick() {
+    if (navigator.mediaDevices?.getUserMedia) {
+      setShowCamera(true)
+    } else {
+      fileInputRef.current.click()
+    }
+  }
+
+  function handleCameraCapture(file) {
+    setForm(f => ({ ...f, photo: file }))
+    setShowCamera(false)
+  }
+
+  function handleGallery() {
+    setShowCamera(false)
+    setTimeout(() => fileInputRef.current.click(), 100)
   }
 
   const isValid =
@@ -101,6 +121,13 @@ export default function Signup() {
 
   return (
     <div className="signup">
+      {showCamera && (
+        <CameraOverlay
+          onCapture={handleCameraCapture}
+          onClose={() => setShowCamera(false)}
+          onGallery={handleGallery}
+        />
+      )}
 
       {/* ── 헤더 ── */}
       <header className="signup__header">
@@ -190,7 +217,7 @@ export default function Signup() {
           <button
             type="button"
             className="signup__upload-btn"
-            onClick={() => fileInputRef.current.click()}
+            onClick={handleUploadClick}
           >
             {form.photo ? form.photo.name : '사진 등록하기'}
           </button>
