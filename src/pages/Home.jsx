@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Home.css'
 
@@ -11,6 +12,13 @@ import group114    from '../assets/icon/Group114.svg'
 
 export default function Home() {
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (localStorage.getItem('accessToken')) {
+      navigate('/main', { replace: true })
+    }
+  }, [navigate])
+
   return (
     <div className="home">
 

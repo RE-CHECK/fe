@@ -18,7 +18,23 @@
 
 /* ── 헤더 ── */
 .main__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
   margin-bottom: 4cqw;
+}
+
+.main__logout-btn {
+  flex-shrink: 0;
+  background: none;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  border-radius: 4cqw;
+  padding: 1.2cqw 3cqw;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-size: 3cqw;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
 }
 
 .main__title {
