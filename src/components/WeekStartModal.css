@@ -1,0 +1,226 @@
+/*
+  Figma 기준: modal width 1082px  /  k = 100 / 1082
+  container-type: inline-size 적용 → 1cqw = modal 너비의 1%
+*/
+
+.wm__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.42);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+/* ── 모달 카드 ── */
+/* Figma: w=1082, h=1563, radius=42.357 */
+.wm {
+  background: #ffffff;
+  border-radius: 3.91cqw;   /* 42.357 / 1082 */
+  width: 72%;
+  max-width: 310px;
+  padding: 5cqw 7.49cqw 7cqw;
+  box-sizing: border-box;
+  container-type: inline-size;
+}
+
+/* ── 2×2 랭킹 그리드 ── */
+.wm__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 2.09cqw;  /* 22.665 / 1082 */
+  row-gap: 7.22cqw;     /* 78.158 / 1082 */
+  margin-bottom: 4cqw;
+}
+
+/* 슬롯: 왕관 이미지가 카드 위로 튀어나오는 공간 확보 */
+.wm__slot {
+  position: relative;
+  padding-top: 11cqw;
+}
+
+/* 왕관 캐릭터 이미지 — 카드 위에 absolute 중앙 배치 */
+.wm__crown {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 43%;
+  z-index: 2;
+}
+
+/* 랭킹 카드 */
+/* Figma: w=448.655, h=356.422, radius=29.85 */
+.wm__card {
+  position: relative;
+  border-radius: 2.76cqw;  /* 29.85 / 448.655 * (448.655/1082 * 100) ≈ 2.76 */
+  overflow: hidden;
+  aspect-ratio: 448.655 / 356.422;
+}
+
+/* 실루엣 — Figma: left=103.17, top=79.73, w=242.207, h=308.867 (카드 기준 %) */
+.wm__silhouette {
+  position: absolute;
+  left: 23%;   /* 103.17 / 448.655 */
+  top: 22%;    /* 79.73 / 356.422 */
+  width: 54%;  /* 242.207 / 448.655 */
+  height: 87%; /* 308.867 / 356.422 */
+  object-fit: contain;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+/* 리스 장식 (1위 카드 전용) — SVG에 회전값 내장 */
+.wm__wreath--left {
+  position: absolute;
+  left: -1%;
+  top: 46%;
+  width: 52%;
+  pointer-events: none;
+}
+
+.wm__wreath--right {
+  position: absolute;
+  left: 49%;
+  top: 46%;
+  width: 52%;
+  pointer-events: none;
+}
+
+/* ? 텍스트 — Figma: font-size=100, left=200, top=187.66 (카드 기준) */
+.wm__question {
+  position: absolute;
+  left: 50%;
+  top: 53%;
+  transform: translate(-50%, -50%);
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-size: 9cqw;  /* 100 / 1082 */
+  color: rgba(0, 0, 0, 0.41);
+  line-height: 1;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── 타이틀 ── */
+/* Figma: font-size=78, text-center */
+.wm__title {
+  margin: 0 0 2.59cqw;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 700;
+  font-size: 7.21cqw;  /* 78 / 1082 */
+  text-align: center;
+  color: #000000;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.wm__title--blue {
+  color: #0088ff;
+}
+
+/* ── 서브타이틀 ── */
+/* Figma: font-size=57.759 */
+.wm__desc {
+  margin: 0 0 4.99cqw;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 600;
+  font-size: 5.34cqw;  /* 57.759 / 1082 */
+  text-align: center;
+  color: #000000;
+  white-space: nowrap;
+}
+
+/* ── 3주차 배틀 레이아웃 ── */
+/* Figma: 박스 width=425, gap=40, 좌우 여백=96 (modal 1082px 기준) */
+.wm__battle {
+  display: flex;
+  gap: 3.70cqw;       /* 40 / 1082 */
+  padding: 0 1.38cqw; /* 96/1082 - 기존 wm 패딩(7.49cqw) 보정 */
+  margin-bottom: 4cqw;
+  align-items: flex-end;
+}
+
+/* 각 슬롯: 캐릭터가 박스 위로 튀어나오는 공간 확보 */
+.wm__battle-slot {
+  flex: 1;
+  position: relative;
+}
+
+.wm__battle-slot--win {
+  padding-top: 28.47cqw; /* (420-112) / 1082 — WIN 캐릭터가 박스 위로 더 높게 */
+}
+
+.wm__battle-slot--lose {
+  padding-top: 24.12cqw; /* (519-258) / 1082 */
+}
+
+/* 캐릭터 이미지 — 슬롯 상단에 absolute 배치 */
+.wm__battle-slot--win .wm__char {
+  position: absolute;
+  top: 0;
+  left: 14%;          /* 59 / 425 */
+  width: 67%;         /* 284.794 / 425 */
+  pointer-events: none;
+  z-index: 1;
+}
+
+.wm__battle-slot--lose .wm__char {
+  position: absolute;
+  top: 0;
+  left: 17%;          /* 72.66 / 425 */
+  width: 61%;         /* 257.711 / 425 */
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 색상 박스 */
+/* Figma: radius=22.879 / 1082 = 2.11cqw */
+.wm__box {
+  border-radius: 2.11cqw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wm__box--win {
+  background: #ff5d50;
+  height: 36.97cqw;   /* 400 / 1082 */
+}
+
+.wm__box--lose {
+  background: #d8d8d8;
+  height: 28.00cqw;   /* 303 / 1082 */
+}
+
+/* WIN / LOSE 텍스트 — Figma: font-size=128.123 */
+.wm__box-text {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 800;
+  font-size: 11.84cqw; /* 128.123 / 1082 */
+  line-height: 1;
+}
+
+.wm__box--win .wm__box-text {
+  color: #ffffff;
+}
+
+.wm__box--lose .wm__box-text {
+  color: #000000;
+}
+
+/* ── 확인 버튼 ── */
+/* Figma: w=943.392, h=168.05, radius=26.675, bg=#fdbd28 */
+.wm__btn {
+  display: block;
+  width: 100%;
+  height: 15.53cqw;    /* 168.05 / 1082 */
+  background: #fdbd28;
+  border: none;
+  border-radius: 2.47cqw;  /* 26.675 / 1082 */
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 600;
+  font-size: 6.57cqw;  /* 71.132 / 1082 */
+  color: #ffffff;
+  cursor: pointer;
+}
