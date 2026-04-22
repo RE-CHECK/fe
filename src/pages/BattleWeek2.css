@@ -155,15 +155,15 @@
 
 /* ── 카드 슬롯 (스케일 애니메이션) ── */
 .bw2__slot {
-  flex: 0 0 62cqw;
+  flex: 0 0 58cqw;
   scroll-snap-align: center;
-  transform: scale(0.88);
+  transform: scale(1);
   transform-origin: top center;
   transition: transform 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .bw2__slot--active {
-  transform: scale(1.0);
+  transform: scale(1.08);
 }
 
 /* ── 카드 공통 ── */
@@ -181,9 +181,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 4cqw 5cqw 3cqw;
+  padding: 4cqw 5cqw 0;
   gap: 1cqw;
-  min-height: 48cqw;
+  min-height: 42cqw;
+  overflow: visible;
+  position: relative;
+  z-index: 1;
 }
 
 /* 왕관 이미지 */
@@ -211,6 +214,7 @@
   object-fit: contain;
   position: relative;
   z-index: 1;
+  transform: translateY(8cqw);
 }
 
 /* 리스 장식 — 1등 전용 */
@@ -219,17 +223,15 @@
   top: 30%;
   width: 50%;
   pointer-events: none;
-  z-index: 0;
+  z-index: 2;
 }
 
 .bw2__wreath--l {
   left: -4%;
-  transform: scaleX(-1) rotate(-6deg);
 }
 
 .bw2__wreath--r {
   right: -4%;
-  transform: rotate(-6deg) scaleX(-1) scaleX(-1);
 }
 
 /* 빈 카드 ? 텍스트 */
@@ -251,8 +253,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3.5cqw 3cqw 5cqw;
+
+  margin-top: -10cqw;
+
+  padding: 6cqw 3cqw 5cqw;
   gap: 2.5cqw;
+
+  position: relative;
+  z-index: 3;               /* bring above mascot */
 }
 
 /* 단과대 배지 */
