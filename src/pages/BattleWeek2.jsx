@@ -10,8 +10,8 @@ import crown3 from '../assets/image/ChatGPT Image 2026년 4월 7일 오후 09_44
 import crown4 from '../assets/image/ChatGPT Image 2026년 4월 7일 오후 09_44_19 6.svg'
 
 // ── 리스 이미지 (1등 전용)
-import wreathL from '../assets/image/ChatGPT Image 2026년 4월 7일 오후 10_21_11 3.svg'
-import wreathR from '../assets/image/ChatGPT Image 2026년 4월 7일 오후 10_21_11 4.svg'
+import wreathL from '../assets/image/1등장식-왼쪽.svg'
+import wreathR from '../assets/image/1등장식-오른쪽.svg'
 
 // ── 마스코트 (색상별)
 import mascotSky   from '../assets/image/mascot/하늘색.svg'

@@ -177,7 +177,7 @@
 /* ── 카드 상단 (흰색, 왕관 + 마스코트) ── */
 /* Figma 비율: 상단 높이 ≈ 58% 전체 카드 */
 .bw2__card-top {
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(240, 240, 240, 0.88);
   display: flex;
   flex-direction: column;
   align-items: center;
