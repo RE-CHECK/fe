@@ -19,19 +19,19 @@
 
 /* ── 헤더 ── */
 .bw3__header {
-  padding: 7.37cqw 4.91cqw 0;
-  margin-bottom: 6cqw;
+  padding: 7cqw 4.91cqw 0;
+  margin-bottom: 5cqw;
 }
 
 .bw3__back {
   display: flex;
   align-items: center;
-  height: 11.45cqw;
+  height: 10cqw;
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
-  margin-bottom: 2cqw;
+  margin-bottom: 1.5cqw;
 }
 
 .bw3__back svg {
@@ -42,8 +42,8 @@
 .bw3__title {
   margin: 0;
   font-family: '온글잎 박다현체', sans-serif;
-  font-size: 6.69cqw;
-  line-height: 9.59cqw;
+  font-size: 6.22cqw;
+  line-height: 8.93cqw;
   color: #ffffff;
   letter-spacing: 0.10cqw;
 }
@@ -52,16 +52,15 @@
   margin: 0;
   font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
   font-weight: 700;
-  font-size: 4.31cqw;
-  line-height: 6.18cqw;
+  font-size: 4.01cqw;
+  line-height: 5.76cqw;
   color: #ffffff;
-  letter-spacing: 0.04cqw;
 }
 
 .bw3__divider {
   border: none;
   border-top: 2px dashed rgba(255, 255, 255, 0.6);
-  margin: 4cqw 0 0;
+  margin: 3.5cqw 0 0;
 }
 
 /* ── 대진 섹션 ── */
@@ -70,27 +69,27 @@
 }
 
 /* ── 가게 배지 ── */
-/* Figma: w=555.653, h=97.382, radius=76.378 in 1378px frame */
+/* Figma: w=555px, h=97px, radius=76px / 1378 */
 .bw3__store-badge {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 3.5cqw;
-  width: 40.3cqw;      /* 555.653 / 1378 × 100 */
-  height: 7.07cqw;     /* 97.382 / 1378 × 100 */
-  border-radius: 5.54cqw; /* 76.378 / 1378 × 100 */
+  margin: 0 auto 3cqw;
+  width: 40.3cqw;
+  height: 7.07cqw;
+  border-radius: 5.54cqw;
   font-family: '온글잎 박다현체', sans-serif;
-  font-size: 5.20cqw;  /* 71.605 / 1378 × 100 */
+  font-size: 5.20cqw;
   color: #ffffff;
   white-space: nowrap;
 }
 
-/* ── 대진 현황 ── */
+/* ── 대진 현황 (학번 표기) ── */
 .bw3__standings {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 3cqw;
+  margin-bottom: 2cqw;
   gap: 2cqw;
 }
 
@@ -109,36 +108,27 @@
 }
 
 /* ── 카드 대결 래퍼 ── */
+/* Figma: 양쪽 여백 ≈ 8.93cqw, 카드 간 gap ≈ 3.85cqw */
 .bw3__matchup {
   display: flex;
-  gap: 3cqw;
-  padding: 0 4cqw;
+  gap: 3.85cqw;
+  padding: 0 8.93cqw;
   align-items: flex-end;
 }
 
 /* ── 슬롯 (캐릭터 + 카드) ── */
-/*
-  캐릭터가 카드 위로 튀어나오는 공간:
-  Figma 1378px 기준: WIN 카드 h=651px, LOSE 카드 h=523px
-  캐릭터 높이(카드 위로 노출되는 부분) ≈ WIN:200px→14.5cqw, LOSE:170px→12.3cqw
-*/
 .bw3__slot {
   flex: 1;
   position: relative;
 }
 
-.bw3__slot--win {
-  padding-top: 14.5cqw;
-}
-
-.bw3__slot--lose {
-  padding-top: 12.3cqw;
-}
-
-.bw3__slot--draw {
-  /* Figma: char top=927, card top=1414 → 487px 노출 → 487/1378×100 */
-  padding-top: 35.34cqw;
-}
+/*
+  Figma 기준 캐릭터가 카드 위로 노출되는 공간:
+  WIN  : (card_top - char_top) / 1378 × 100 = (1286-875) / 1378 × 100 = 29.83cqw
+  LOSE : (card_top - char_top) / 1378 × 100 = (1414-1060) / 1378 × 100 = 25.69cqw
+*/
+.bw3__slot--win  { padding-top: 29.83cqw; }
+.bw3__slot--lose { padding-top: 25.69cqw; }
 
 /* ── 캐릭터 이미지 ── */
 .bw3__char {
@@ -146,64 +136,75 @@
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 80%;
+  width: 68%;
+  object-fit: contain;
+  object-position: top;
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* ── 카드 공통 ── */
-/* Figma: radius=30px → 30/1378×100 = 2.18cqw */
+/* Figma: radius=30px / 1378 = 2.18cqw */
 .bw3__card {
   width: 100%;
   border-radius: 2.18cqw;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: flex-end;
-  padding: 0 3cqw 5cqw;
-  gap: 1.5cqw;
+  padding: 3.5cqw 2cqw 4cqw;
   box-sizing: border-box;
+  position: relative;
+  z-index: 1;
 }
 
 /* ── WIN 카드 ── */
-/* Figma: h=651px → 47.24cqw */
+/* Figma: h=651px / 1378 = 47.24cqw */
 .bw3__card--win {
   background: #ff5d50;
   min-height: 47.24cqw;
 }
 
 /* ── LOSE 카드 ── */
-/* Figma: h=523px → 37.95cqw */
+/* Figma: h=523px / 1378 = 37.95cqw */
 .bw3__card--lose {
   background: #d8d8d8;
   min-height: 37.95cqw;
 }
 
 /* ── DRAW 카드 ── */
-/* Figma: bg=#d8d8d8, h=523px → 37.95cqw (LOSE와 동일) */
 .bw3__card--draw {
   background: #d8d8d8;
   min-height: 37.95cqw;
 }
 
-/* ── 단 배지 (팀23, 팀24 …) ── */
-/* Figma: h=71.907px → 5.22cqw, radius ≈ 4.44cqw */
+/* ── 팀 배지 (카드 상단) ── */
+/* Figma: h=89px, radius=50px, w=254px */
 .bw3__badge {
-  display: inline-block;
-  height: 5.22cqw;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18.43cqw;
+  height: 6.46cqw;
   padding: 0 3.5cqw;
-  border-radius: 4.44cqw;
+  border-radius: 3.63cqw;
   background: rgba(255, 255, 255, 0.88);
-  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
-  font-weight: 700;
-  font-size: 2.9cqw;
+  font-family: '온글잎 박다현체', sans-serif;
+  font-size: 4cqw;
   color: #333333;
-  line-height: 5.22cqw;
   white-space: nowrap;
 }
 
-/* ── WIN / LOSE 텍스트 ── */
-/* Figma: font-size=168px → 12.19cqw */
+/* ── 결과 텍스트 + 금액 묶음 (카드 하단) ── */
+.bw3__card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5cqw;
+}
+
+/* ── WIN / LOSE / DRAW 텍스트 ── */
+/* Figma: font-size=168px / 1378 = 12.19cqw */
 .bw3__result-text {
   margin: 0;
   font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
@@ -212,33 +213,23 @@
   line-height: 1;
 }
 
-.bw3__result-text--win {
-  color: #ffffff;
-}
-
-.bw3__result-text--lose {
-  color: #000000;
-}
-
-.bw3__result-text--draw {
-  color: #000000;
-}
+.bw3__result-text--win  { color: #ffffff; }
+.bw3__result-text--lose { color: #000000; }
+.bw3__result-text--draw { color: #000000; }
 
 /* ── 금액 ── */
-/* Figma: font-size=93.859px → 6.81cqw */
+/* Figma: font-size=93.859px / 1378 = 6.81cqw */
 .bw3__amount {
   margin: 0;
   font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
   font-weight: 800;
   font-size: 6.81cqw;
-  color: #00315b;
   line-height: 1;
 }
 
-.bw3__card--lose .bw3__amount,
-.bw3__card--draw .bw3__amount {
-  color: #444444;
-}
+.bw3__amount--win  { color: #ffffff; }
+.bw3__amount--lose { color: #444444; }
+.bw3__amount--draw { color: #444444; }
 
 .bw3__won {
   font-size: 4cqw;
@@ -247,7 +238,6 @@
   vertical-align: baseline;
 }
 
-/* DRAW 슬롯에서는 캐릭터가 슬롯보다 약간 더 넓음 (Figma: char 600px, card 557px) */
-.bw3__slot--draw .bw3__char {
-  width: 95%;
-}
+/* ── 무승부 슬롯 ── */
+.bw3__slot--draw { padding-top: 25.69cqw; }
+.bw3__slot--draw .bw3__char { width: 82%; }

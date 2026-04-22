@@ -7,39 +7,72 @@ import char1 from '../assets/image/3주차_1.svg'
 import char2 from '../assets/image/3주차_2.svg'
 import charDraw from '../assets/image/3주차_무승부.svg'
 
-// ── 하드코딩 대진표 (3주차 고정) ────────────────────────────
-// API는 matchup 인덱스 순서대로 응답 (0: 23vs24, 1: 25vs26)
 const MATCHUPS_CONFIG = [
   {
     storeName: '사랑집4',
     storeColor: '#fdbd28',
-    matchupLabel: '23학번 vs 24학번',
     year1Label: '23학번',
     year2Label: '24학번',
+    badge1: '팀23',
+    badge2: '팀24',
   },
   {
     storeName: '사랑집5',
     storeColor: '#0ca214',
-    matchupLabel: '25학번 vs 26학번',
     year1Label: '25학번',
     year2Label: '26학번',
+    badge1: '팀25',
+    badge2: '팀26',
   },
 ]
 
-// ── 한 대진 카드 슬롯 (캐릭터 + 컬러박스) ────────────────────
-// result: 'win' | 'lose' | 'draw'
-function BattleSlot({ charSrc, label, result, amount }) {
-  const resultText = result === 'win' ? 'WIN' : result === 'lose' ? 'LOSE' : 'DRAW'
+// ── 승/패 슬롯 ───────────────────────────────────────────────
+function BattleSlot({ charSrc, badge, result, amount }) {
+  const resultText = result === 'win' ? 'WIN' : 'LOSE'
 
   return (
     <div className={`bw3__slot bw3__slot--${result}`}>
       <img src={charSrc} className="bw3__char" alt="" />
       <div className={`bw3__card bw3__card--${result}`}>
-        <span className="bw3__badge">{label}</span>
-        <p className={`bw3__result-text bw3__result-text--${result}`}>{resultText}</p>
-        <p className="bw3__amount">
-          {amount.toLocaleString('ko-KR')}<span className="bw3__won">원</span>
-        </p>
+        <span className="bw3__badge">{badge}</span>
+        <div className="bw3__card-content">
+          <p className={`bw3__result-text bw3__result-text--${result}`}>{resultText}</p>
+          <p className={`bw3__amount bw3__amount--${result}`}>
+            {amount.toLocaleString('ko-KR')}<span className="bw3__won">원</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ── 무승부 레이아웃 ──────────────────────────────────────────
+function DrawSection({ config, data }) {
+  return (
+    <div className="bw3__matchup">
+      <div className="bw3__slot bw3__slot--draw">
+        <img src={charDraw} className="bw3__char" alt="" />
+        <div className="bw3__card bw3__card--draw">
+          <span className="bw3__badge">{config.badge1}</span>
+          <div className="bw3__card-content">
+            <p className="bw3__result-text bw3__result-text--draw">DRAW</p>
+            <p className="bw3__amount bw3__amount--draw">
+              {data.year1Total.toLocaleString('ko-KR')}<span className="bw3__won">원</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="bw3__slot bw3__slot--draw">
+        <img src={charDraw} className="bw3__char" alt="" />
+        <div className="bw3__card bw3__card--draw">
+          <span className="bw3__badge">{config.badge2}</span>
+          <div className="bw3__card-content">
+            <p className="bw3__result-text bw3__result-text--draw">DRAW</p>
+            <p className="bw3__amount bw3__amount--draw">
+              {data.year2Total.toLocaleString('ko-KR')}<span className="bw3__won">원</span>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   )
@@ -47,7 +80,6 @@ function BattleSlot({ charSrc, label, result, amount }) {
 
 // ── 대진 섹션 ────────────────────────────────────────────────
 function MatchupSection({ config, data }) {
-  // API가 항상 데이터를 반환 (집계 없으면 0 반환 → isDraw=true로 처리됨)
   if (!data) return (
     <section className="bw3__section">
       <div className="bw3__store-badge" style={{ background: config.storeColor }}>
@@ -61,41 +93,39 @@ function MatchupSection({ config, data }) {
     </section>
   )
 
-  const isDraw = data.isDraw
-  const year1Result = isDraw ? 'draw' : (data.year1Total >= data.year2Total ? 'win' : 'lose')
-  const year2Result = isDraw ? 'draw' : (data.year2Total > data.year1Total ? 'win' : 'lose')
-  const year1Char = isDraw ? charDraw : char1
-  const year2Char = isDraw ? charDraw : char2
+  const isDraw = data.draw
+  const year1Result = data.year1Total >= data.year2Total ? 'win' : 'lose'
+  const year2Result = data.year2Total > data.year1Total ? 'win' : 'lose'
 
   return (
     <section className="bw3__section">
-      {/* 가게 배지 */}
       <div className="bw3__store-badge" style={{ background: config.storeColor }}>
         {config.storeName} 대결
       </div>
-
-      {/* 대진 현황 */}
       <div className="bw3__standings">
         <span className="bw3__year-name">{config.year1Label}</span>
         <span className="bw3__vs">vs</span>
         <span className="bw3__year-name">{config.year2Label}</span>
       </div>
 
-      {/* 카드 대결 */}
-      <div className="bw3__matchup">
-        <BattleSlot
-          charSrc={year1Char}
-          label={config.year1Label}
-          result={year1Result}
-          amount={data.year1Total}
-        />
-        <BattleSlot
-          charSrc={year2Char}
-          label={config.year2Label}
-          result={year2Result}
-          amount={data.year2Total}
-        />
-      </div>
+      {isDraw ? (
+        <DrawSection config={config} data={data} />
+      ) : (
+        <div className="bw3__matchup">
+          <BattleSlot
+            charSrc={char1}
+            badge={config.badge1}
+            result={year1Result}
+            amount={data.year1Total}
+          />
+          <BattleSlot
+            charSrc={char2}
+            badge={config.badge2}
+            result={year2Result}
+            amount={data.year2Total}
+          />
+        </div>
+      )}
     </section>
   )
 }
@@ -107,9 +137,9 @@ export default function BattleWeek3() {
 
   useEffect(() => {
     getWeek3Challenge()
-      .then(res => {
-        if (res?.success && Array.isArray(res.data)) {
-          setMatchups(res.data)
+      .then(data => {
+        if (Array.isArray(data)) {
+          setMatchups(data)
         }
       })
       .catch(() => {})
@@ -118,7 +148,6 @@ export default function BattleWeek3() {
   return (
     <div className="bw3">
 
-      {/* ── 헤더 ── */}
       <header className="bw3__header">
         <button className="bw3__back" onClick={() => navigate(-1)} aria-label="뒤로가기">
           <svg width="11" height="20" viewBox="0 0 11 20" fill="none">
@@ -133,7 +162,6 @@ export default function BattleWeek3() {
         <hr className="bw3__divider" />
       </header>
 
-      {/* ── 대진 섹션 ── */}
       {MATCHUPS_CONFIG.map((config, i) => (
         <MatchupSection
           key={config.storeName}
