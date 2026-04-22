@@ -49,7 +49,7 @@ export default function Signup2() {
     if (!isValid || isSubmitting) return
     setIsSubmitting(true)
     try {
-      await register({
+      const data = await register({
         username: form.userId,
         password: form.password,
         passwordConfirm: form.passwordConfirm,
@@ -61,7 +61,7 @@ export default function Signup2() {
       })
 
       window.dataLayer = window.dataLayer || []
-      window.dataLayer.push({ event: 'user_auth_success', user_id: form.userId })
+      window.dataLayer.push({ event: 'user_auth_success', user_id: String(data.id) })
 
       setShowSuccess(true)
     } catch (err) {

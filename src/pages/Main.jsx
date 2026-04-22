@@ -4,8 +4,28 @@ import './Main.css'
 import AlertModal from '../components/AlertModal'
 import WeekStartModal from '../components/WeekStartModal'
 import asset21    from '../assets/image/자산 21@4x 1.svg'
-import mascotImg  from '../assets/image/자산 11@4x 1.svg'
+import mascotHaneul  from '../assets/image/mascot/하늘색.svg'
+import mascotHoesek  from '../assets/image/mascot/회색.svg'
+import mascotNamsek  from '../assets/image/mascot/남색.svg'
+import mascotBeige   from '../assets/image/mascot/베이지.svg'
+import mascotPink    from '../assets/image/mascot/분홍색.svg'
+import mascotBlack   from '../assets/image/mascot/검정색.svg'
 import ellipse189 from '../assets/icon/Ellipse 189.svg'
+
+const COLLEGE_MASCOT = {
+  '경영대학':         mascotHaneul,
+  '공과대학':         mascotHoesek,
+  '소프트웨어융합대학': mascotNamsek,
+  '첨단ICT융합대학':  mascotNamsek,
+  '인문대학':         mascotNamsek,
+  '자연과학대학':     mascotNamsek,
+  '다산학부':         mascotNamsek,
+  '약학대학':         mascotHaneul,
+  '첨단바이오융합대학': mascotHaneul,
+  '사회과학대학':     mascotBeige,
+  '간호대학':         mascotPink,
+  '의과대학':         mascotBlack,
+}
 import chartG1    from '../assets/image/chart-group1.svg'
 import chartG2    from '../assets/image/chart-group2.svg'
 import chartG3    from '../assets/image/chart-group3.svg'
@@ -108,7 +128,7 @@ export default function Main() {
       {/* ── 유저 카드 ── */}
       <div className="main__card">
         <img className="main__card-asset" src={asset21} alt="" />
-        <div className="main__card-mascot"><img src={mascotImg} alt="" /></div>
+        <div className="main__card-mascot"><img src={COLLEGE_MASCOT[user.college] ?? mascotNamsek} alt="" /></div>
         <p className="main__card-name">{user.name}</p>
         <p className="main__card-college">{user.college}</p>
         <p className="main__card-label">지금까지 얼마 썼나요?</p>
@@ -199,7 +219,7 @@ export default function Main() {
         </div>
         <div className="main__bottom-card main__bottom-card--light">
           <p className="main__bottom-big main__bottom-big--blue">GO!</p>
-          <button className="main__bottom-btn main__bottom-btn--blue" onClick={() => navigate('/receipt-upload')}>참여하기</button>
+          <button id="btn-go-challenge" className="main__bottom-btn main__bottom-btn--blue" onClick={() => navigate('/receipt-upload')}>참여하기</button>
         </div>
       </div>
 

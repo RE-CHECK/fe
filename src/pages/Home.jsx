@@ -54,7 +54,7 @@ export default function Home() {
       <p className="home__btn-text home__btn-text--start" onClick={() => navigate('/login')}>START!</p>
 
       {/* 회원가입 버튼 배경 */}
-      <button className="home__btn-bg home__btn-bg--signup" onClick={() => navigate('/signup')} />
+      <button id="btn-go-signup" className="home__btn-bg home__btn-bg--signup" onClick={() => navigate('/signup')} />
       <p className="home__btn-text home__btn-text--signup" onClick={() => navigate('/signup')}>회원가입</p>
 
       {/* RE:AJOU CHECK 마스코트 이미지 */}

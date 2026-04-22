@@ -22,6 +22,15 @@ export default function AdminMain() {
             <path d="M9.5 1.5L1.5 10L9.5 18.5" stroke="#33363F" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
+        <button
+          className="admin-main__logout"
+          onClick={() => {
+            localStorage.removeItem('accessToken')
+            navigate('/')
+          }}
+        >
+          로그아웃
+        </button>
       </div>
 
       <hr className="admin-main__divider" />

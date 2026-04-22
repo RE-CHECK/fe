@@ -221,10 +221,10 @@ export default function BattleWeek2() {
 
   useEffect(() => {
     getWeek2Ranking()
-      .then(res => {
-        if (res?.success && Array.isArray(res.data)) {
+      .then(data => {
+        if (Array.isArray(data)) {
           const map = {}
-          res.data.forEach(store => {
+          data.forEach(store => {
             map[store.storeName] = Array.isArray(store.rankings) ? store.rankings : []
           })
           setRankingMap(map)
