@@ -20,7 +20,11 @@ export default function AdminMain() {
     async function fetchWeek() {
       try {
         const res = await getCurrentWeek()
-        setCurrentWeek(res.weekNumber) // 필요시 res.data.week로 수정
+        if (res.data == null) {
+          setCurrentWeek("테스트 ")
+        } else {
+          setCurrentWeek(res.weekNumber)  
+        }
       } catch (e) {
         console.error('주차 조회 실패', e)
       }
