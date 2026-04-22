@@ -25,6 +25,16 @@
   margin-top: 9.92cqw; /* 39/393 */
 }
 
+.current-week {
+  margin: 0;
+  padding-top: 4cqw; 
+  padding-left: 2cap;
+  font-family: 'Inter', sans-serif;
+  font-size: 4cqw; 
+  color: #000000;
+  margin-right: auto;
+}
+
 .admin-main__logout {
   background: none;
   border: 1px solid #000000;
