@@ -17,11 +17,6 @@ export default function AdminMain() {
 
       {/* ── 헤더 영역 ── */}
       <div className="admin-main__header">
-        <button className="admin-main__back" onClick={() => navigate(-1)} aria-label="뒤로가기">
-          <svg width="11" height="20" viewBox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9.5 1.5L1.5 10L9.5 18.5" stroke="#33363F" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
         <button
           className="admin-main__logout"
           onClick={() => {

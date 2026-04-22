@@ -25,23 +25,6 @@
   margin-top: 9.92cqw; /* 39/393 */
 }
 
-.admin-main__back {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 11.45cqw;
-  height: 11.45cqw;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-}
-
-.admin-main__back svg {
-  width: 2.80cqw;   /* 11/393 */
-  height: 5.09cqw;  /* 20/393 */
-}
-
 .admin-main__logout {
   background: none;
   border: 1px solid #000000;
@@ -51,6 +34,7 @@
   font-size: 3.30cqw;
   color: #000000;
   cursor: pointer;
+  margin-left: auto;
 }
 
 .admin-main__logout:hover {
