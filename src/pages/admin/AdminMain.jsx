@@ -36,7 +36,7 @@ export default function AdminMain() {
       {/* ── 헤더 영역 ── */}
       <div className="admin-main__header">
         <div className="current-week">
-          현재 주차 : {weekNumber !== null && <span>{weekNumber}주차</span>}
+          현재 활성화 주차 : {weekNumber !== null && <span>{weekNumber}주차</span>}
         </div>
         <button
           className="admin-main__logout"
