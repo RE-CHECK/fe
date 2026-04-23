@@ -2,16 +2,17 @@ import './WeekStartModal.css'
 import silhouette  from '../assets/image/character_silhouette 1.svg'
 import crown1      from '../assets/image/ChatGPT Image 2026년 4월 7일 오후 09_44_19 4.svg'
 import crown2      from '../assets/image/ChatGPT Image 2026년 4월 7일 오후 09_44_19 2.svg'
-import crown4      from '../assets/image/ChatGPT Image 2026년 4월 7일 오후 09_44_19 5.svg'
-import wreathLeft  from '../assets/image/ChatGPT Image 2026년 4월 7일 오후 10_21_11 3.svg'
-import wreathRight from '../assets/image/ChatGPT Image 2026년 4월 7일 오후 10_21_11 4.svg'
+import crown3      from '../assets/image/ChatGPT Image 2026년 4월 7일 오후 09_44_19 5.svg'
+import crown4      from '../assets/image/ChatGPT Image 2026년 4월 7일 오후 09_44_19 6.svg'
+import wreathLeft  from '../assets/image/1등장식-왼쪽.svg'
+import wreathRight from '../assets/image/1등장식-오른쪽.svg'
 import char3win    from '../assets/image/3주차_1.svg'
 import char3lose   from '../assets/image/3주차_2.svg'
 
 const RANKS = [
   { bg: '#fcfad6',                crown: crown1, hasWreath: true },
   { bg: 'rgba(208,213,220,0.64)', crown: crown2  },
-  { bg: 'rgba(216,136,21,0.34)',  crown: crown1  },
+  { bg: 'rgba(216,136,21,0.34)',  crown: crown3  },
   { bg: 'rgba(194,93,34,0.42)',   crown: crown4  },
 ]
 

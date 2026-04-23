@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './BattleWeek2.css'
 import { getWeek2Ranking } from '../api/receipts'
@@ -10,8 +10,8 @@ import crown3 from '../assets/image/ChatGPT Image 2026년 4월 7일 오후 09_44
 import crown4 from '../assets/image/ChatGPT Image 2026년 4월 7일 오후 09_44_19 6.svg'
 
 // ── 리스 이미지 (1등 전용)
-import wreathL from '../assets/image/ChatGPT Image 2026년 4월 7일 오후 10_21_11 3.svg'
-import wreathR from '../assets/image/ChatGPT Image 2026년 4월 7일 오후 10_21_11 4.svg'
+import wreathL from '../assets/image/1등장식-왼쪽.svg'
+import wreathR from '../assets/image/1등장식-오른쪽.svg'
 
 // ── 마스코트 (색상별)
 import mascotSky   from '../assets/image/mascot/하늘색.svg'
@@ -126,9 +126,9 @@ function RankCard({ rank, entry }) {
 
 // ── 캐러셀 (랭킹 데이터 있을 때만 사용) ─────────────────────
 function RankCarousel({ rankings }) {
-  const trackRef   = useRef(null)
-  const rafRef     = useRef(null)
-  const [activeIdx, setActiveIdx] = useState(0)
+  const trackRef      = useRef(null)
+  const rafRef        = useRef(null)
+  const activeIdxRef  = useRef(0)
 
   function updateActive() {
     const track = trackRef.current
@@ -140,7 +140,11 @@ function RankCarousel({ rankings }) {
       const dist = Math.abs(el.offsetLeft + el.offsetWidth / 2 - center)
       if (dist < minDist) { minDist = dist; nearest = i }
     })
-    setActiveIdx(nearest)
+    if (nearest !== activeIdxRef.current) {
+      slots[activeIdxRef.current]?.classList.remove('bw2__slot--active')
+      slots[nearest]?.classList.add('bw2__slot--active')
+      activeIdxRef.current = nearest
+    }
   }
 
   function onScroll() {
@@ -149,6 +153,8 @@ function RankCarousel({ rankings }) {
   }
 
   useEffect(() => {
+    const slots = trackRef.current?.querySelectorAll('.bw2__slot')
+    slots?.[0]?.classList.add('bw2__slot--active')
     return () => rafRef.current && cancelAnimationFrame(rafRef.current)
   }, [])
 
@@ -158,10 +164,7 @@ function RankCarousel({ rankings }) {
         const rank  = i + 1
         const entry = rankings.find(r => r.rank === rank)
         return (
-          <div
-            key={rank}
-            className={`bw2__slot${activeIdx === i ? ' bw2__slot--active' : ''}`}
-          >
+          <div key={rank} className="bw2__slot">
             {entry
               ? <RankCard rank={rank} entry={entry} />
               : <EmptyCard rank={rank} />

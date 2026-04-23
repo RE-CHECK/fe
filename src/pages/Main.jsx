@@ -152,7 +152,7 @@ export default function Main() {
 
       <div className="main__stat-block main__stat-block--last">
         <div className="main__pill main__pill--green">
-          총 {user.college} 누적 소비 금액
+          {user.college} 총 누적 소비 금액
         </div>
         <p className="main__stat-num">
           {collegeTotalPayment}<span className="main__stat-unit">원</span>
