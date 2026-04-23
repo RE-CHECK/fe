@@ -56,13 +56,13 @@ const COLLEGE_INFO = {
   '첨단ICT융합대학':      { color: '남색',   short: '첨아융'   },
   '인문대학':             { color: '남색',   short: '인문대'   },
   '자연과학대학':         { color: '남색',   short: '자과대'   },
-  '다산학부':             { color: '남색',   short: '다산학부' },
+  '다산학부대학':             { color: '남색',   short: '다산학부' },
   '약학대학':             { color: '하늘색', short: '약학대'   },
-  '첨단바이오융합대학':   { color: '하늘색', short: '첨바융'   },
+  '첨단바이오융합대학':   { color: '남색', short: '첨바융'   },
   '사회과학대학':         { color: '베이지', short: '사과대'   },
   '간호대학':             { color: '분홍색', short: '간호대'   },
   '의과대학':             { color: '검정색', short: '의대'     },
-  '메디컬':               { color: '검정색', short: '메디컬'   },
+  '메디컬':               { color: '남색', short: '메디컬'   },
   '국방디지털융합학과':   { color: '남색',   short: '국디융'   },
   '경제정치사회융합학부': { color: '베이지', short: '경정사'   },
 }
@@ -82,14 +82,16 @@ function getInfo(collegeName) {
 // ── 빈 카드 (집계 전) ────────────────────────────────────────
 function EmptyCard({ rank }) {
   return (
-    <div className="bw2__card bw2__card--empty">
-      <div className="bw2__card-top">
-        <img src={CROWNS[rank]} className="bw2__crown bw2__crown--dim" alt="" />
-        <span className="bw2__empty-q">?</span>
-      </div>
-      <div className="bw2__card-foot">
-        <span className="bw2__badge" style={{ background: '#b0b8c8' }}>미정</span>
-        <p className="bw2__amount bw2__amount--dim">집계 중</p>
+    <div className="bw2__card-wrapper">
+      <img src={CROWNS[rank]} className="bw2__crown bw2__crown--dim" alt="" />
+      <div className="bw2__card bw2__card--empty">
+        <div className="bw2__card-top">
+          <span className="bw2__empty-q">?</span>
+        </div>
+        <div className="bw2__card-foot">
+          <span className="bw2__badge" style={{ background: '#b0b8c8' }}>미정</span>
+          <p className="bw2__amount bw2__amount--dim">집계 중</p>
+        </div>
       </div>
     </div>
   )
@@ -103,22 +105,24 @@ function RankCard({ rank, entry }) {
   const isFirst = rank === 1
 
   return (
-    <div className="bw2__card">
-      <div className="bw2__card-top">
-        <img src={CROWNS[rank]} className="bw2__crown" alt={`${rank}등 왕관`} />
-        <div className="bw2__mascot-wrap">
-          {isFirst && <img src={wreathL} className="bw2__wreath bw2__wreath--l" alt="" />}
-          {isFirst && <img src={wreathR} className="bw2__wreath bw2__wreath--r" alt="" />}
-          <img src={mascot} className="bw2__mascot" alt={info.short} />
+    <div className="bw2__card-wrapper">
+      <img src={CROWNS[rank]} className="bw2__crown" alt={`${rank}등 왕관`} />
+      <div className="bw2__card">
+        <div className="bw2__card-top">
+          <div className="bw2__mascot-wrap">
+            {isFirst && <img src={wreathL} className="bw2__wreath bw2__wreath--l" alt="" />}
+            {isFirst && <img src={wreathR} className="bw2__wreath bw2__wreath--r" alt="" />}
+            <img src={mascot} className="bw2__mascot" alt={info.short} />
+          </div>
         </div>
-      </div>
-      <div className="bw2__card-foot">
-        <span className="bw2__badge" style={{ background: BADGE_BG[rank] }}>
-          {info.short}
-        </span>
-        <p className="bw2__amount">
-          {amount}<span className="bw2__won">원</span>
-        </p>
+        <div className="bw2__card-foot">
+          <span className="bw2__badge" style={{ background: BADGE_BG[rank] }}>
+            {info.short}
+          </span>
+          <p className="bw2__amount">
+            {amount}<span className="bw2__won">원</span>
+          </p>
+        </div>
       </div>
     </div>
   )
