@@ -1,16 +1,24 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import {
+  LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer,
+} from 'recharts'
 import './Main.css'
 import AlertModal from '../components/AlertModal'
 import WeekStartModal from '../components/WeekStartModal'
-import asset21    from '../assets/image/자산 21@4x 1.svg'
+import asset21       from '../assets/image/자산 21@4x 1.svg'
 import mascotHaneul  from '../assets/image/mascot/하늘색.svg'
 import mascotHoesek  from '../assets/image/mascot/회색.svg'
 import mascotNamsek  from '../assets/image/mascot/남색.svg'
 import mascotBeige   from '../assets/image/mascot/베이지.svg'
 import mascotPink    from '../assets/image/mascot/분홍색.svg'
 import mascotBlack   from '../assets/image/mascot/검정색.svg'
-import ellipse189 from '../assets/icon/Ellipse 189.svg'
+import { getMyDashboard } from '../api/users'
+import {
+  getTotalParticipation, getTotalAllPayment,
+  getCollegeTotalPayment, getWeeklyCollegeRanking,
+} from '../api/receipts'
+import { getCurrentWeek } from '../api/weeks'
 
 const COLLEGE_MASCOT = {
   '경영대학':         mascotHaneul,
@@ -26,30 +34,68 @@ const COLLEGE_MASCOT = {
   '간호대학':         mascotPink,
   '의과대학':         mascotBlack,
 }
-import chartG1    from '../assets/image/chart-group1.svg'
-import chartG2    from '../assets/image/chart-group2.svg'
-import chartG3    from '../assets/image/chart-group3.svg'
-import { getMyDashboard } from '../api/users'
-import { getTotalParticipation, getTotalAllPayment, getCollegeTotalPayment } from '../api/receipts'
-import { getCurrentWeek } from '../api/weeks'
 
-const DAYS   = ['월', '화', '수', '목', '금', '토', '일']
-const LEGEND = [
-  { label: '공과대', color: '#635cff' },
-  { label: '경영대', color: '#c7a800' },
-  { label: '사과대', color: '#ec5a89' },
-  { label: '첨아융', color: '#0ca214' },
-]
+const DAYS = ['월', '화', '수', '목', '금', '토', '일']
+
+const CHART_COLORS = ['#635cff', '#c7a800', '#ec5a89', '#0ca214']
+
+const COLLEGE_SHORT = {
+  '공과대학':         '공과대',
+  '경영대학':         '경영대',
+  '소프트웨어융합대학': '소융대',
+  '첨단ICT융합대학':  '첨아융',
+  '인문대학':         '인문대',
+  '자연과학대학':     '자과대',
+  '다산학부대학':         '다산대',
+  '약학대학':         '약학대',
+  '첨단바이오융합대학': '첨바융',
+  '사회과학대학':     '사과대',
+  '간호대학':         '간호대',
+  '의과대학':         '의과대',
+}
+const shortenCollegeName = name => COLLEGE_SHORT[name] ?? name.slice(0, 3)
+
+function formatUpdateTime(date) {
+  const month  = date.getMonth() + 1
+  const day    = date.getDate()
+  const hour24 = date.getHours()
+  const period = hour24 < 12 ? '오전' : '오후'
+  const hour12 = hour24 % 12 || 12
+  const min = String(date.getMinutes()).padStart(2, '0')
+  const sec = String(date.getSeconds()).padStart(2, '0')
+  return `${month}월 ${day}일 ${period} ${hour12}시 ${min}분 ${sec}초`
+}
+
+function CustomDayTick({ x, y, payload }) {
+  const R = 15
+  return (
+    <g transform={`translate(${x},${y + R + 2})`}>
+      <circle cx={0} cy={0} r={R} fill="rgba(255,255,255,0.25)" />
+      <text
+        x={0} y={0}
+        textAnchor="middle"
+        dominantBaseline="central"
+        fill="white"
+        fontFamily="'온글잎 박다현체', sans-serif"
+        fontSize={13}
+      >
+        {payload.value}
+      </text>
+    </g>
+  )
+}
 
 export default function Main() {
   const navigate = useNavigate()
   const [showBattleModal, setShowBattleModal] = useState(false)
-  const [showWeekModal, setShowWeekModal] = useState(false)
-  const [currentWeek, setCurrentWeek] = useState(null)
-  const [user, setUser] = useState({ name: '', college: '', spent: '' })
+  const [showWeekModal, setShowWeekModal]     = useState(false)
+  const [currentWeek, setCurrentWeek]         = useState(null)
+  const [user, setUser]                       = useState({ name: '', college: '', spent: '' })
   const [totalParticipation, setTotalParticipation] = useState('')
-  const [totalAllPayment, setTotalAllPayment] = useState('')
+  const [totalAllPayment, setTotalAllPayment]       = useState('')
   const [collegeTotalPayment, setCollegeTotalPayment] = useState('')
+  const [rankingData, setRankingData]         = useState([])
+  const [updateTime, setUpdateTime]           = useState('')
 
   useEffect(() => {
     getCurrentWeek()
@@ -59,7 +105,7 @@ export default function Main() {
         setCurrentWeek(week)
 
         const prevWeek = localStorage.getItem('prevActiveWeek')
-        const weekKey = week === null ? 'null' : String(week)
+        const weekKey  = week === null ? 'null' : String(week)
         console.log('[WeekModal] prevActiveWeek:', prevWeek, '→', weekKey, '/ weekModalSeen:', localStorage.getItem('weekModalSeen'))
 
         if (week === 2 || week === 3) {
@@ -74,14 +120,19 @@ export default function Main() {
         }
 
         localStorage.setItem('prevActiveWeek', weekKey)
+        return getWeeklyCollegeRanking(week)
+      })
+      .then(data => {
+        setRankingData(data.rankings || [])
+        setUpdateTime(formatUpdateTime(new Date()))
       })
       .catch(err => console.error('[WeekModal] getCurrentWeek 실패:', err))
 
     getMyDashboard()
       .then(data => setUser({
-        name: data.name,
+        name:    data.name,
         college: data.collegeName,
-        spent: `${data.totalPaymentAmount.toLocaleString()}원`,
+        spent:   `${data.totalPaymentAmount.toLocaleString()}원`,
       }))
       .catch(() => {})
 
@@ -97,6 +148,15 @@ export default function Main() {
       .then(data => setCollegeTotalPayment(data.totalPaymentAmount.toLocaleString()))
       .catch(() => {})
   }, [])
+
+  const chartData = DAYS.map(day => {
+    const entry = { day }
+    rankingData.forEach((college, i) => {
+      const found = college.dailyAmounts?.find(d => d.day === day)
+      entry[`c${i}`] = found?.amount ?? 0
+    })
+    return entry
+  })
 
   function handleWeekModalClose() {
     localStorage.setItem('weekModalSeen', '1')
@@ -163,46 +223,59 @@ export default function Main() {
       <div className="main__chart-section">
 
         <div className="main__chart-title-wrap">
-          <div className="main__chart-pill">이번 주 단과대 소비 현황</div>
-        </div>
-        <p className="main__chart-update">업데이트 일시 : 00:00</p>
-
-        {/* 차트 영역 (API 연동 예정) */}
-        <div className="main__chart-area">
-          {/* 차트 라인 이미지 — 동일 좌상단 기준 절대 배치 */}
-          {/* 세로 점선 — 요일 중앙 정렬 */}
-          {DAYS.map((_, i) => (
-            <div
-              key={i}
-              className="main__chart-vline"
-              style={{ left: `calc(${i} / 6 * (100% - 8.87cqw) + 4.435cqw)` }}
-            />
-          ))}
-          <div className="main__chart-graphs">
-            <img src={chartG2} className="main__chart-g main__chart-g2" alt="" />
-            <img src={chartG1} className="main__chart-g main__chart-g1" alt="" />
-            <img src={chartG3} className="main__chart-g main__chart-g3" alt="" />
-          </div>
-          {/* 범례: 흰색 pill + 색상 텍스트 */}
-          <div className="main__legend">
-            {LEGEND.map(({ label, color }) => (
-              <div key={label} className="main__legend-item">
-                <span className="main__legend-label" style={{ color }}>{label}</span>
+          <div className="main__chart-legend-mini">
+            {rankingData.map((college, i) => (
+              <div key={college.collegeName} className="main__chart-legend-mini-item">
+                <span className="main__chart-legend-mini-dot" style={{ background: CHART_COLORS[i] }} />
+                <span className="main__chart-legend-mini-name" style={{ color: CHART_COLORS[i] }}>
+                  {shortenCollegeName(college.collegeName)}
+                </span>
               </div>
             ))}
           </div>
+          <div className="main__chart-pill">이번 주 단과대 소비 현황</div>
         </div>
+        <p className="main__chart-update">업데이트 일시 : {updateTime || '--'}</p>
 
-        <hr className="main__chart-divider" />
+        <div className="main__chart-area">
+          <div className="main__chart-rechart">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={chartData} margin={{ top: 8, right: 20, bottom: 4, left: 20 }}>
+                <CartesianGrid
+                  vertical={true}
+                  horizontal={false}
+                  stroke="rgba(255,255,255,0.45)"
+                  strokeDasharray="4 4"
+                />
+                <XAxis
+                  dataKey="day"
+                  tick={<CustomDayTick />}
+                  tickLine={false}
+                  axisLine={{ stroke: 'rgba(255,255,255,0.5)' }}
+                  interval={0}
+                  height={36}
+                />
+                <YAxis
+                  hide
+                  width={0}
+                  domain={[0, dataMax => Math.max(dataMax, 1)]}
+                />
+                {rankingData.map((college, i) => (
+                  <Line
+                    key={college.collegeName}
+                    type="monotone"
+                    dataKey={`c${i}`}
+                    stroke={CHART_COLORS[i]}
+                    strokeWidth={2}
+                    dot={{ r: 3, fill: CHART_COLORS[i], strokeWidth: 0 }}
+                    activeDot={{ r: 4 }}
+                    connectNulls
+                  />
+                ))}
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
 
-        {/* 요일 행 */}
-        <div className="main__weekdays">
-          {DAYS.map(day => (
-            <div key={day} className="main__weekday">
-              <img src={ellipse189} className="main__weekday-dot" alt="" />
-              <span>{day}</span>
-            </div>
-          ))}
         </div>
 
       </div>
