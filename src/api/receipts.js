@@ -31,6 +31,10 @@ export async function getWeek3Challenge() {
   return apiRequest('/api/receipts/week3-challenge')
 }
 
+export async function getWeeklyCollegeRanking(weekNumber) {
+  return apiRequest(`/api/receipts/weekly-college-ranking?weekNumber=${weekNumber}`)
+}
+
 // 사용자 확인 후 최종 저장 — S3 업로드 + DB 저장
 export async function confirmReceipt(imageFile, ocrData) {
   const formData = new FormData()

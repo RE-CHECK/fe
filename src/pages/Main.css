@@ -213,13 +213,43 @@
 }
 
 .main__chart-title-wrap {
+  position: relative;
   display: flex;
-  justify-content: center;
+  align-items: center;
   margin-bottom: 2.5cqw;
+}
+
+.main__chart-legend-mini {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2cqw;
+}
+
+.main__chart-legend-mini-item {
+  display: flex;
+  align-items: center;
+  gap: 1cqw;
+}
+
+.main__chart-legend-mini-dot {
+  width: 1.8cqw;
+  height: 1.8cqw;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.main__chart-legend-mini-name {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-size: 2.2cqw;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 /* 파란 pill: h=12.05cqw, radius=6.24cqw */
 .main__chart-pill {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -247,124 +277,17 @@
 /* 차트 영역 */
 .main__chart-area {
   position: relative;
-  height: 61.73cqw;
+  height: 68cqw;
   margin-bottom: 2cqw;
 }
 
-/* 요일별 세로 점선 */
-.main__chart-vline {
+/* Recharts 래퍼 — 차트 영역 전체를 꽉 채움 */
+.main__chart-rechart {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 0;
-  border-left: 1.5px dashed rgba(255, 255, 255, 0.45);
-  transform: translateX(-50%);
-  pointer-events: none;
+  inset: 0;
 }
 
-/*
-  Figma 차트 이미지 좌표 (1378px 기준 → ×430/1378)
-    chart-section top  = 3165.88px
-    chart-area 시작    ≈ section top + 26cqw(pill+텍스트+패딩)
-    group3: top=3686.21 → section 기준 520.33px → 37.76cqw / h=527.97px → 38.33cqw
-    group2: top=3760.68 → 594.80px → 43.16cqw / h=543.24px → 39.44cqw
-    group1: top=3831.33 → 665.45px → 48.28cqw / h=349.43px → 25.38cqw
-  chart-area top = 26cqw → 각 이미지의 chart-area 기준 top:
-    group3: 37.76-26 = 11.76cqw  → chart-area(61.73cqw) 대비 19%
-    group2: 43.16-26 = 17.16cqw  → 28%
-    group1: 48.28-26 = 22.28cqw  → 36%
-  height 비율(chart-area 61.73cqw 기준):
-    group3: 38.33/61.73 = 62%
-    group2: 39.44/61.73 = 64%
-    group1: 25.38/61.73 = 41%
-*/
 
-/* 차트 래퍼 — 범례 공간(22cqw) 제외한 왼쪽 영역 */
-.main__chart-graphs {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: calc(100% - 22cqw);
-  height: 100%;
-}
-
-/* 차트 이미지 공통: 부모 너비 100%, 명시적 height로 SVG 렌더 확정 */
-.main__chart-g {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  display: block;
-}
-.main__chart-g3 { top: 19%; height: 62%; }
-.main__chart-g2 { top: 28%; height: 64%; }
-.main__chart-g1 { top: 36%; height: 41%; }
-
-/* 범례: 오른쪽 22cqw 영역 — 흰색 pill + 색상 텍스트 */
-.main__legend {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 20cqw;
-  display: flex;
-  flex-direction: column;
-  gap: 3.2cqw;
-}
-
-/* Figma Union shape: h=57.127px→4.15cqw, rounded pill, white */
-.main__legend-item {
-  background: #ffffff;
-  border-radius: 4.15cqw;
-  height: 4.15cqw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.main__legend-label {
-  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
-  font-weight: 600;
-  font-size: 2.40cqw;
-  white-space: nowrap;
-}
-
-/* 차트 구분선 */
-.main__chart-divider {
-  border: none;
-  border-top: 1.5px solid rgba(255, 255, 255, 0.5);
-  margin: 0 0 3cqw;
-}
-
-/* ── 요일 행 ── */
-.main__weekdays {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.main__weekday {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* 원형 dot (Ellipse 189 에셋) */
-.main__weekday-dot {
-  width: 8.87cqw;
-  height: 8.87cqw;
-  display: block;
-}
-
-/* 요일 텍스트: 원 위에 absolute 중앙 정렬 */
-.main__weekday span {
-  position: absolute;
-  font-family: '온글잎 박다현체', sans-serif;
-  font-size: 5.28cqw;
-  color: #ffffff;
-  letter-spacing: 0.053cqw;
-  line-height: 1;
-  pointer-events: none;
-}
 
 /* ── 하단 카드 ── */
 .main__bottom {
