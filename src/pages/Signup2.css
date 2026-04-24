@@ -156,18 +156,20 @@
 .s2__input--id {
   flex: 1;
   width: auto;
+  min-width: 0;
 }
 
 /* ── 중복확인 버튼 ── */
 .s2__check-btn {
   flex-shrink: 0;
-  width: 34cqw;   /* 468.278 / 1378 * 100 */
+  padding: 0 4cqw;
   height: 13.83cqw;
   border: none;
   border-radius: 8.59cqw;
   background: #ffffff;
+  box-sizing: border-box;
   font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
-  font-size: 4.21cqw;   /* 58.017 / 1378 * 100 */
+  font-size: 4.21cqw;
   font-weight: 600;
   color: #333333;
   cursor: pointer;
