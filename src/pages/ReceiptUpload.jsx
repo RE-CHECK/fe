@@ -10,6 +10,36 @@ import char2        from '../assets/image/4.서브 캐릭터 기본형2 1.svg'
 import AlertModal   from '../components/AlertModal'
 import { analyzeReceipt, confirmReceipt } from '../api/receipts'
 
+// HEIC 등 비표준 포맷·대용량 파일을 JPEG로 변환 후 5MB 이하로 압축
+function compressImage(file) {
+  return new Promise((resolve) => {
+    const img = new Image()
+    const url = URL.createObjectURL(file)
+    img.onload = () => {
+      URL.revokeObjectURL(url)
+      const canvas = document.createElement('canvas')
+      let { width, height } = img
+      if (width > 1920) {
+        height = Math.round((height * 1920) / width)
+        width = 1920
+      }
+      canvas.width = width
+      canvas.height = height
+      canvas.getContext('2d').drawImage(img, 0, 0, width, height)
+      canvas.toBlob(
+        (blob) => resolve(new File([blob], 'receipt.jpg', { type: 'image/jpeg' })),
+        'image/jpeg',
+        0.85
+      )
+    }
+    img.onerror = () => {
+      URL.revokeObjectURL(url)
+      resolve(file) // 변환 실패 시 원본 그대로
+    }
+    img.src = url
+  })
+}
+
 export default function ReceiptUpload() {
   const navigate = useNavigate()
   const fileInputRef = useRef(null)
@@ -27,8 +57,9 @@ export default function ReceiptUpload() {
 
     setIsLoading(true)
     try {
-      const data = await analyzeReceipt(file)
-      setImageFile(file)
+      const compressed = await compressImage(file)
+      const data = await analyzeReceipt(compressed)
+      setImageFile(compressed)
       setReceiptData({
         storeName: data.storeName,
         amount: `${data.paymentAmount.toLocaleString()}원`,
