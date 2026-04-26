@@ -104,6 +104,7 @@ export default function Signup() {
     form.studentId &&
     form.college &&
     form.department &&
+    form.photo &&
     form.agreed
 
   function handleNext() {
