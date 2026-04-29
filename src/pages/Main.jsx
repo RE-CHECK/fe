@@ -7,6 +7,8 @@ import './Main.css'
 import AlertModal from '../components/AlertModal'
 import WeekStartModal from '../components/WeekStartModal'
 import asset21       from '../assets/image/자산 21@4x 1.svg'
+import floatCircle  from '../assets/icon/float-btn-circle.svg'
+import floatBubble  from '../assets/icon/float-btn-bubble.svg'
 import mascotHaneul  from '../assets/image/mascot/하늘색.svg'
 import mascotHoesek  from '../assets/image/mascot/회색.svg'
 import mascotNamsek  from '../assets/image/mascot/남색.svg'
@@ -308,6 +310,27 @@ export default function Main() {
           onClose={() => setShowBattleModal(false)}
         />
       )}
+
+      <a
+        className="main__float-btn"
+        href="http://pf.kakao.com/_GxdvZX"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div className="main__float-btn-inner">
+          <img src={floatCircle} className="main__float-btn-circle" alt="" />
+          <div className="main__float-btn-content">
+            <div className="main__float-btn-icon-wrap">
+              <img src={floatBubble} className="main__float-btn-bubble" alt="" />
+              <svg className="main__float-btn-lines" viewBox="0 0 124 124" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M30 50L94 50" stroke="#222222" strokeWidth="9" strokeLinecap="round"/>
+                <path d="M30 74L94 74" stroke="#222222" strokeWidth="9" strokeLinecap="round"/>
+              </svg>
+            </div>
+            <p className="main__float-btn-text">문의하기</p>
+          </div>
+        </div>
+      </a>
     </div>
   )
 }
