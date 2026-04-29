@@ -20,11 +20,7 @@ export default function AdminMain() {
     async function fetchWeek() {
       try {
         const res = await getCurrentWeek()
-        if (res.data == null) {
-          setCurrentWeek("테스트 ")
-        } else {
-          setCurrentWeek(res.weekNumber)  
-        }
+        setCurrentWeek(res.weekNumber)
       } catch (e) {
         console.error('주차 조회 실패', e)
       }
@@ -40,7 +36,7 @@ export default function AdminMain() {
       {/* ── 헤더 영역 ── */}
       <div className="admin-main__header">
         <div className="current-week">
-          현재 활성화 주차 : {weekNumber !== null && <span>{weekNumber}주차</span>}
+          현재 활성화 주차 : {weekNumber !== null ? <span>{weekNumber}주차</span> : <span>테스트 기간</span>}
         </div>
         <button
           className="admin-main__logout"
