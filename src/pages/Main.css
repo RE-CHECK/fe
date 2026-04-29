@@ -344,3 +344,67 @@
   background: #0088ff;
   color: #ffffff;
 }
+
+/* ── 플로팅 문의하기 버튼 ── */
+/* 원 크기 249px→18.07cqw, 아이콘 186px→13.5cqw, 우측 49px→3.56cqw */
+.main__float-btn {
+  position: fixed;
+  right: max(3.56cqw, calc((100vw - 430px) / 2 + 3.56cqw));
+  bottom: 8cqw;
+  text-decoration: none;
+  z-index: 100;
+}
+
+.main__float-btn-inner {
+  position: relative;
+  width: 18.07cqw;
+  height: 18.07cqw;
+}
+
+.main__float-btn-circle {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.main__float-btn-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0cqw;
+  padding-top: 1.5cqw;
+}
+
+.main__float-btn-icon-wrap {
+  position: relative;
+  width: 9cqw;
+  height: 9cqw;
+}
+
+.main__float-btn-bubble {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.main__float-btn-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.main__float-btn-text {
+  margin: 0;
+  font-family: '온글잎 박다현체', sans-serif;
+  font-size: 3.26cqw;
+  color: #222222;
+  text-align: center;
+  letter-spacing: 0.049cqw;
+  white-space: nowrap;
+}
