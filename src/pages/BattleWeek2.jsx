@@ -2,6 +2,11 @@ import { useRef, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './BattleWeek2.css'
 import { getWeek2Ranking } from '../api/receipts'
+import StoreInfoModal from '../components/StoreInfoModal'
+
+import ImgStoreSarangjip from '../assets/image/store/사랑집.svg'
+import ImgStoreUjok1     from '../assets/image/store/우족1.svg'
+import ImgStoreUjok2     from '../assets/image/store/우족2.svg'
 
 // ── 왕관 이미지 (4.svg=1등, 2.svg=2등, 5.svg=3등, 6.svg=4등)
 import crown1 from '../assets/image/ChatGPT Image 2026년 4월 7일 오후 09_44_19 4.svg'
@@ -24,16 +29,40 @@ import mascotGray  from '../assets/image/mascot/회색.svg'
 // ── 하드코딩 대진표 (2주차 고정) ────────────────────────────
 const STORES_CONFIG = [
   {
-    storeName: '사랑집1',
+    storeName: '사랑집',
+    infoLabel: '사랑집',
     colleges: ['공과대학', '소프트웨어융합대학', '첨단ICT융합대학', '인문대학'],
+    info: {
+      badgeName: '사랑집',
+      images:    [ImgStoreSarangjip],
+      color:     '#fdbd28',
+      address:   '경기 수원시 팔달구 아주로39번길 18-7 1층',
+      hours:     '매일 11:00~22:00 / 브레이크타임 14:30~16:30',
+      phone:     '0507-1349-9209',
+      desc:      '눈 뜨면 없어져 있는 돼지김치구이 맛집',
+    },
   },
   {
     storeName: '사랑집2',
+    infoLabel: '우족',
     colleges: ['자연과학대학', '경영대학', '메디컬', '경제정치사회융합학부'],
+    info: {
+      badgeName: '우만동 족발집',
+      images:      [ImgStoreUjok1, ImgStoreUjok2],
+      imageRatios: [483, 560],
+      imageHeight: 35.05,
+      color:       '#ff5252',
+      address:   '경기 수원시 팔달구 아주로27번길 10-20 1층',
+      hours:     '매일 11:30~21:30 / 브레이크타임 15:00~16:30',
+      phone:     '0507-1406-7066',
+      desc:      '점심특선이 레전설인 아주대 최고 족발집',
+    },
   },
   {
     storeName: '사랑집3',
+    infoLabel: '동떡이',
     colleges: ['첨단바이오융합대학', '다산학부', '국방디지털융합학과', '사회과학대학'],
+    info: null,
   },
 ]
 
@@ -183,7 +212,7 @@ function RankCarousel({ rankings }) {
 // ── 사랑집 섹션 ─────────────────────────────────────────────
 // config: STORES_CONFIG의 항목 (하드코딩)
 // rankings: API에서 받아온 해당 가게의 랭킹 배열 (없으면 [])
-function StoreSection({ config, rankings }) {
+function StoreSection({ config, rankings, onInfo }) {
   const storeColor = STORE_COLORS[config.storeName] ?? '#fdbd28'
   const hasData    = rankings.length > 0
   const sorted     = hasData
@@ -196,6 +225,11 @@ function StoreSection({ config, rankings }) {
       <div className="bw2__store-badge" style={{ background: storeColor }}>
         {config.storeName} 대결
       </div>
+
+      {/* 정보보기 텍스트 버튼 */}
+      <button className="bw2__info-btn" onClick={onInfo} disabled={!onInfo}>
+        {config.infoLabel} 정보보기
+      </button>
 
       {/* 대진 현황 (하드코딩) */}
       <div className="bw2__standings">
@@ -223,8 +257,8 @@ function StoreSection({ config, rankings }) {
 // ── 메인 페이지 ─────────────────────────────────────────────
 export default function BattleWeek2() {
   const navigate = useNavigate()
-  // storeName → rankings 맵 (API 응답)
   const [rankingMap, setRankingMap] = useState({})
+  const [modalConfig, setModalConfig] = useState(null)
 
   useEffect(() => {
     getWeek2Ranking()
@@ -266,8 +300,17 @@ export default function BattleWeek2() {
           key={config.storeName}
           config={config}
           rankings={rankingMap[config.storeName] ?? []}
+          onInfo={config.info ? () => setModalConfig(config) : null}
         />
       ))}
+
+      {/* ── 가게 정보 모달 ── */}
+      {modalConfig && (
+        <StoreInfoModal
+          storeInfo={modalConfig.info}
+          onClose={() => setModalConfig(null)}
+        />
+      )}
 
     </div>
   )

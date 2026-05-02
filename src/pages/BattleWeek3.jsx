@@ -2,27 +2,56 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './BattleWeek3.css'
 import { getWeek3Challenge } from '../api/receipts'
+import StoreInfoModal from '../components/StoreInfoModal'
 
 import char1 from '../assets/image/3주차_1.svg'
 import char2 from '../assets/image/3주차_2.svg'
 import charDraw from '../assets/image/3주차_무승부.svg'
 
+import ImgAppaTaeng1 from '../assets/image/store/아빠땡1.svg'
+import ImgAppaTaeng2 from '../assets/image/store/아빠땡2.svg'
+import ImgPopuri1    from '../assets/image/store/포푸리1.svg'
+import ImgPopuri2    from '../assets/image/store/포푸리2.svg'
+
 const MATCHUPS_CONFIG = [
   {
-    storeName: '사랑집4',
+    storeName: '아빠땡',
+    infoLabel: '아빠땡',
     storeColor: '#fdbd28',
     year1Label: '23학번',
     year2Label: '24학번',
     badge1: '팀23',
     badge2: '팀24',
+    info: {
+      badgeName:   '아빠땡',
+      images:      [ImgAppaTaeng1, ImgAppaTaeng2],
+      imageRatios: [576, 418],
+      imageHeight: 32.6,
+      color:       '#fdbd28',
+      address:     '경기 수원시 영통구 월드컵로 193번길 15 2층',
+      hours:       '매일 8:00~22:00 / 매주 일요일 휴무',
+      phone:       '0507-1373-7260',
+      desc:        '순공시간 2시간 확보되는 잠봉뵈르 맛집 카페',
+    },
   },
   {
-    storeName: '사랑집5',
+    storeName: '포푸리',
+    infoLabel: '포푸리',
     storeColor: '#0ca214',
     year1Label: '25학번',
     year2Label: '26학번',
     badge1: '팀25',
     badge2: '팀26',
+    info: {
+      badgeName:   '포푸리',
+      images:      [ImgPopuri1, ImgPopuri2],
+      imageRatios: [1, 1],
+      color:       '#0ca214',
+      address:     '경기 수원시 영통구 월드컵로 179번길 32-3',
+      hours:       '매일11:00~23:00 / 매주 일요일 휴무',
+      phone:       '010-3012-3856',
+      desc:        '들어가자마자 에겐되는 케이크가 맛있는 예카',
+    },
   },
 ]
 
@@ -79,12 +108,15 @@ function DrawSection({ config, data }) {
 }
 
 // ── 대진 섹션 ────────────────────────────────────────────────
-function MatchupSection({ config, data }) {
+function MatchupSection({ config, data, onInfo }) {
   if (!data) return (
     <section className="bw3__section">
       <div className="bw3__store-badge" style={{ background: config.storeColor }}>
         {config.storeName} 대결
       </div>
+      <button className="bw3__info-btn" onClick={onInfo} disabled={!onInfo}>
+        {config.infoLabel} 정보보기
+      </button>
       <div className="bw3__standings">
         <span className="bw3__year-name">{config.year1Label}</span>
         <span className="bw3__vs">vs</span>
@@ -102,6 +134,9 @@ function MatchupSection({ config, data }) {
       <div className="bw3__store-badge" style={{ background: config.storeColor }}>
         {config.storeName} 대결
       </div>
+      <button className="bw3__info-btn" onClick={onInfo} disabled={!onInfo}>
+        {config.infoLabel} 정보보기
+      </button>
       <div className="bw3__standings">
         <span className="bw3__year-name">{config.year1Label}</span>
         <span className="bw3__vs">vs</span>
@@ -134,6 +169,7 @@ function MatchupSection({ config, data }) {
 export default function BattleWeek3() {
   const navigate = useNavigate()
   const [matchups, setMatchups] = useState([])
+  const [modalInfo, setModalInfo] = useState(null)
 
   useEffect(() => {
     getWeek3Challenge()
@@ -167,8 +203,16 @@ export default function BattleWeek3() {
           key={config.storeName}
           config={config}
           data={matchups[i] ?? null}
+          onInfo={config.info ? () => setModalInfo(config.info) : null}
         />
       ))}
+
+      {modalInfo && (
+        <StoreInfoModal
+          storeInfo={modalInfo}
+          onClose={() => setModalInfo(null)}
+        />
+      )}
 
     </div>
   )

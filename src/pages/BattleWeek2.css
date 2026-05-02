@@ -96,6 +96,24 @@
   white-space: nowrap;
 }
 
+/* ── 정보보기 텍스트 버튼 ── */
+/* Figma: font-size=50px, letter-spacing=0.75px, underline, white, centered */
+.bw2__info-btn {
+  display: block;
+  margin: 0 auto 2cqw;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: '온글잎 박다현체', sans-serif;
+  font-size: 3.63cqw;    /* 50 / 1378 × 100 */
+  color: #ffffff;
+  text-decoration: underline;
+  text-align: center;
+  letter-spacing: 0.054cqw; /* 0.75 / 1378 × 100 */
+  line-height: 1.2;
+}
+
 /* ── 대진 현황 (공과대 vs 소융대 vs ...) ── */
 .bw2__standings {
   display: flex;
@@ -308,6 +326,7 @@
   opacity: 0.35;
   font-size: 4.5cqw;
 }
+
 
 .bw2__won {
   font-size: 4.5cqw;
