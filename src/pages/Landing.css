@@ -8,11 +8,11 @@
   position: relative;
   width: 100%;
   max-width: 430px;
-  height: 685.53cqw;
+  min-height: 708.92cqw;
   margin: 0 auto;
   container-type: inline-size;
   background: linear-gradient(to bottom, #4585ff, #b2cbff);
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 /* ── shared helpers ── */
@@ -578,6 +578,26 @@
 }
 
 /* ── CTA SECTION ── */
+
+/* Background ellipse (Ellipse 180) */
+.lp__ellipse180 {
+  position: absolute;
+  left: 3.54cqw;           /* 50/1413 */
+  top: 602.16cqw;          /* 8845/1413 - 23.46 shift */
+  width: 93.42cqw;         /* 1320/1413 */
+  height: 38.50cqw;        /* 544/1413 */
+  pointer-events: none;
+}
+.lp__ellipse180 img {
+  position: absolute;
+  top: -75.93%;
+  right: -31.29%;
+  bottom: -75.93%;
+  left: -31.29%;
+  display: block;
+  max-width: none;
+}
+
 /* Tilted card 1 wrapper + content */
 .lp__cta-wrap-1 {
   position: absolute;
@@ -585,7 +605,7 @@
   align-items: center;
   justify-content: center;
   left: 7.50cqw;          /* 106/1413 */
-  top: 602.48cqw;
+  top: 625.94cqw;
   width: 54.46cqw;        /* 769.508/1413 */
   height: 18.08cqw;       /* 255.396/1413 */
 }
@@ -622,7 +642,7 @@
   align-items: center;
   justify-content: center;
   left: 19.02cqw;         /* 268.79/1413 */
-  top: 616.70cqw;         /* 9045.39/1413 - 23.46 */
+  top: 640.16cqw;         /* 9045.39/1413 */
   width: 71.04cqw;        /* 1003.762/1413 */
   height: 18.99cqw;       /* 268.415/1413 */
 }
@@ -656,7 +676,7 @@
 .lp__cta-intro {
   position: absolute;
   left: 50%;
-  top: 644.70cqw;         /* 9441/1413 - 23.46 */
+  top: 668.16cqw;         /* 9441/1413 */
   transform: translateX(-50%);
   margin: 0;
   font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
@@ -673,7 +693,7 @@
 .lp__cta-bar {
   position: absolute;
   left: 0;
-  top: 664.15cqw;         /* 9716/1413 - 23.46 */
+  top: 687.61cqw;         /* 9716/1413 */
   width: 100%;
   height: 21.38cqw;       /* 302/1413 */
   background: #fdbd28;
@@ -683,7 +703,7 @@
 .lp__cta-btn {
   position: absolute;
   left: 50%;
-  top: 673.64cqw;         /* 9850/1413 - 23.46 */
+  top: 697.10cqw;         /* 9850/1413 */
   transform: translateX(-50%);
   background: none;
   border: none;

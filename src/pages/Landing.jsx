@@ -5,6 +5,7 @@ import imgCardLogo   from '../assets/landing/image 33.svg'
 import imgWeek1Circ  from '../assets/landing/Ellipse 241.svg'
 import imgWeek2Circ  from '../assets/landing/Ellipse 242.svg'
 import imgWeek3Circ  from '../assets/landing/Ellipse 243.svg'
+import imgEllipse180 from '../assets/landing/Ellipse 180.svg'
 
 export default function Landing() {
   const navigate = useNavigate()
@@ -171,6 +172,10 @@ export default function Landing() {
       </div>
 
       {/* ── CTA SECTION ── */}
+      <div className="lp__ellipse180">
+        <img src={imgEllipse180} alt="" />
+      </div>
+
       <div className="lp__cta-wrap-1">
         <div className="lp__cta-card-1" />
         <p className="lp__cta-hl-1">공대 vs 소융대</p>
