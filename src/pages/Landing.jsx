@@ -10,7 +10,7 @@ export default function Landing() {
   const navigate = useNavigate()
 
   const handleCta = () => {
-    navigate(localStorage.getItem('accessToken') ? '/main' : '/login')
+    navigate('/')
   }
 
   return (
@@ -171,8 +171,6 @@ export default function Landing() {
       </div>
 
       {/* ── CTA SECTION ── */}
-      <div className="lp__deco-ellipse" />
-
       <div className="lp__cta-wrap-1">
         <div className="lp__cta-card-1" />
         <p className="lp__cta-hl-1">공대 vs 소융대</p>
