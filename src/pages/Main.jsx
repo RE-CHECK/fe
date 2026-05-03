@@ -90,6 +90,7 @@ function CustomDayTick({ x, y, payload }) {
 export default function Main() {
   const navigate = useNavigate()
   const [showBattleModal, setShowBattleModal] = useState(false)
+  const [showStoresModal, setShowStoresModal] = useState(false)
   const [showWeekModal, setShowWeekModal]     = useState(false)
   const [currentWeek, setCurrentWeek]         = useState(null)
   const [user, setUser]                       = useState({ name: '', college: '', spent: '' })
@@ -197,6 +198,11 @@ export default function Main() {
         <p className="main__card-amount">{user.spent}</p>
       </div>
 
+      {/* ── 제휴매장 버튼 ── */}
+      <button className="main__store-btn" onClick={() => setShowStoresModal(true)}>
+        제휴매장 한 눈에 보기
+      </button>
+
       {/* ── 통계 ── */}
       <div className="main__stat-block">
         <div className="main__pill main__pill--yellow">총 누적 참여 횟수</div>
@@ -300,6 +306,15 @@ export default function Main() {
 
       {showWeekModal && (
         <WeekStartModal week={currentWeek} onClose={handleWeekModalClose} />
+      )}
+
+      {showStoresModal && (
+        <AlertModal
+          title="추후 오픈 예정!"
+          desc="조금만 기다려주세요"
+          btnVariant="yellow"
+          onClose={() => setShowStoresModal(false)}
+        />
       )}
 
       {showBattleModal && (

@@ -1,0 +1,713 @@
+/*
+  Landing page
+  Figma frame: 1413 × 10020 px
+  cqw formula: value / 1413 * 100 = N cqw
+*/
+
+.lp {
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  min-height: 708.92cqw;
+  margin: 0 auto;
+  container-type: inline-size;
+  background: linear-gradient(to bottom, #4585ff, #b2cbff);
+  overflow: hidden;
+}
+
+/* ── shared helpers ── */
+.lp__w700 { font-weight: 700; }
+.lp__w800 { font-weight: 800; }
+.lp__white { color: #ffffff; }
+.lp__yellow { color: #feba19; }
+
+/* ── HERO ── */
+
+.lp__badge-bg {
+  position: absolute;
+  left: 23.57cqw;         /* 333/1413 */
+  top: 14.58cqw;          /* 206/1413 */
+  width: 52.86cqw;        /* 747/1413 */
+  height: 6.48cqw;        /* 91.576/1413 */
+  background: rgba(253,189,40,0.24);
+  border: 0.11cqw solid white;
+  border-radius: 4.63cqw; /* 65.412/1413 */
+}
+
+.lp__badge-text {
+  position: absolute;
+  left: 50.04cqw;
+  top: 15.97cqw;          /* 225.62/1413 */
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: '온글잎 박다현체', sans-serif;
+  font-size: 3.51cqw;     /* 49.635/1413 */
+  line-height: 3.69cqw;   /* 52.076/1413 */
+  color: #feba19;
+  letter-spacing: 0.035cqw;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.lp__hero-title {
+  position: absolute;
+  left: 49.96cqw;
+  top: 25.69cqw;          /* 363/1413 */
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 800;
+  font-size: 9.77cqw;     /* 138/1413 */
+  line-height: 11.51cqw;  /* 162.617/1413 */
+  color: #ffffff;
+  letter-spacing: 0.098cqw;
+  white-space: nowrap;
+  text-align: center;
+}
+.lp__hero-title--yellow { color: #feba19; }
+
+.lp__hero-sub {
+  position: absolute;
+  left: 50.04cqw;
+  top: 51.88cqw;          /* 733/1413 */
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: '온글잎 박다현체', sans-serif;
+  font-size: 5.66cqw;     /* 80/1413 */
+  line-height: 4.73cqw;   /* 66.855/1413 */
+  background: linear-gradient(to right, #ffbc18, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.057cqw;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Photo card */
+.lp__photo {
+  position: absolute;
+  left: 6.07cqw;          /* 85.79/1413 */
+  top: 66.24cqw;          /* 936/1413 */
+  width: 37.72cqw;        /* 532.917/1413 */
+  height: 24.06cqw;       /* 340/1413 */
+  border-radius: 2.38cqw; /* 33.661/1413 */
+  overflow: hidden;
+}
+.lp__photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+
+/* Student card */
+.lp__card-outer {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 56.90cqw;         /* 803.95/1413 */
+  top: 66.24cqw;
+  width: 37.10cqw;        /* 524.283/1413 */
+  height: 23.16cqw;       /* 327.28/1413 */
+}
+.lp__card-rot {
+  flex: none;
+  transform: rotate(-90deg);
+}
+.lp__card {
+  position: relative;
+  width: 23.16cqw;
+  height: 37.10cqw;
+  border-radius: 2.25cqw; /* 31.775/1413 */
+  border: 0.20cqw solid white;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(255,255,255,0));
+  backdrop-filter: blur(1.18cqw);
+  overflow: hidden;
+}
+.lp__card-tex {
+  position: absolute;
+  inset: 0;
+  border-radius: 2.25cqw;
+  opacity: 0.3;
+  mix-blend-mode: overlay;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: top left;
+}
+/* Shared row style for card content */
+.lp__card-row {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lp__card-unrot { flex: none; transform: rotate(90deg); }
+
+/* Card number  – left:65.31 top:35.35 w:32 h:327 inside the portrait card */
+.lp__card-row--num {
+  left: 4.62cqw;
+  top: 2.50cqw;
+  width: 2.26cqw;
+  height: 23.14cqw;
+}
+.lp__card-num {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 2.02cqw;
+  color: rgba(255,255,255,0.66);
+  white-space: nowrap;
+}
+
+/* STUDENT ID – left:250.07 top:366.6 w:22 h:115 */
+.lp__card-row--id {
+  left: 17.70cqw;
+  top: 25.95cqw;
+  width: 1.56cqw;
+  height: 8.14cqw;
+}
+.lp__card-id {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.35cqw;
+  color: rgba(255,255,255,0.77);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Name – left:34.6 top:36.15 w:23 h:108 */
+.lp__card-row--name {
+  left: 2.45cqw;
+  top: 2.56cqw;
+  width: 1.63cqw;
+  height: 7.64cqw;
+}
+.lp__card-name {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.46cqw;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.088cqw;
+  white-space: nowrap;
+}
+
+/* Logo – left:225.23 top:35.35 w:65.933 h:61.937 */
+.lp__card-row--logo {
+  left: 15.94cqw;
+  top: 2.50cqw;
+  width: 4.67cqw;
+  height: 4.38cqw;
+}
+.lp__card-logo {
+  width: 4.67cqw;
+  height: 4.38cqw;
+  max-width: none;
+  object-fit: cover;
+}
+
+/* Scroll arrow */
+.lp__arrow {
+  position: absolute;
+  left: 49.96cqw;
+  top: 78.15cqw;
+  transform: translateX(-50%);
+  width: 2.83cqw;
+  height: 2.83cqw;
+  border-right: 0.28cqw solid rgba(255,255,255,0.85);
+  border-bottom: 0.28cqw solid rgba(255,255,255,0.85);
+  transform: translateX(-50%) rotate(45deg);
+  pointer-events: none;
+}
+
+/* ── PROBLEM ── */
+.lp__problem {
+  position: absolute;
+  left: 49.89cqw;         /* 705.5/1413 */
+  top: 99.72cqw;          /* 1409/1413 */
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-size: 4.60cqw;     /* 65/1413 */
+  line-height: 5.66cqw;   /* 80/1413 */
+  text-align: center;
+  letter-spacing: 0.046cqw;
+  white-space: nowrap;
+}
+
+/* ── SECTION LABELS ── */
+.lp__label {
+  position: absolute;
+  left: 6.58cqw;          /* 93/1413 */
+  margin: 0;
+  font-family: '온글잎 박다현체', sans-serif;
+  font-size: 4.60cqw;
+  line-height: 4.95cqw;   /* 70/1413 */
+  color: #feba19;
+  letter-spacing: 0.046cqw;
+  white-space: nowrap;
+}
+.lp__label--why      { top: 133.55cqw; } /* 1887/1413 */
+.lp__label--schedule { top: 257.54cqw; } /* 3639/1413 */
+.lp__label--how      { top: 398.16cqw; } /* 5626/1413 */
+.lp__label--reward   { top: 517.48cqw; } /* 7311/1413 */
+
+/* ── SECTION HEADINGS ── */
+.lp__section-head {
+  position: absolute;
+  left: 6.58cqw;
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 700;
+  font-size: 7.51cqw;     /* 106.049/1413 */
+  line-height: 9.20cqw;   /* 130/1413 */
+  color: #ffffff;
+  letter-spacing: 0.075cqw;
+  white-space: nowrap;
+}
+.lp__section-head--why      { top: 141.26cqw; } /* 1996/1413 */
+.lp__section-head--schedule { top: 265.25cqw; } /* 3748/1413 */
+.lp__section-head--how      { top: 405.87cqw; } /* 5735/1413 */
+.lp__section-head--reward   { top: 524.27cqw; } /* 7407/1413 */
+
+/* ── WHY INFO CARDS ── */
+.lp__info-card {
+  position: absolute;
+  left: 6.58cqw;
+  width: 86.84cqw;        /* 1227/1413 */
+  height: 23.43cqw;       /* 331/1413 */
+  background: rgba(255,255,255,0.2);
+  border-radius: 2.12cqw; /* 30/1413 */
+}
+.lp__info-card--1 { top: 164.19cqw; } /* 2320/1413 */
+.lp__info-card--2 { top: 192.50cqw; } /* 2720/1413 */
+.lp__info-card--3 { top: 220.88cqw; } /* 3120/1413 */
+
+/* icon wrapper – background square with emoji centered inside */
+.lp__info-icon {
+  position: absolute;
+  left: 4.03cqw;          /* 57/1413 */
+  top: 4.67cqw;           /* 66/1413 */
+  width: 10.62cqw;        /* 150/1413 */
+  height: 10.62cqw;
+  background: rgba(253,189,40,0.6);
+  border: 0.21cqw solid rgba(255,255,255,0.49);
+  border-radius: 1.42cqw; /* 20/1413 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lp__info-emoji {
+  margin: 0;
+  font-size: 7.51cqw;
+  line-height: 1;
+  color: #000000;
+}
+.lp__info-title {
+  position: absolute;
+  left: 17.27cqw;         /* (337-93)/1413 */
+  top: 4.67cqw;
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 700;
+  font-size: 3.27cqw;     /* 46.153/1413 */
+  line-height: 4.00cqw;   /* 56.577/1413 */
+  color: #000000;
+  white-space: nowrap;
+  letter-spacing: 0.033cqw;
+}
+.lp__info-body {
+  position: absolute;
+  left: 17.27cqw;
+  top: 10.54cqw;          /* (2469-2320)/1413 = 149/1413 */
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 500;
+  font-size: 3.27cqw;
+  line-height: 4.00cqw;
+  color: rgba(0,0,0,0.57);
+  white-space: nowrap;
+  letter-spacing: 0.033cqw;
+}
+
+/* ── SCHEDULE WEEKS ── */
+
+/* Shared circle */
+.lp__week-circ {
+  position: absolute;
+  width: 11.18cqw;        /* 158/1413 */
+  height: 11.18cqw;
+}
+.lp__week-circ--1 { left: 6.58cqw; top: 291.79cqw; } /* 93/1413, 4123/1413 */
+.lp__week-circ--2 { left: 6.51cqw; top: 327.24cqw; } /* 92/1413, 4624/1413 */
+.lp__week-circ--3 { left: 6.51cqw; top: 362.71cqw; } /* 92/1413, 5125/1413 */
+
+/* Week numbers inside circles */
+.lp__week-num {
+  position: absolute;
+  margin: 0;
+  font-family: '온글잎 박다현체', sans-serif;
+  font-size: 7.51cqw;
+  line-height: 9.20cqw;
+  white-space: nowrap;
+}
+.lp__week-num--1 { left: 11.25cqw; top: 293.00cqw; color: #ffd062; } /* 159/1413, 4146/1413 */
+.lp__week-num--2 { left: 10.26cqw; top: 328.80cqw; color: #007af5; } /* 145/1413, 4646/1413 */
+.lp__week-num--3 { left: 10.26cqw; top: 364.26cqw; color: #f62717; } /* 145/1413, 5147/1413 */
+
+/* Week date labels */
+.lp__week-date {
+  position: absolute;
+  left: 20.24cqw;         /* 286/1413 */
+  margin: 0;
+  font-family: '온글잎 박다현체', sans-serif;
+  font-size: 4.60cqw;
+  line-height: 4.95cqw;
+  white-space: nowrap;
+  letter-spacing: 0.046cqw;
+}
+.lp__week-date--1 { top: 291.79cqw; color: #feba19; }
+.lp__week-date--2 { top: 327.24cqw; color: #0062ff; }
+.lp__week-date--3 { top: 362.71cqw; color: #f62717; }
+
+/* Week names */
+.lp__week-name {
+  position: absolute;
+  left: 20.17cqw;         /* 285/1413 */
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 700;
+  font-size: 4.60cqw;
+  line-height: 4.95cqw;
+  color: #000000;
+  white-space: nowrap;
+  letter-spacing: 0.046cqw;
+}
+.lp__week-name--1 { top: 297.74cqw; } /* 4207/1413 */
+.lp__week-name--2 { top: 333.19cqw; } /* 4708/1413 */
+.lp__week-name--3 { top: 368.65cqw; } /* 5209/1413 */
+
+/* Week descriptions */
+.lp__week-desc {
+  position: absolute;
+  left: 20.17cqw;
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 500;
+  font-size: 3.87cqw;     /* 54.655/1413 */
+  line-height: 4.74cqw;   /* 66.999/1413 */
+  color: rgba(0,0,0,0.57);
+  letter-spacing: 0.039cqw;
+  white-space: nowrap;
+}
+.lp__week-desc--1 { top: 304.46cqw; } /* 4302/1413 */
+.lp__week-desc--2 { top: 339.91cqw; } /* 4803/1413 */
+.lp__week-desc--3 { top: 375.37cqw; } /* 5304/1413 */
+
+/* ── HOW STEPS ── */
+.lp__step {
+  position: absolute;
+  left: 6.58cqw;
+  width: 86.84cqw;
+  height: 20.31cqw;       /* 287/1413 */
+  background: rgba(255,255,255,0.2);
+  border-radius: 2.12cqw;
+}
+.lp__step--1 { top: 427.03cqw; } /* 6034/1413 */
+.lp__step--2 { top: 455.20cqw; } /* 6432/1413 */
+.lp__step--3 { top: 483.37cqw; } /* 6830/1413 */
+
+/* Step number circle – number centered inside with flex */
+.lp__step-num-bg {
+  position: absolute;
+  left: 4.03cqw;
+  top: 4.67cqw;
+  width: 10.62cqw;
+  height: 10.62cqw;
+  background: #fdbd28;
+  border: 0.21cqw solid rgba(255,255,255,0.49);
+  border-radius: 3.54cqw; /* 50/1413 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lp__step-num {
+  margin: 0;
+  font-family: '온글잎 박다현체', sans-serif;
+  font-size: 8.49cqw;     /* 120/1413 */
+  line-height: 1;
+  color: #000000;
+  text-align: center;
+}
+.lp__step-title {
+  position: absolute;
+  left: 17.27cqw;
+  top: 4.67cqw;
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 700;
+  font-size: 3.27cqw;
+  line-height: 4.00cqw;
+  color: #000000;
+  white-space: nowrap;
+  letter-spacing: 0.033cqw;
+}
+.lp__step-desc {
+  position: absolute;
+  left: 17.27cqw;
+  top: 10.54cqw;
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 500;
+  font-size: 3.40cqw;     /* ~48/1413 */
+  line-height: 4.00cqw;
+  color: rgba(0,0,0,0.57);
+  white-space: nowrap;
+  letter-spacing: 0.034cqw;
+}
+
+/* ── REWARD ── */
+
+/* Reward cards – coupon and honor side by side */
+.lp__reward-card {
+  position: absolute;
+  background: rgba(255,255,255,0.34);
+  border: 0.21cqw solid white;
+  border-radius: 2.12cqw;
+}
+.lp__reward-card--coupon {
+  left: 5.87cqw;          /* 83/1413 */
+  top: 546.35cqw;         /* 7719/1413 */
+  width: 43.24cqw;        /* 611/1413 */
+  height: 26.33cqw;       /* 372/1413 */
+}
+.lp__reward-card--honor {
+  left: 50.88cqw;         /* 719/1413 */
+  top: 546.35cqw;
+  width: 43.24cqw;
+  height: 26.33cqw;
+}
+.lp__reward-card--lucky {
+  left: 5.87cqw;
+  top: 575.37cqw;         /* 8130/1413 */
+  width: 88.25cqw;        /* 1247/1413 */
+  height: 27.11cqw;       /* 383/1413 */
+  background: rgba(253,189,40,0.38);
+}
+
+.lp__reward-emoji {
+  position: absolute;
+  left: 50%;
+  top: 4.25cqw;           /* ~60/1413 */
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 7.51cqw;
+  line-height: 9.20cqw;
+  text-align: center;
+}
+.lp__reward-title {
+  position: absolute;
+  left: 50%;
+  top: 14.25cqw;          /* ~201.5/1413 – below emoji */
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 700;
+  font-size: 3.04cqw;     /* 43/1413 */
+  line-height: 4.04cqw;   /* 57.096/1413 */
+  color: #000000;
+  white-space: nowrap;
+  text-align: center;
+}
+.lp__reward-desc {
+  position: absolute;
+  left: 50%;
+  top: 18.61cqw;          /* reward title bottom + margin */
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 500;
+  font-size: 2.48cqw;     /* 35/1413 */
+  line-height: 4.04cqw;
+  color: #353535;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Lucky draw (full-width card) */
+.lp__reward-emoji-big {
+  position: absolute;
+  left: 50%;
+  top: 2.12cqw;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 7.51cqw;
+  line-height: 9.20cqw;
+  text-align: center;
+}
+.lp__reward-title-big {
+  position: absolute;
+  left: 50%;
+  top: 10.52cqw;
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 700;
+  font-size: 3.04cqw;
+  line-height: 4.04cqw;
+  color: #000000;
+  white-space: nowrap;
+  text-align: center;
+}
+.lp__reward-desc-big {
+  position: absolute;
+  left: 50%;
+  top: 15.10cqw;
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 500;
+  font-size: 2.48cqw;
+  line-height: 3.18cqw;   /* 45/1413 */
+  color: #353535;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* ── CTA SECTION ── */
+
+/* Decorative ellipse – CSS only (large oval, extends beyond container) */
+.lp__deco-ellipse {
+  position: absolute;
+  left: -55cqw;
+  top: 587cqw;
+  width: 210cqw;
+  height: 134cqw;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.10);
+  pointer-events: none;
+}
+
+/* Tilted card 1 wrapper + content */
+.lp__cta-wrap-1 {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 7.50cqw;          /* 106/1413 */
+  top: 625.94cqw;
+  width: 54.46cqw;        /* 769.508/1413 */
+  height: 18.08cqw;       /* 255.396/1413 */
+}
+.lp__cta-card-1 {
+  position: absolute;
+  width: 53.60cqw;        /* 757.306/1413 */
+  height: 14.43cqw;       /* 203.953/1413 */
+  background: white;
+  border: 0.17cqw solid black;
+  border-radius: 1.73cqw; /* 24.377/1413 */
+  box-shadow: 1.73cqw 1.73cqw 0.23cqw 0 rgba(0,0,0,0.25);
+  transform: rotate(-3.93deg);
+}
+.lp__cta-hl-1 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%) rotate(-3.93deg);
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 700;
+  font-size: 7.79cqw;     /* 110/1413 */
+  line-height: 10.44cqw;  /* 147.566/1413 */
+  color: #fdbd28;
+  white-space: nowrap;
+  text-align: center;
+  letter-spacing: -0.234cqw;
+}
+
+/* Tilted card 2 wrapper + content */
+.lp__cta-wrap-2 {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 19.02cqw;         /* 268.79/1413 */
+  top: 640.16cqw;         /* 9045.39/1413 */
+  width: 71.04cqw;        /* 1003.762/1413 */
+  height: 18.99cqw;       /* 268.415/1413 */
+}
+.lp__cta-card-2 {
+  position: absolute;
+  width: 70.37cqw;        /* 994.323/1413 */
+  height: 15.65cqw;       /* 221.098/1413 */
+  background: white;
+  border: 0.21cqw solid black;
+  border-radius: 2.12cqw;
+  box-shadow: 2.12cqw 2.12cqw 0.28cqw 0 rgba(0,0,0,0.25);
+  transform: rotate(2.74deg);
+}
+.lp__cta-hl-2 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%) rotate(2.74deg);
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 700;
+  font-size: 7.08cqw;     /* 100/1413 */
+  line-height: 4.83cqw;   /* 68.31/1413 */
+  color: #000000;
+  white-space: nowrap;
+  text-align: center;
+  letter-spacing: 0.071cqw;
+}
+
+/* Intro line */
+.lp__cta-intro {
+  position: absolute;
+  left: 50%;
+  top: 668.16cqw;         /* 9441/1413 */
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 700;
+  font-size: 4.82cqw;     /* 68.066/1413 */
+  line-height: 2.45cqw;   /* 34.615/1413 */
+  color: #000000;
+  white-space: nowrap;
+  text-align: center;
+  letter-spacing: -0.096cqw;
+}
+
+/* Yellow bottom bar */
+.lp__cta-bar {
+  position: absolute;
+  left: 0;
+  top: 687.61cqw;         /* 9716/1413 */
+  width: 100%;
+  height: 21.38cqw;       /* 302/1413 */
+  background: #fdbd28;
+}
+
+/* CTA button text */
+.lp__cta-btn {
+  position: absolute;
+  left: 50%;
+  top: 697.10cqw;         /* 9850/1413 */
+  transform: translateX(-50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 700;
+  font-size: 5.66cqw;     /* 80/1413 */
+  line-height: 2.45cqw;
+  color: #000000;
+  white-space: nowrap;
+  text-align: center;
+  letter-spacing: -0.113cqw;
+}

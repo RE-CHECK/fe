@@ -160,6 +160,26 @@
   z-index: 1;
 }
 
+/* ── 제휴매장 버튼 ── */
+/* Figma: x=729, y=1475, w=621, h=135, radius=70 → cqw 기준 1378 */
+.main__store-btn {
+  display: block;
+  width: 45.07cqw;
+  height: 9.80cqw;
+  margin-left: auto;
+  margin-bottom: 6.10cqw;
+  background: transparent;
+  border: 3px dashed #ffffff;
+  border-radius: 5.08cqw;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: '온글잎 박다현체', sans-serif;
+  font-size: 5cqw;
+  color: #ffffff;
+  letter-spacing: 0.075cqw;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
 /* ── 통계 블록 ── */
 .main__stat-block {
   margin-bottom: 5.52cqw;
