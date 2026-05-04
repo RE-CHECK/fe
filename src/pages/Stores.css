@@ -17,8 +17,8 @@
 /* ── 헤더 ── */
 .stores__header {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
   margin-bottom: 4cqw;
 }
 
@@ -40,16 +40,19 @@
 }
 
 .stores__back-btn {
-  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  height: 11.45cqw;
   background: none;
-  border: 1.5px solid rgba(255, 255, 255, 0.55);
-  border-radius: 4cqw;
-  padding: 1.2cqw 3cqw;
-  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
-  font-size: 3cqw;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.85);
+  border: none;
+  padding: 0;
   cursor: pointer;
+  margin-bottom: 2cqw;
+}
+
+.stores__back-btn svg {
+  width: 2.80cqw;
+  height: 5.09cqw;
 }
 
 .stores__divider {
