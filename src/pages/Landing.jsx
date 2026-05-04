@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import './Landing.css'
 import imgPhoto      from '../assets/landing/Gemini_Generated_Image_rjah9arjah9arjah 6.svg'
+import imgArrow      from '../assets/landing/Arrow 60.svg'
 import imgCardLogo   from '../assets/landing/image 33.svg'
 import imgWeek1Circ  from '../assets/landing/Ellipse 241.svg'
 import imgWeek2Circ  from '../assets/landing/Ellipse 242.svg'
@@ -53,7 +54,9 @@ export default function Landing() {
         </div>
       </div>
 
-      <div className="lp__arrow" />
+      <div className="lp__arrow">
+        <img src={imgArrow} alt="" />
+      </div>
 
       {/* ── PROBLEM ── */}
       <p className="lp__problem">

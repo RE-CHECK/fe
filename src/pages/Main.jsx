@@ -169,6 +169,11 @@ export default function Main() {
   return (
     <div className="main">
 
+      {/* 트랙 배경 이미지 */}
+      <div className="main__track-bg">
+        <img src={asset21} alt="" />
+      </div>
+
       {/* ── 헤더 ── */}
       <div className="main__header">
         <div>
@@ -190,7 +195,6 @@ export default function Main() {
 
       {/* ── 유저 카드 ── */}
       <div className="main__card">
-        <img className="main__card-asset" src={asset21} alt="" />
         <div className="main__card-mascot"><img src={COLLEGE_MASCOT[user.college] ?? mascotNamsek} alt="" /></div>
         <p className="main__card-name">{user.name}</p>
         <p className="main__card-college">{user.college}</p>

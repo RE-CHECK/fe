@@ -122,10 +122,11 @@
   position: relative;
   width: 23.16cqw;
   height: 37.10cqw;
-  border-radius: 2.25cqw; /* 31.775/1413 */
-  border: 0.20cqw solid white;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.4), rgba(255,255,255,0));
+  border-radius: 2.25cqw;
+  border: 0.14cqw solid rgba(255,255,255,0.65);
+  background: linear-gradient(135deg, rgba(255,255,255,0.42) 0%, rgba(200,220,255,0.18) 50%, rgba(255,255,255,0.08) 100%);
   backdrop-filter: blur(1.18cqw);
+  box-shadow: inset 0 0.10cqw 0 rgba(255,255,255,0.6), 0 0.35cqw 1.77cqw rgba(0,30,120,0.30);
   overflow: hidden;
 }
 .lp__card-tex {
@@ -147,80 +148,84 @@
 }
 .lp__card-unrot { flex: none; transform: rotate(90deg); }
 
-/* Card number  – left:65.31 top:35.35 w:32 h:327 inside the portrait card */
+/* Card number — portrait row height must exceed text length to avoid clipping */
 .lp__card-row--num {
-  left: 4.62cqw;
+  left: 4.18cqw;
   top: 2.50cqw;
-  width: 2.26cqw;
-  height: 23.14cqw;
+  width: 2.80cqw;
+  height: 32.00cqw;
 }
 .lp__card-num {
   margin: 0;
   font-family: 'Courier New', Courier, monospace;
-  font-size: 2.02cqw;
-  color: rgba(255,255,255,0.66);
+  font-size: 2.20cqw;
+  letter-spacing: 0.10cqw;
+  color: rgba(255,255,255,0.88);
   white-space: nowrap;
 }
 
-/* STUDENT ID – left:250.07 top:366.6 w:22 h:115 */
+/* STUDENT ID */
 .lp__card-row--id {
-  left: 17.70cqw;
-  top: 25.95cqw;
-  width: 1.56cqw;
-  height: 8.14cqw;
+  left: 17.41cqw;
+  top: 24.80cqw;
+  width: 1.85cqw;
+  height: 12.00cqw;
 }
 .lp__card-id {
   margin: 0;
   font-family: 'Courier New', Courier, monospace;
-  font-size: 1.35cqw;
-  color: rgba(255,255,255,0.77);
+  font-size: 1.60cqw;
+  letter-spacing: 0.08cqw;
+  color: rgba(255,255,255,0.80);
   text-transform: uppercase;
   white-space: nowrap;
 }
 
-/* Name – left:34.6 top:36.15 w:23 h:108 */
+/* Name */
 .lp__card-row--name {
-  left: 2.45cqw;
+  left: 2.18cqw;
   top: 2.56cqw;
-  width: 1.63cqw;
-  height: 7.64cqw;
+  width: 1.90cqw;
+  height: 10.00cqw;
 }
 .lp__card-name {
   margin: 0;
   font-family: 'Courier New', Courier, monospace;
-  font-size: 1.46cqw;
-  color: rgba(255,255,255,0.55);
+  font-size: 1.70cqw;
+  color: rgba(255,255,255,0.78);
   text-transform: uppercase;
-  letter-spacing: 0.088cqw;
+  letter-spacing: 0.10cqw;
   white-space: nowrap;
 }
 
-/* Logo – left:225.23 top:35.35 w:65.933 h:61.937 */
+/* Logo */
 .lp__card-row--logo {
-  left: 15.94cqw;
-  top: 2.50cqw;
-  width: 4.67cqw;
-  height: 4.38cqw;
+  left: 15.20cqw;
+  top: 2.20cqw;
+  width: 5.50cqw;
+  height: 5.16cqw;
 }
 .lp__card-logo {
-  width: 4.67cqw;
-  height: 4.38cqw;
+  width: 5.50cqw;
+  height: 5.16cqw;
   max-width: none;
-  object-fit: cover;
+  object-fit: contain;
 }
 
-/* Scroll arrow */
+/* Arrow between photo and card */
 .lp__arrow {
   position: absolute;
-  left: 49.96cqw;
-  top: 78.15cqw;
-  transform: translateX(-50%);
-  width: 2.83cqw;
-  height: 2.83cqw;
-  border-right: 0.28cqw solid rgba(255,255,255,0.85);
-  border-bottom: 0.28cqw solid rgba(255,255,255,0.85);
-  transform: translateX(-50%) rotate(45deg);
+  left: 47.00cqw;
+  top: 76.32cqw;          /* vertically centered: 66.24 + 23.16/2 - 3/2 */
+  width: 6.00cqw;
+  height: 3.00cqw;
   pointer-events: none;
+}
+.lp__arrow img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 /* ── PROBLEM ── */
@@ -583,7 +588,7 @@
 .lp__ellipse180 {
   position: absolute;
   left: 3.54cqw;           /* 50/1413 */
-  top: 602.16cqw;          /* 8845/1413 - 23.46 shift */
+  top: 625.62cqw;          /* 8845/1413 */
   width: 93.42cqw;         /* 1320/1413 */
   height: 38.50cqw;        /* 544/1413 */
   pointer-events: none;
