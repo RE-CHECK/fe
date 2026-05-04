@@ -1,12 +1,22 @@
+.home-outer {
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: linear-gradient(to bottom, #4585ff, #b2cbff);
+}
+
 .home {
+  --home-scale: 1;
   position: relative;
   width: 100%;
   max-width: 430px;
-  margin: 0 auto;
   aspect-ratio: 1378 / 3250;
   container-type: inline-size;
-  background: linear-gradient(to bottom, #4585ff, #b2cbff);
   overflow: hidden;
+  transform-origin: top center;
+  transform: scale(var(--home-scale));
 }
 
 .home__asset {

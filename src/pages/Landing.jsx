@@ -86,24 +86,24 @@ export default function Landing() {
       </p>
 
       {/* ── WHY ── */}
-      <p className="lp__label lp__label--why lp__reveal" style={{ transitionDelay: '0.5s' }}>WHY · 왜 하나요?</p>
-      <p className="lp__section-head lp__section-head--why lp__reveal" style={{ transitionDelay: '0.7s' }}>
+      <p className="lp__label lp__label--why lp__reveal" style={{ transitionDelay: '0.3s' }}>WHY · 왜 하나요?</p>
+      <p className="lp__section-head lp__section-head--why lp__reveal" style={{ transitionDelay: '0.4s' }}>
         커피 한 잔이<br />학생증을 바꿔요
       </p>
 
-      <div className="lp__info-card lp__info-card--1 lp__reveal" style={{ transitionDelay: '0.8s' }}>
+      <div className="lp__info-card lp__info-card--1 lp__reveal" style={{ transitionDelay: '0.5s' }}>
         <div className="lp__info-icon"><p className="lp__info-emoji">📦</p></div>
         <p className="lp__info-title">기존 재고 소진 필요</p>
         <p className="lp__info-body">현재 학생증 체크카드 재고가 남아 있는 한<br />신규 디자인 출시가 불가능해요.</p>
       </div>
 
-      <div className="lp__info-card lp__info-card--2 lp__reveal" style={{ transitionDelay: '0.8s' }}>
+      <div className="lp__info-card lp__info-card--2 lp__reveal" style={{ transitionDelay: '0.5s' }}>
         <div className="lp__info-icon"><p className="lp__info-emoji">💳</p></div>
         <p className="lp__info-title">KB 학생증 체크카드로 결제</p>
         <p className="lp__info-body">일상 속 소비를 내 학생증 체크카드로!<br />영수증만 찍으면 단과대 점수가 쌓여요.</p>
       </div>
 
-      <div className="lp__info-card lp__info-card--3 lp__reveal" style={{ transitionDelay: '0.8s' }}>
+      <div className="lp__info-card lp__info-card--3 lp__reveal" style={{ transitionDelay: '0.5s' }}>
         <div className="lp__info-icon"><p className="lp__info-emoji">✨</p></div>
         <p className="lp__info-title">리뉴얼 앞당기기</p>
         <p className="lp__info-body">아주대생이 함께 쓸수록,<br />새로운 디자인의 학생증이 더 빨리 나와요.</p>
