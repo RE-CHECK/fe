@@ -133,6 +133,10 @@
 }
 
 /* Figma: desc font-size=45px → 3.18cqw, y=1628 (64% from card top) */
+.stores__card-img--appatteng {
+  top: 4cqw;
+}
+
 .stores__card-desc {
   margin: 0;
   font-family: '온글잎 박다현체', sans-serif;
@@ -167,13 +171,24 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  gap: 0.5cqw;
 }
 
 .stores__card-img-group img {
   max-width: 48%;
   max-height: 100%;
   object-fit: contain;
+}
+
+.stores__card-img-group img:first-child {
+  position: relative;
+  top: -1.5cqw;
+}
+
+/* Figma: 두 이미지 3.91cqw 겹침 (x6 right=936 → x5 left=881, diff=55px/1413) */
+.stores__card-img-group img:last-child {
+  margin-left: -3.91cqw;
+  position: relative;
+  top: 1.5cqw;
 }
 
 /* ── 벡터 데코 ── */

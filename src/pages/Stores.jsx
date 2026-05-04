@@ -56,7 +56,7 @@ export default function Stores() {
 
       <div className="stores__grid stores__grid--2col">
         <div className="stores__card">
-          <img src={imgAppatteng} className="stores__card-img" alt="" />
+          <img src={imgAppatteng} className="stores__card-img stores__card-img--appatteng" alt="" />
           <p className="stores__card-desc">잠봉뵈르와 아메가 맛있는</p>
           <p className="stores__card-name stores__card-name--red">아빠땡</p>
         </div>
