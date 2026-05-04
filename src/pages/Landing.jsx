@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Landing.css'
 import imgPhoto      from '../assets/landing/Gemini_Generated_Image_rjah9arjah9arjah 6.svg'
@@ -10,6 +11,21 @@ import imgEllipse180 from '../assets/landing/Ellipse 180.svg'
 
 export default function Landing() {
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const els = document.querySelectorAll('.lp__reveal')
+    const obs = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible')
+          obs.unobserve(e.target)
+        }
+      }),
+      { threshold: 0.12 }
+    )
+    els.forEach(el => obs.observe(el))
+    return () => obs.disconnect()
+  }, [])
 
   const handleCta = () => {
     navigate('/')
@@ -59,7 +75,7 @@ export default function Landing() {
       </div>
 
       {/* ── PROBLEM ── */}
-      <p className="lp__problem">
+      <p className="lp__problem lp__reveal" style={{ transitionDelay: '0.1s' }}>
         <span className="lp__w700 lp__white">새 학생증 디자인, 왜 아직 안 나올까요?</span>
         <br />
         <span className="lp__w800 lp__yellow">기존 재고가 소진되어야</span>
@@ -70,102 +86,102 @@ export default function Landing() {
       </p>
 
       {/* ── WHY ── */}
-      <p className="lp__label lp__label--why">WHY · 왜 하나요?</p>
-      <p className="lp__section-head lp__section-head--why">
+      <p className="lp__label lp__label--why lp__reveal" style={{ transitionDelay: '0.5s' }}>WHY · 왜 하나요?</p>
+      <p className="lp__section-head lp__section-head--why lp__reveal" style={{ transitionDelay: '0.7s' }}>
         커피 한 잔이<br />학생증을 바꿔요
       </p>
 
-      <div className="lp__info-card lp__info-card--1">
+      <div className="lp__info-card lp__info-card--1 lp__reveal" style={{ transitionDelay: '0.8s' }}>
         <div className="lp__info-icon"><p className="lp__info-emoji">📦</p></div>
         <p className="lp__info-title">기존 재고 소진 필요</p>
         <p className="lp__info-body">현재 학생증 체크카드 재고가 남아 있는 한<br />신규 디자인 출시가 불가능해요.</p>
       </div>
 
-      <div className="lp__info-card lp__info-card--2">
+      <div className="lp__info-card lp__info-card--2 lp__reveal" style={{ transitionDelay: '0.8s' }}>
         <div className="lp__info-icon"><p className="lp__info-emoji">💳</p></div>
         <p className="lp__info-title">KB 학생증 체크카드로 결제</p>
         <p className="lp__info-body">일상 속 소비를 내 학생증 체크카드로!<br />영수증만 찍으면 단과대 점수가 쌓여요.</p>
       </div>
 
-      <div className="lp__info-card lp__info-card--3">
+      <div className="lp__info-card lp__info-card--3 lp__reveal" style={{ transitionDelay: '0.8s' }}>
         <div className="lp__info-icon"><p className="lp__info-emoji">✨</p></div>
         <p className="lp__info-title">리뉴얼 앞당기기</p>
         <p className="lp__info-body">아주대생이 함께 쓸수록,<br />새로운 디자인의 학생증이 더 빨리 나와요.</p>
       </div>
 
       {/* ── SCHEDULE ── */}
-      <p className="lp__label lp__label--schedule">SCHEDULE · 단계별 대항전</p>
-      <p className="lp__section-head lp__section-head--schedule">
+      <p className="lp__label lp__label--schedule lp__reveal">SCHEDULE · 단계별 대항전</p>
+      <p className="lp__section-head lp__section-head--schedule lp__reveal" style={{ transitionDelay: '0.1s' }}>
         단계별로<br />더 치열해져요!
       </p>
 
-      <img src={imgWeek1Circ} alt="" className="lp__week-circ lp__week-circ--1" />
-      <p className="lp__week-num lp__week-num--1">1</p>
-      <p className="lp__week-date lp__week-date--1">WEEK 1 · ~5월 10일</p>
-      <p className="lp__week-name lp__week-name--1">전체 화력 측정전</p>
-      <p className="lp__week-desc lp__week-desc--1">
+      <img src={imgWeek1Circ} alt="" className="lp__week-circ lp__week-circ--1 lp__reveal" />
+      <p className="lp__week-num lp__week-num--1 lp__reveal" style={{ transitionDelay: '0.05s' }}>1</p>
+      <p className="lp__week-date lp__week-date--1 lp__reveal" style={{ transitionDelay: '0.10s' }}>WEEK 1 · ~5월 10일</p>
+      <p className="lp__week-name lp__week-name--1 lp__reveal" style={{ transitionDelay: '0.15s' }}>전체 화력 측정전</p>
+      <p className="lp__week-desc lp__week-desc--1 lp__reveal" style={{ transitionDelay: '0.20s' }}>
         12개 단과대 소비 총액 실시간 비교.<br />우리 단과대, 지금 몇 위일까요?
       </p>
 
-      <img src={imgWeek2Circ} alt="" className="lp__week-circ lp__week-circ--2" />
-      <p className="lp__week-num lp__week-num--2">2</p>
-      <p className="lp__week-date lp__week-date--2">WEEK 2 · 5월 11~17일</p>
-      <p className="lp__week-name lp__week-name--2">가맹점 점령전 4파전</p>
-      <p className="lp__week-desc lp__week-desc--2">
+      <img src={imgWeek2Circ} alt="" className="lp__week-circ lp__week-circ--2 lp__reveal" />
+      <p className="lp__week-num lp__week-num--2 lp__reveal" style={{ transitionDelay: '0.05s' }}>2</p>
+      <p className="lp__week-date lp__week-date--2 lp__reveal" style={{ transitionDelay: '0.10s' }}>WEEK 2 · 5월 11~17일</p>
+      <p className="lp__week-name lp__week-name--2 lp__reveal" style={{ transitionDelay: '0.15s' }}>가맹점 점령전 4파전</p>
+      <p className="lp__week-desc lp__week-desc--2 lp__reveal" style={{ transitionDelay: '0.20s' }}>
         제휴 가맹점에서 가장 많이 쓴 단과대는?<br />4개 단과대가 맞붙는 본격 배틀!
       </p>
 
-      <img src={imgWeek3Circ} alt="" className="lp__week-circ lp__week-circ--3" />
-      <p className="lp__week-num lp__week-num--3">3</p>
-      <p className="lp__week-date lp__week-date--3">WEEK 3 · 5월 18~24일</p>
-      <p className="lp__week-name lp__week-name--3">학번 1:1 대항전</p>
-      <p className="lp__week-desc lp__week-desc--3">
+      <img src={imgWeek3Circ} alt="" className="lp__week-circ lp__week-circ--3 lp__reveal" />
+      <p className="lp__week-num lp__week-num--3 lp__reveal" style={{ transitionDelay: '0.05s' }}>3</p>
+      <p className="lp__week-date lp__week-date--3 lp__reveal" style={{ transitionDelay: '0.10s' }}>WEEK 3 · 5월 18~24일</p>
+      <p className="lp__week-name lp__week-name--3 lp__reveal" style={{ transitionDelay: '0.15s' }}>학번 1:1 대항전</p>
+      <p className="lp__week-desc lp__week-desc--3 lp__reveal" style={{ transitionDelay: '0.20s' }}>
         23학번 vs 24학번, 25학번 vs 26학번.<br />진짜 주인공은 누구인지 가립니다.
       </p>
 
       {/* ── HOW ── */}
-      <p className="lp__label lp__label--how">HOW · 참여 방법</p>
-      <p className="lp__section-head lp__section-head--how">
+      <p className="lp__label lp__label--how lp__reveal">HOW · 참여 방법</p>
+      <p className="lp__section-head lp__section-head--how lp__reveal" style={{ transitionDelay: '0.1s' }}>
         영수증만 찍으면<br />참여 완료
       </p>
 
-      <div className="lp__step lp__step--1">
+      <div className="lp__step lp__step--1 lp__reveal">
         <div className="lp__step-num-bg"><p className="lp__step-num">1</p></div>
         <p className="lp__step-title">KB 학생증 체크카드로 결제</p>
         <p className="lp__step-desc">반드시 학생증 체크카드여야 점수 반영!</p>
       </div>
 
-      <div className="lp__step lp__step--2">
+      <div className="lp__step lp__step--2 lp__reveal" style={{ transitionDelay: '0.15s' }}>
         <div className="lp__step-num-bg"><p className="lp__step-num">2</p></div>
         <p className="lp__step-title">영수증 사진 촬영</p>
         <p className="lp__step-desc">영수증에 국민은행이 찍혀있는지 꼭 확인하세요</p>
       </div>
 
-      <div className="lp__step lp__step--3">
+      <div className="lp__step lp__step--3 lp__reveal" style={{ transitionDelay: '0.30s' }}>
         <div className="lp__step-num-bg"><p className="lp__step-num">3</p></div>
         <p className="lp__step-title">챌린지 페이지에 업로드</p>
         <p className="lp__step-desc">OCR이 금액·업종 자동 인식, 점수 반영!</p>
       </div>
 
       {/* ── REWARD ── */}
-      <p className="lp__label lp__label--reward">REWARD · 리워드</p>
-      <p className="lp__section-head lp__section-head--reward">
+      <p className="lp__label lp__label--reward lp__reveal">REWARD · 리워드</p>
+      <p className="lp__section-head lp__section-head--reward lp__reveal" style={{ transitionDelay: '0.1s' }}>
         이기면<br />확실히 드릴게요~
       </p>
 
-      <div className="lp__reward-card lp__reward-card--coupon">
+      <div className="lp__reward-card lp__reward-card--coupon lp__reveal">
         <p className="lp__reward-emoji">🎁</p>
         <p className="lp__reward-title">제휴 가맹점 쿠폰</p>
         <p className="lp__reward-desc">이긴 단과대 참여자 중 랜덤 추첨 지급</p>
       </div>
 
-      <div className="lp__reward-card lp__reward-card--honor">
+      <div className="lp__reward-card lp__reward-card--honor lp__reveal" style={{ transitionDelay: '0.15s' }}>
         <p className="lp__reward-emoji">🏆</p>
         <p className="lp__reward-title">단과대 명예</p>
         <p className="lp__reward-desc">랭킹 TOP 단과대 공식 인증</p>
       </div>
 
-      <div className="lp__reward-card lp__reward-card--lucky">
+      <div className="lp__reward-card lp__reward-card--lucky lp__reveal" style={{ transitionDelay: '0.30s' }}>
         <p className="lp__reward-emoji-big">🎰</p>
         <p className="lp__reward-title-big">실시간 사다리타기 추첨</p>
         <p className="lp__reward-desc-big">
