@@ -15,6 +15,25 @@
   overflow: hidden;
 }
 
+/* ── 스크롤 reveal 애니메이션 ── */
+.lp__reveal {
+  opacity: 0;
+  transform: translateY(2.5cqw);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.lp__reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* lp__problem은 translateX(-50%) 중앙 정렬을 유지하면서 reveal */
+.lp__problem.lp__reveal {
+  transform: translateX(-50%) translateY(2.5cqw);
+}
+.lp__problem.lp__reveal.is-visible {
+  transform: translateX(-50%) translateY(0);
+}
+
 /* ── shared helpers ── */
 .lp__w700 { font-weight: 700; }
 .lp__w800 { font-weight: 800; }
