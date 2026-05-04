@@ -1,21 +1,14 @@
-/*
-  Figma 기준 프레임: 1378 × 2900 px
-  k = 100 / 1378  →  px → cqw 변환 계수
-  container-type: inline-size 로 1cqw = 컨테이너 너비의 1%
-*/
-
 .home {
   position: relative;
   width: 100%;
   max-width: 430px;
   margin: 0 auto;
-  aspect-ratio: 1378 / 2900;
+  aspect-ratio: 1378 / 3250;
   container-type: inline-size;
   background: linear-gradient(to bottom, #4585ff, #b2cbff);
   overflow: hidden;
 }
 
-/* ── 공통: 이미지 전체 채우기 ── */
 .home__asset {
   position: absolute;
   pointer-events: none;
@@ -29,17 +22,14 @@
   object-fit: cover;
 }
 
-/* ── 외곽 트랙 배경 (자산 24@4x 1) ── */
-/* top:1432 left:-111 w:1549 h:1656  / 1378 * 100 */
 .home__track-outer {
   top:    103.92cqw;
-  left:   -8.06cqw;
-  width:  112.41cqw;
-  height: 120.17cqw;
+  left:   0.29cqw;
+  width:  101.09cqw;
+  height: 138.03cqw;
 }
+.home__track-outer img { object-fit: fill; }
 
-/* ── 내부 트랙 + 마스코트 (자산 11@4x 1) ── */
-/* top:956 left:181 w:1016 h:1388 */
 .home__track-inner {
   top:    69.37cqw;
   left:   13.14cqw;
@@ -47,8 +37,6 @@
   height: 100.73cqw;
 }
 
-/* ── 레이싱 깃발 ── */
-/* container: left:918 top:2230 size:255.148 */
 .home__flag-wrap {
   position: absolute;
   top:    161.83cqw;
@@ -60,12 +48,10 @@
   justify-content: center;
   pointer-events: none;
 }
-/* inner: size:209.979, rotate:14.23deg */
 .home__flag-rotate {
   width:  15.24cqw;
   height: 15.24cqw;
   transform: rotate(14.23deg);
-  flex-shrink: 0;
 }
 .home__flag-rotate img {
   width: 100%;
@@ -73,7 +59,6 @@
   object-fit: contain;
 }
 
-/* ── 장식 그룹 공통 ── */
 .home__group {
   position: absolute;
   pointer-events: none;
@@ -83,19 +68,12 @@
   height: 100%;
   object-fit: contain;
 }
-
-/* Group114 – 좌측: inset top:33.64% right:74.51% bottom:53.7% left:6.89% */
-/* top = 33.64% × (2900/1378×100cqw) = 70.79cqw
-   height = (1-33.64%-53.7%) × (2900/1378×100cqw) = 26.65cqw
-   left = 6.89cqw, width = (1-74.51%-6.89%) × 100cqw = 18.6cqw          */
 .home__group--left {
   top:    70.79cqw;
   left:   6.89cqw;
   width:  18.60cqw;
   height: 26.65cqw;
 }
-
-/* Group110 – 우측: inset top:34.9% right:6.16% bottom:53.71% left:73.68% */
 .home__group--right {
   top:    73.45cqw;
   left:   73.68cqw;
@@ -103,40 +81,37 @@
   height: 23.97cqw;
 }
 
-/* ── 버튼 배경 ── */
 .home__btn-bg {
   position: absolute;
-  left:   16.18cqw;  /* 223 / 1378 * 100 */
-  width:  67.63cqw;  /* 932 / 1378 * 100 */
-  height: 12.05cqw;  /* 166 / 1378 * 100 */
+  left:   16.18cqw;
+  width:  67.63cqw;
+  height: 12.05cqw;
   border-radius: 6.24cqw;
   border: none;
   cursor: pointer;
+  z-index: 1;
 }
-.home__btn-bg--start  { top: 175.25cqw; background: #679bff; } /* 2415 */
-.home__btn-bg--signup { top: 195.21cqw; background: #fdbd28; } /* 2690 */
+.home__btn-bg--start   { top: 175.25cqw; background: #679bff; }
+.home__btn-bg--signup  { top: 195.21cqw; background: #fdbd28; }
+.home__btn-bg--landing { top: 217.27cqw; background: #0ca214; }
 
-/* ── 버튼 텍스트 ── */
 .home__btn-text {
   position: absolute;
   cursor: pointer;
-  left: 50cqw;       /* 689 / 1378 * 100 */
+  left: 50cqw;
   transform: translateX(-50%);
-  margin: 0;
-  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-  font-weight: 700;
-  font-size:  6.90cqw;  /* 95 / 1378 * 100 */
-  line-height: 6.53cqw; /* 90 / 1378 * 100 */
+  z-index: 2;
+  font-family: '온글잎 박다현체', sans-serif;
+  font-size:  6.90cqw;
+  line-height: 6.53cqw;
   letter-spacing: 0.069cqw;
   color: #ffffff;
   white-space: nowrap;
-  text-align: center;
 }
-.home__btn-text--start  { top: 178.01cqw; } /* 2453 */
-.home__btn-text--signup { top: 197.97cqw; } /* 2728 */
+.home__btn-text--start   { top: 178.01cqw; }
+.home__btn-text--signup  { top: 197.97cqw; }
+.home__btn-text--landing { top: 220.09cqw; }
 
-/* ── RE:AJOU CHECK 마스코트 이미지 ── */
-/* top:278 left:97 w:1169.465 h:569  (SVG 내부에 크롭 이미 적용됨) */
 .home__mascot-wrap {
   position: absolute;
   top:    20.17cqw;
@@ -151,31 +126,24 @@
   object-fit: fill;
 }
 
-/* ── 캠퍼스 챌린지 ── */
-/* top:836 left:969.5(-translate-x-1/2) */
 .home__campus {
   position: absolute;
   top:  60.67cqw;
   left: 70.36cqw;
   transform: translateX(-50%);
-  margin: 0;
   font-family: '온글잎 박다현체', sans-serif;
   font-size:   6.90cqw;
   line-height: 9.19cqw;
   letter-spacing: 0.103cqw;
   color: #ff696d;
   white-space: nowrap;
-  text-align: center;
 }
 
-/* ── 과 함께하는 ── */
-/* top:109 left:889(-translate-x-1/2) */
 .home__pretitle {
   position: absolute;
   top:  7.91cqw;
   left: 64.52cqw;
   transform: translateX(-50%);
-  margin: 0;
   font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
   font-weight: 600;
   font-size:   4.50cqw;
@@ -183,11 +151,8 @@
   letter-spacing: 0.067cqw;
   color: #ffffff;
   white-space: nowrap;
-  text-align: center;
 }
 
-/* ── KB 국민은행 로고 (image 72) ── */
-/* top:158 left:293 w:435 h:72 */
 .home__kb-logo {
   top:    11.47cqw;
   left:   21.26cqw;

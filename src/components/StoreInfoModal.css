@@ -1,0 +1,139 @@
+/*
+  가게 정보 모달 공통 컴포넌트
+  Figma 기준 프레임: 1378px / container .bw2·.bw3 (max-width 430px)
+  1cqw = container 너비의 1%
+*/
+
+/* ── 딤 오버레이 ── */
+.sinfo__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.46);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+/* ── 카드 (Figma: w=1215/1378, radius=30) ── */
+.sinfo__card {
+  background: #ffffff;
+  border-radius: 2.18cqw;     /* 30 / 1378 */
+  width: 88.2cqw;             /* 1215 / 1378 */
+  max-height: 85svh;
+  overflow-y: auto;
+  scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8.7cqw 0 12cqw;
+}
+
+.sinfo__card::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── 사진 래퍼 ── */
+.sinfo__photos {
+  display: flex;
+  gap: 1.5cqw;
+  margin-bottom: 3.77cqw;
+}
+
+/* ── 단일 사진 (사랑집: w=969, h=462) ── */
+.sinfo__photo {
+  width: 70.3cqw;             /* 969 / 1378 */
+  height: 33.5cqw;            /* 462 / 1378 */
+  object-fit: cover;
+  border-radius: 0.73cqw;     /* 10 / 1378 */
+}
+
+/* ── 2장 나란히 ── */
+/* height는 info.imageHeight로 inline override */
+.sinfo__photos--pair {
+  height: 33.5cqw;
+}
+
+.sinfo__photos--pair .sinfo__photo {
+  width: auto;
+  height: 100%;
+  flex: 1;
+  /* flex 비율은 info.imageRatios로 inline override */
+}
+
+/* ── 매장명 배지 (Figma: h=111, radius=76.378) ── */
+.sinfo__name-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5cqw;
+  height: 8.06cqw;            /* 111 / 1378 */
+  border-radius: 5.54cqw;     /* 76.378 / 1378 */
+  font-family: '온글잎 박다현체', sans-serif;
+  font-size: 6.68cqw;         /* 92 / 1378 */
+  color: #ffffff;
+  letter-spacing: 0.10cqw;
+  white-space: nowrap;
+  margin-bottom: 2.32cqw;
+}
+
+/* ── 정보 행들 묶음 ── */
+.sinfo__rows {
+  align-self: stretch;
+  padding: 0 6.97cqw;         /* (195-99) / 1378 */
+  display: flex;
+  flex-direction: column;
+  gap: 2cqw;
+  margin-bottom: 4cqw;
+}
+
+/* ── 아이콘 + 텍스트 행 ── */
+.sinfo__row {
+  display: flex;
+  align-items: flex-start;
+  gap: 2cqw;
+}
+
+.sinfo__icon {
+  flex-shrink: 0;
+  width: 5.5cqw;
+  height: 5.5cqw;
+  margin-top: 0.3cqw;
+  color: #222222;
+}
+
+.sinfo__row p {
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 500;
+  font-size: 3.32cqw;         /* 45.716 / 1378 */
+  color: #000000;
+  line-height: 1.5;
+  letter-spacing: 0.05cqw;
+}
+
+.sinfo__address-link {
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 500;
+  font-size: 3.32cqw;
+  color: #000000;
+  line-height: 1.5;
+  letter-spacing: 0.05cqw;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* ── 닫기 버튼 (Figma: w=943.392, h=168.05, radius=26.675, #fdbd28) ── */
+.sinfo__close {
+  width: 68.5cqw;             /* 943.392 / 1378 */
+  height: 12.2cqw;            /* 168.05 / 1378 */
+  border: none;
+  border-radius: 1.94cqw;     /* 26.675 / 1378 */
+  background: #fdbd28;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 600;
+  font-size: 5.16cqw;         /* 71.132 / 1378 */
+  color: #ffffff;
+  cursor: pointer;
+  flex-shrink: 0;
+}

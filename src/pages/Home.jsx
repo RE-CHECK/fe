@@ -57,6 +57,10 @@ export default function Home() {
       <button id="btn-go-signup" className="home__btn-bg home__btn-bg--signup" onClick={() => navigate('/signup')} />
       <p className="home__btn-text home__btn-text--signup" onClick={() => navigate('/signup')}>회원가입</p>
 
+      {/* 캠퍼스 챌린지란? 버튼 */}
+      <button className="home__btn-bg home__btn-bg--landing" onClick={() => navigate('/landing')} />
+      <p className="home__btn-text home__btn-text--landing" onClick={() => navigate('/landing')}>캠퍼스 챌린지란?</p>
+
       {/* RE:AJOU CHECK 마스코트 이미지 */}
       <div className="home__mascot-wrap">
         <img src={mascotImg} alt="RE:AJOU CHECK" />
