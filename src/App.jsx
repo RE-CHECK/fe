@@ -12,6 +12,7 @@ import CollegeSpending from './pages/admin/CollegeSpending'
 import BattleWeek2 from './pages/BattleWeek2'
 import BattleWeek3 from './pages/BattleWeek3'
 import Landing from './pages/Landing'
+import Stores from './pages/Stores'
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
       <Route path="/battle/week2" element={<BattleWeek2 />} />
       <Route path="/battle/week3" element={<BattleWeek3 />} />
       <Route path="/landing" element={<Landing />} />
+      <Route path="/stores" element={<Stores />} />
     </Routes>
   )
 }

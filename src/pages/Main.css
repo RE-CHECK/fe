@@ -180,16 +180,16 @@
   display: block;
   width: 45.07cqw;
   height: 9.80cqw;
-  margin-left: auto;
-  margin-bottom: 6.10cqw;
-  background: transparent;
-  border: 3px dashed #ffffff;
+  margin: 0 auto 6.10cqw;
+  background: #ffffff;
+  border: 3px solid #ffffff;
   border-radius: 5.08cqw;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  font-family: '온글잎 박다현체', sans-serif;
-  font-size: 5cqw;
-  color: #ffffff;
-  letter-spacing: 0.075cqw;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 700;
+  font-size: 4.35cqw;
+  color: #007af5;
+  letter-spacing: 0.065cqw;
   cursor: pointer;
   white-space: nowrap;
 }

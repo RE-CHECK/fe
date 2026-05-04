@@ -90,7 +90,6 @@ function CustomDayTick({ x, y, payload }) {
 export default function Main() {
   const navigate = useNavigate()
   const [showBattleModal, setShowBattleModal] = useState(false)
-  const [showStoresModal, setShowStoresModal] = useState(false)
   const [showWeekModal, setShowWeekModal]     = useState(false)
   const [currentWeek, setCurrentWeek]         = useState(null)
   const [user, setUser]                       = useState({ name: '', college: '', spent: '' })
@@ -195,6 +194,7 @@ export default function Main() {
 
       {/* ── 유저 카드 ── */}
       <div className="main__card">
+        <img src={asset21} className="main__card-asset" alt="" />
         <div className="main__card-mascot"><img src={COLLEGE_MASCOT[user.college] ?? mascotNamsek} alt="" /></div>
         <p className="main__card-name">{user.name}</p>
         <p className="main__card-college">{user.college}</p>
@@ -203,8 +203,8 @@ export default function Main() {
       </div>
 
       {/* ── 제휴매장 버튼 ── */}
-      <button className="main__store-btn" onClick={() => setShowStoresModal(true)}>
-        제휴매장 한 눈에 보기
+      <button className="main__store-btn" onClick={() => navigate('/stores')}>
+        제휴매장 확인하기
       </button>
 
       {/* ── 통계 ── */}
@@ -312,14 +312,6 @@ export default function Main() {
         <WeekStartModal week={currentWeek} onClose={handleWeekModalClose} />
       )}
 
-      {showStoresModal && (
-        <AlertModal
-          title="추후 오픈 예정!"
-          desc="조금만 기다려주세요"
-          btnVariant="yellow"
-          onClose={() => setShowStoresModal(false)}
-        />
-      )}
 
       {showBattleModal && (
         <AlertModal
