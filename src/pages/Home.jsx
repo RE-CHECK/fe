@@ -21,15 +21,22 @@ export default function Home() {
   }, [navigate])
 
   useEffect(() => {
+    const outer = homeRef.current?.parentElement
     const update = () => {
       const el = homeRef.current
       if (!el) return
+      const h = window.visualViewport?.height ?? window.innerHeight
+      if (outer) outer.style.height = h + 'px'
       const contentH = el.offsetWidth * (3250 / 1378)
-      el.style.setProperty('--home-scale', String(Math.min(1, window.innerHeight / contentH)))
+      el.style.setProperty('--home-scale', String(Math.min(1, h / contentH)))
     }
     update()
+    window.visualViewport?.addEventListener('resize', update)
     window.addEventListener('resize', update)
-    return () => window.removeEventListener('resize', update)
+    return () => {
+      window.visualViewport?.removeEventListener('resize', update)
+      window.removeEventListener('resize', update)
+    }
   }, [])
 
   return (
