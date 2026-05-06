@@ -38,9 +38,11 @@
 */
 .home__track-outer {
   top:    103.92cqw;
-  left:   calc(50% - 50vw / var(--home-scale, 1));
-  width:  calc(100vw / var(--home-scale, 1));
+  left:   0;
+  width:  100%;
   height: 138.03cqw;
+  transform: scaleX(calc(1 / var(--home-scale, 1)));
+  transform-origin: center;
 }
 .home__track-outer img { object-fit: fill; }
 
