@@ -21,6 +21,15 @@ export default function Home() {
   }, [navigate])
 
   useEffect(() => {
+    document.documentElement.style.overflow = 'hidden'
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.documentElement.style.overflow = ''
+      document.body.style.overflow = ''
+    }
+  }, [])
+
+  useEffect(() => {
     const outer = homeRef.current?.parentElement
     const update = () => {
       const el = homeRef.current
