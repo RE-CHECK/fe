@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Home.css'
 
@@ -12,6 +12,7 @@ import group114    from '../assets/icon/Group114.svg'
 
 export default function Home() {
   const navigate = useNavigate()
+  const homeRef = useRef(null)
 
   useEffect(() => {
     if (localStorage.getItem('accessToken')) {
@@ -28,9 +29,28 @@ export default function Home() {
     }
   }, [])
 
+  useEffect(() => {
+    const outer = homeRef.current?.parentElement
+    const update = () => {
+      const el = homeRef.current
+      if (!el) return
+      const h = window.visualViewport?.height ?? window.innerHeight
+      if (outer) outer.style.height = h + 'px'
+      const contentH = el.offsetWidth * (3250 / 1378)
+      el.style.setProperty('--home-scale', String(Math.min(1, h / contentH)))
+    }
+    update()
+    window.visualViewport?.addEventListener('resize', update)
+    window.addEventListener('resize', update)
+    return () => {
+      window.visualViewport?.removeEventListener('resize', update)
+      window.removeEventListener('resize', update)
+    }
+  }, [])
+
   return (
     <div className="home-outer">
-    <div className="home">
+    <div className="home" ref={homeRef}>
 
       {/* 외곽 트랙 배경 */}
       <div className="home__asset home__track-outer">
