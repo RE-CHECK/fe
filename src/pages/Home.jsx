@@ -34,10 +34,15 @@ export default function Home() {
     const update = () => {
       const el = homeRef.current
       if (!el) return
-      const h = window.visualViewport?.height ?? window.innerHeight
+      const h  = window.visualViewport?.height ?? window.innerHeight
+      const vw = document.documentElement.clientWidth
       if (outer) outer.style.height = h + 'px'
-      const contentH = el.offsetWidth * (3250 / 1378)
-      el.style.setProperty('--home-scale', String(Math.min(1, h / contentH)))
+      const mw      = el.offsetWidth
+      const contentH = mw * (3250 / 1378)
+      const scale   = Math.min(1, h / contentH)
+      el.style.setProperty('--home-scale', String(scale))
+      el.style.setProperty('--track-outer-width', `${vw / scale}px`)
+      el.style.setProperty('--track-outer-left',  `${mw / 2 - vw / (2 * scale)}px`)
     }
     update()
     window.visualViewport?.addEventListener('resize', update)
