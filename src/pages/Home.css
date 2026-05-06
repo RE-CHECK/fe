@@ -41,8 +41,8 @@
   left:   0;
   width:  100%;
   height: 138.03cqw;
-  transform: scaleX(calc(1 / var(--home-scale, 1)));
-  transform-origin: center;
+  transform: scaleX(calc(1 / var(--home-scale, 1))) scaleY(1.05);
+  transform-origin: top center;
 }
 .home__track-outer img { object-fit: fill; }
 
