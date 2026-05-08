@@ -91,7 +91,7 @@ export default function Signup() {
   }, [countdown, phoneVerified])
 
   const phoneRaw = form.phone.replace(/-/g, '')
-  const isPhoneReady = phoneRaw.length >= 10
+  const isPhoneReady = phoneRaw.length === 11
 
   function handlePhoneChange(e) {
     const newPhone = formatPhone(e.target.value)
