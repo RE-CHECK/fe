@@ -337,7 +337,7 @@ export default function Signup() {
           <p className="signup__field-desc" style={{ lineHeight: '1.4' }}>
             <span>학번이 기재된 실물 학생증 사진을 업로드 해주세요</span>
             <br />
-            <span>위에 입력한 학번과 불일치 할 경우 서비스 이용이 제한될 수 있습니다</span>
+            <span>위에 입력한 정보와 불일치 할 경우 서비스 이용이 제한될 수 있습니다</span>
           </p>
           <button
             type="button"
