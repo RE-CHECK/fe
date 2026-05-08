@@ -7,8 +7,6 @@ import img114X1    from '../assets/image/자산 11@4x 1.svg'
 import racingFlag  from '../assets/image/racing-flag 1.svg'
 import mascotImg   from '../assets/image/ChatGPT Image 2026년 4월 9일 오후 03_08_24 1.svg'
 import kbLogo      from '../assets/image/image 72.svg'
-import group110    from '../assets/icon/Group110.svg'
-import group114    from '../assets/icon/Group114.svg'
 
 export default function Home() {
   const navigate = useNavigate()
@@ -36,7 +34,7 @@ export default function Home() {
       if (!el) return
       const h = window.visualViewport?.height ?? window.innerHeight
       if (outer) outer.style.height = h + 'px'
-      const contentH = el.offsetWidth * (3250 / 1378)
+      const contentH = el.offsetWidth * (874 / 402)
       el.style.setProperty('--home-scale', String(Math.min(1, h / contentH)))
     }
     update()
@@ -67,16 +65,6 @@ export default function Home() {
         <div className="home__flag-rotate">
           <img src={racingFlag} alt="" />
         </div>
-      </div>
-
-      {/* 좌측 장식 그룹 (Group114) */}
-      <div className="home__group home__group--left">
-        <img src={group114} alt="" />
-      </div>
-
-      {/* 우측 장식 그룹 (Group110) */}
-      <div className="home__group home__group--right">
-        <img src={group110} alt="" />
       </div>
 
       {/* START! 버튼 배경 */}
