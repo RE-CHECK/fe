@@ -4,6 +4,7 @@ import './Signup.css'
 import arrowIcon from '../assets/icon/arrow-drop-down.svg'
 import { colleges, departments } from '../data/academicData'
 import CameraOverlay from '../components/CameraOverlay'
+import AlertModal from '../components/AlertModal'
 import { sendPhoneCode, verifyPhoneCode } from '../api/auth'
 
 function formatPhone(value) {
@@ -83,6 +84,7 @@ export default function Signup() {
   const [isVerifying, setIsVerifying] = useState(false)
   const [sendError, setSendError] = useState(null)
   const [verifyError, setVerifyError] = useState(null)
+  const [modal, setModal] = useState(null)
 
   useEffect(() => {
     if (countdown <= 0 || phoneVerified) return
@@ -91,7 +93,7 @@ export default function Signup() {
   }, [countdown, phoneVerified])
 
   const phoneRaw = form.phone.replace(/-/g, '')
-  const isPhoneReady = phoneRaw.length >= 10
+  const isPhoneReady = phoneRaw.length === 11
 
   function handlePhoneChange(e) {
     const newPhone = formatPhone(e.target.value)
@@ -120,7 +122,11 @@ export default function Signup() {
       setPhoneSent(true)
       setCountdown(300)
     } catch (err) {
-      setSendError(err.message || '인증번호 발송에 실패했습니다.')
+      if (err.code === 409) {
+        setModal({ title: '이미 가입된 전화번호입니다', desc: '다른 번호로 다시 시도해주세요.' })
+      } else {
+        setSendError(err.message || '인증번호 발송에 실패했습니다.')
+      }
     } finally {
       setIsSending(false)
     }
@@ -199,6 +205,14 @@ export default function Signup() {
 
   return (
     <div className="signup">
+      {modal && (
+        <AlertModal
+          title={modal.title}
+          desc={modal.desc}
+          onClose={() => setModal(null)}
+        />
+      )}
+
       {showCamera && (
         <CameraOverlay
           onCapture={handleCameraCapture}
@@ -337,7 +351,7 @@ export default function Signup() {
           <p className="signup__field-desc" style={{ lineHeight: '1.4' }}>
             <span>학번이 기재된 실물 학생증 사진을 업로드 해주세요</span>
             <br />
-            <span>위에 입력한 학번과 불일치 할 경우 서비스 이용이 제한될 수 있습니다</span>
+            <span>위에 입력한 정보와 불일치 할 경우 서비스 이용이 제한될 수 있습니다</span>
           </p>
           <button
             type="button"
