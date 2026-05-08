@@ -1,15 +1,22 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Signup.css'
 import arrowIcon from '../assets/icon/arrow-drop-down.svg'
 import { colleges, departments } from '../data/academicData'
 import CameraOverlay from '../components/CameraOverlay'
+import { sendPhoneCode, verifyPhoneCode } from '../api/auth'
 
 function formatPhone(value) {
   const digits = value.replace(/\D/g, '').slice(0, 11)
   if (digits.length <= 3) return digits
   if (digits.length <= 7) return `${digits.slice(0, 3)}-${digits.slice(3)}`
   return `${digits.slice(0, 3)}-${digits.slice(3, 7)}-${digits.slice(7)}`
+}
+
+function formatCountdown(seconds) {
+  const m = Math.floor(seconds / 60)
+  const s = seconds % 60
+  return `${m}:${String(s).padStart(2, '0')}`
 }
 
 function Dropdown({ value, onChange, options, placeholder, disabled }) {
@@ -67,6 +74,74 @@ export default function Signup() {
   const fileInputRef = useRef(null)
   const [showCamera, setShowCamera] = useState(false)
 
+  const [phoneSent, setPhoneSent] = useState(false)
+  const [codeInput, setCodeInput] = useState('')
+  const [countdown, setCountdown] = useState(0)
+  const [phoneVerified, setPhoneVerified] = useState(false)
+  const [verifiedToken, setVerifiedToken] = useState(null)
+  const [isSending, setIsSending] = useState(false)
+  const [isVerifying, setIsVerifying] = useState(false)
+  const [sendError, setSendError] = useState(null)
+  const [verifyError, setVerifyError] = useState(null)
+
+  useEffect(() => {
+    if (countdown <= 0 || phoneVerified) return
+    const t = setTimeout(() => setCountdown(c => c - 1), 1000)
+    return () => clearTimeout(t)
+  }, [countdown, phoneVerified])
+
+  const phoneRaw = form.phone.replace(/-/g, '')
+  const isPhoneReady = phoneRaw.length >= 10
+
+  function handlePhoneChange(e) {
+    const newPhone = formatPhone(e.target.value)
+    setForm(f => ({ ...f, phone: newPhone }))
+    if (phoneSent) {
+      setPhoneSent(false)
+      setPhoneVerified(false)
+      setVerifiedToken(null)
+      setCodeInput('')
+      setCountdown(0)
+      setSendError(null)
+      setVerifyError(null)
+    }
+  }
+
+  async function handleSendCode() {
+    if (!isPhoneReady || isSending) return
+    setIsSending(true)
+    setSendError(null)
+    setVerifyError(null)
+    setCodeInput('')
+    setPhoneVerified(false)
+    setVerifiedToken(null)
+    try {
+      await sendPhoneCode(phoneRaw)
+      setPhoneSent(true)
+      setCountdown(300)
+    } catch (err) {
+      setSendError(err.message || '인증번호 발송에 실패했습니다.')
+    } finally {
+      setIsSending(false)
+    }
+  }
+
+  async function handleVerifyCode() {
+    if (codeInput.length !== 6 || isVerifying || phoneVerified) return
+    setIsVerifying(true)
+    setVerifyError(null)
+    try {
+      const data = await verifyPhoneCode(phoneRaw, codeInput)
+      setVerifiedToken(data.verifiedToken)
+      setPhoneVerified(true)
+      setCountdown(0)
+    } catch (err) {
+      setVerifyError(err.message || '인증에 실패했습니다.')
+    } finally {
+      setIsVerifying(false)
+    }
+  }
+
   const filteredDepts = form.college
     ? departments.filter(d => d.collegeId === form.college.id)
     : []
@@ -105,17 +180,19 @@ export default function Signup() {
     form.college &&
     form.department &&
     form.photo &&
-    form.agreed
+    form.agreed &&
+    phoneVerified
 
   function handleNext() {
     if (!isValid) return
     navigate('/signup2', {
       state: {
-        phone: form.phone,
+        phone: phoneRaw,
         name: form.name,
         studentId: form.studentId,
         departmentId: form.department.id,
         photo: form.photo,
+        verifiedToken,
       },
     })
   }
@@ -152,18 +229,6 @@ export default function Signup() {
       {/* ── 폼 ── */}
       <form className="signup__form" onSubmit={e => e.preventDefault()}>
 
-        {/* 전화번호 */}
-        <div className="signup__field">
-          <label className="signup__label">전화번호</label>
-          <input
-            className="signup__input"
-            type="tel"
-            placeholder="010-1234-5678"
-            value={form.phone}
-            onChange={e => setForm(f => ({ ...f, phone: formatPhone(e.target.value) }))}
-          />
-        </div>
-
         {/* 이름 */}
         <div className="signup__field">
           <label className="signup__label">이름</label>
@@ -184,7 +249,7 @@ export default function Signup() {
             type="text"
             placeholder="202312345"
             value={form.studentId}
-            onChange={e => setForm(f => ({ ...f, studentId: e.target.value }))}
+            onChange={e => setForm(f => ({ ...f, studentId: e.target.value.slice(0, 9) }))}
           />
         </div>
 
@@ -211,10 +276,69 @@ export default function Signup() {
           />
         </div>
 
+        {/* 전화번호 + 인증 */}
+        <div className="signup__field">
+          <label className="signup__label">전화번호</label>
+          <div className="signup__phone-row">
+            <input
+              className="signup__input"
+              type="tel"
+              placeholder="010-1234-5678"
+              value={form.phone}
+              onChange={handlePhoneChange}
+            />
+            <button
+              type="button"
+              className={`signup__send-btn${isPhoneReady && !phoneVerified ? ' signup__send-btn--active' : ''}`}
+              onClick={handleSendCode}
+              disabled={!isPhoneReady || isSending || phoneVerified}
+            >
+              {isSending ? '발송 중' : phoneSent ? '재전송' : '인증 요청'}
+            </button>
+          </div>
+          {sendError && <p className="signup__error-msg">{sendError}</p>}
+
+          {phoneSent && (
+            <>
+              <div className="signup__verify-row">
+                <input
+                  className="signup__input"
+                  type="text"
+                  inputMode="numeric"
+                  placeholder="인증번호 6자리"
+                  value={codeInput}
+                  onChange={e => setCodeInput(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                  disabled={phoneVerified}
+                />
+                <button
+                  type="button"
+                  className={`signup__verify-btn${codeInput.length === 6 && !phoneVerified ? ' signup__verify-btn--active' : ''}`}
+                  onClick={handleVerifyCode}
+                  disabled={codeInput.length !== 6 || phoneVerified || isVerifying}
+                >
+                  {isVerifying ? '확인 중' : '확인'}
+                </button>
+              </div>
+              <p className={`signup__countdown${phoneVerified ? ' signup__countdown--done' : ''}`}>
+                {phoneVerified
+                  ? '인증 완료!'
+                  : countdown > 0
+                    ? formatCountdown(countdown)
+                    : '인증 시간이 만료되었습니다. 재전송해 주세요.'}
+              </p>
+              {verifyError && <p className="signup__error-msg">{verifyError}</p>}
+            </>
+          )}
+        </div>
+
         {/* 학생증 사진 등록 */}
         <div className="signup__field">
           <label className="signup__label">학생증 사진 등록</label>
-          <p className="signup__field-desc">실물 학생증 사진을 업로드 해주세요</p>
+          <p className="signup__field-desc" style={{ lineHeight: '1.4' }}>
+            <span>학번이 기재된 실물 학생증 사진을 업로드 해주세요</span>
+            <br />
+            <span>위에 입력한 학번과 불일치 할 경우 서비스 이용이 제한될 수 있습니다</span>
+          </p>
           <button
             type="button"
             className="signup__upload-btn"

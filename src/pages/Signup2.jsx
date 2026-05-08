@@ -39,10 +39,12 @@ export default function Signup2() {
     }
   }
 
+  const isIdAlphanumeric = /^[a-zA-Z0-9]*$/.test(form.userId)
+
   const passwordMatch =
     form.password && form.passwordConfirm && form.password === form.passwordConfirm
 
-  const isValid = form.userId && idStatus === 'available' && form.password && passwordMatch
+  const isValid = form.userId && isIdAlphanumeric && idStatus === 'available' && form.password && passwordMatch
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -57,6 +59,7 @@ export default function Signup2() {
         phoneNumber: step1.phone,
         studentNumber: Number(step1.studentId),
         departmentId: step1.departmentId,
+        verifiedToken: step1.verifiedToken,
         studentCardImage: step1.photo,
       })
 
@@ -128,6 +131,9 @@ export default function Signup2() {
               {idStatus === 'available' ? '확인완료' : isCheckingId ? '확인 중...' : '중복확인'}
             </button>
           </div>
+          {form.userId && !isIdAlphanumeric && (
+            <p className="s2__error-msg">영문과 숫자 조합으로만 사용 가능합니다</p>
+          )}
           {idStatus === 'available' && (
             <p className="s2__id-available">사용 가능한 아이디입니다</p>
           )}

@@ -12,7 +12,7 @@
   position: relative;
   width: 100%;
   max-width: 430px;
-  aspect-ratio: 1378 / 3250;
+  aspect-ratio: 402 / 874;
   container-type: inline-size;
   transform-origin: top center;
   transform: scale(var(--home-scale));
@@ -32,42 +32,41 @@
 }
 
 /*
-  트랙 외곽: 스케일 보정에 vw 단위 사용.
-  부모가 scale(s)로 줄어들어도 시각적 너비 = (100vw/s) × s = 100vw 로 항상 화면 꽉 채움.
-  cqw 기반 계산과 달리 vw는 브라우저 측정 오차 없이 정확한 뷰포트 너비를 참조.
+  트랙 외곽: scaleX(1/homeScale)로 scale 보정.
+  부모가 축소돼도 시각적 너비가 항상 컨테이너 너비를 채움.
 */
 .home__track-outer {
-  top:    103.92cqw;
+  top:    99.75cqw;
   left:   0;
   width:  100%;
-  height: 138.03cqw;
-  transform: scaleX(calc(1 / var(--home-scale, 1))) scaleY(1.05);
+  height: 119.65cqw;
+  transform: scaleX(calc(1 / var(--home-scale, 1))) scaleY(1.02);
   transform-origin: top center;
 }
 .home__track-outer img { object-fit: fill; }
 
 .home__track-inner {
-  top:    69.37cqw;
-  left:   13.14cqw;
-  width:  73.73cqw;
-  height: 100.73cqw;
+  top:    72.14cqw;
+  left:   18.91cqw;
+  width:  63.35cqw;
+  height: 86.57cqw;
 }
 
 .home__flag-wrap {
   position: absolute;
-  top:    161.83cqw;
-  left:   66.62cqw;
-  width:  18.51cqw;
-  height: 18.51cqw;
+  top:    151.92cqw;
+  left:   68.60cqw;
+  width:  12.45cqw;
+  height: 12.45cqw;
   display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: none;
 }
 .home__flag-rotate {
-  width:  15.24cqw;
-  height: 15.24cqw;
-  transform: rotate(14.23deg);
+  width:  11.38cqw;
+  height: 11.38cqw;
+  transform: rotate(5.65deg);
 }
 .home__flag-rotate img {
   width: 100%;
@@ -75,41 +74,19 @@
   object-fit: contain;
 }
 
-.home__group {
-  position: absolute;
-  pointer-events: none;
-}
-.home__group img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-.home__group--left {
-  top:    70.79cqw;
-  left:   6.89cqw;
-  width:  18.60cqw;
-  height: 26.65cqw;
-}
-.home__group--right {
-  top:    73.45cqw;
-  left:   73.68cqw;
-  width:  20.16cqw;
-  height: 23.97cqw;
-}
-
 .home__btn-bg {
   position: absolute;
-  left:   16.18cqw;
-  width:  67.63cqw;
-  height: 12.05cqw;
-  border-radius: 6.24cqw;
+  left:   18.41cqw;
+  width:  63.19cqw;
+  height: 11.25cqw;
+  border-radius: 5.83cqw;
   border: none;
   cursor: pointer;
   z-index: 1;
 }
-.home__btn-bg--start   { top: 175.25cqw; background: #679bff; }
-.home__btn-bg--signup  { top: 195.21cqw; background: #fdbd28; }
-.home__btn-bg--landing { top: 217.27cqw; background: #0ca214; }
+.home__btn-bg--start   { top: 161.44cqw; background: #679bff; }
+.home__btn-bg--signup  { top: 180.09cqw; background: #fdbd28; }
+.home__btn-bg--landing { top: 198.73cqw; background: #0ca214; }
 
 .home__btn-text {
   position: absolute;
@@ -118,22 +95,19 @@
   transform: translateX(-50%);
   z-index: 2;
   font-family: '온글잎 박다현체', sans-serif;
-  font-size:  6.90cqw;
-  line-height: 6.53cqw;
-  letter-spacing: 0.069cqw;
   color: #ffffff;
   white-space: nowrap;
 }
-.home__btn-text--start   { top: 178.01cqw; }
-.home__btn-text--signup  { top: 197.97cqw; }
-.home__btn-text--landing { top: 220.09cqw; }
+.home__btn-text--start   { top: 164.02cqw; font-size: 6.44cqw; letter-spacing: 0.064cqw; }
+.home__btn-text--signup  { top: 182.66cqw; font-size: 6.78cqw; letter-spacing: 0.068cqw; }
+.home__btn-text--landing { top: 201.31cqw; font-size: 6.44cqw; letter-spacing: 0.064cqw; }
 
 .home__mascot-wrap {
   position: absolute;
-  top:    20.17cqw;
-  left:    7.04cqw;
-  width:  84.87cqw;
-  height: 41.29cqw;
+  top:    21.39cqw;
+  left:    8.21cqw;
+  width:  83.34cqw;
+  height: 40.55cqw;
   pointer-events: none;
 }
 .home__mascot-wrap img {
@@ -144,34 +118,33 @@
 
 .home__campus {
   position: absolute;
-  top:  60.67cqw;
-  left: 70.36cqw;
+  top:  62.94cqw;
+  left: 69.53cqw;
   transform: translateX(-50%);
   font-family: '온글잎 박다현체', sans-serif;
-  font-size:   6.90cqw;
-  line-height: 9.19cqw;
-  letter-spacing: 0.103cqw;
-  color: #ff696d;
+  font-size:   7.69cqw;
+  line-height: 10.25cqw;
+  letter-spacing: 0.115cqw;
+  color: #ffffff;
   white-space: nowrap;
 }
 
 .home__pretitle {
   position: absolute;
-  top:  7.91cqw;
-  left: 64.52cqw;
+  top:  6.72cqw;
+  left: 66.44cqw;
   transform: translateX(-50%);
-  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-  font-weight: 600;
-  font-size:   4.50cqw;
-  line-height: 12.26cqw;
-  letter-spacing: 0.067cqw;
+  font-family: '온글잎 박다현체', sans-serif;
+  font-size:   7.38cqw;
+  line-height: 17.82cqw;
+  letter-spacing: 0.11cqw;
   color: #ffffff;
   white-space: nowrap;
 }
 
 .home__kb-logo {
-  top:    11.47cqw;
-  left:   21.26cqw;
-  width:  31.57cqw;
-  height:  5.22cqw;
+  top:    12.89cqw;
+  left:   18.91cqw;
+  width:  32.22cqw;
+  height:  5.33cqw;
 }

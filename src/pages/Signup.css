@@ -308,6 +308,86 @@
   white-space: pre-line;
 }
 
+/* ── 전화번호 인증 ── */
+.signup__phone-row {
+  display: flex;
+  gap: 2cqw;
+  align-items: center;
+}
+
+.signup__phone-row .signup__input {
+  flex: 1;
+  min-width: 0;
+}
+
+.signup__send-btn {
+  flex-shrink: 0;
+  height: 13.75cqw;
+  padding: 0 3.5cqw;
+  border: none;
+  border-radius: 8.59cqw;
+  background: #c0c0c0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 600;
+  font-size: 3.5cqw;
+  color: #ffffff;
+  cursor: not-allowed;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.signup__send-btn--active {
+  background: #4585ff;
+  cursor: pointer;
+}
+
+.signup__verify-row {
+  display: flex;
+  gap: 2cqw;
+  align-items: center;
+}
+
+.signup__verify-row .signup__input {
+  flex: 1;
+  min-width: 0;
+}
+
+.signup__verify-btn {
+  flex-shrink: 0;
+  height: 13.75cqw;
+  padding: 0 3.5cqw;
+  border: none;
+  border-radius: 8.59cqw;
+  background: #c0c0c0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 600;
+  font-size: 3.5cqw;
+  color: #ffffff;
+  cursor: not-allowed;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.signup__verify-btn--active {
+  background: #4585ff;
+  cursor: pointer;
+}
+
+.signup__countdown {
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-weight: 600;
+  font-size: 3.5cqw;
+  color: #2dc58a;
+}
+
+.signup__error-msg {
+  margin: 0;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+  font-size: 3.15cqw;
+  color: #ff6b6b;
+}
+
 /* ── 다음 버튼 ── */
 .signup__next-btn {
   width: 100%;

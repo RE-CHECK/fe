@@ -1,5 +1,21 @@
 import { apiRequest } from './client'
 
+export async function sendPhoneCode(phoneNumber) {
+  await apiRequest('/api/auth/phone/send-code', {
+    skipAuth: true,
+    method: 'POST',
+    body: JSON.stringify({ phoneNumber }),
+  })
+}
+
+export async function verifyPhoneCode(phoneNumber, code) {
+  return apiRequest('/api/auth/phone/verify-code', {
+    skipAuth: true,
+    method: 'POST',
+    body: JSON.stringify({ phoneNumber, code }),
+  })
+}
+
 export async function login(username, password) {
   const data = await apiRequest('/api/auth/login', {
     skipAuth: true,
@@ -22,11 +38,11 @@ export async function logout() {
   window.location.href = '/login'
 }
 
-export async function register({ username, password, passwordConfirm, name, phoneNumber, studentNumber, departmentId, studentCardImage }) {
+export async function register({ username, password, passwordConfirm, name, phoneNumber, studentNumber, departmentId, verifiedToken, studentCardImage }) {
   const formData = new FormData()
 
   const requestBlob = new Blob(
-    [JSON.stringify({ username, password, passwordConfirm, name, phoneNumber, studentNumber, departmentId })],
+    [JSON.stringify({ username, password, passwordConfirm, name, phoneNumber, studentNumber, departmentId, verifiedToken })],
     { type: 'application/json' }
   )
   formData.append('request', requestBlob)
