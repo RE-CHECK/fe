@@ -124,6 +124,8 @@ export default function Signup() {
     } catch (err) {
       if (err.code === 409) {
         setModal({ title: '이미 가입된 전화번호입니다', desc: '다른 번호로 다시 시도해주세요.' })
+      } else if (err.code === 403) {
+        setModal({ title: '사용이 제한된 전화번호입니다', desc: '해당 번호로는 서비스 이용이 불가합니다.' })
       } else {
         setSendError(err.message || '인증번호 발송에 실패했습니다.')
       }

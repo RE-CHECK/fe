@@ -1,0 +1,164 @@
+/*
+  Figma 기준: 393px  /  k = 100 / 393
+  블랙리스트 관리 화면
+*/
+
+.bl {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100svh;
+  container-type: inline-size;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+/* ── 헤더 ── */
+/* Figma: back btn top=39px, left=19px, size=45px */
+.bl__header {
+  display: flex;
+  align-items: center;
+  height: 11.45cqw;
+  padding: 0 4.83cqw;
+  margin-top: 9.92cqw;
+}
+
+.bl__back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 11.45cqw;
+  height: 11.45cqw;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.bl__back svg {
+  width: 2.80cqw;
+  height: 5.09cqw;
+}
+
+/* ── 구분선 ── */
+/* Figma: top=98px */
+.bl__divider {
+  border: none;
+  border-top: 1px solid #000000;
+  margin: 3.56cqw 0 0;
+}
+
+/* ── 타이틀 ── */
+/* Figma: font-size=30px, center */
+.bl__title {
+  margin: 0;
+  padding-top: 16.54cqw;
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: 7.63cqw;
+  color: #000000;
+  text-align: center;
+}
+
+/* ── 섹션 (입력 + 버튼) ── */
+/* 각 섹션 내부: 입력 → 버튼, 세로 정렬 */
+.bl__section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.80cqw;   /* ~11px */
+  padding: 7.12cqw 0 18cqw;
+}
+
+/* ── 입력 필드 ── */
+/* Figma: w=231px, h=55px, radius=30px, font-size=20px */
+.bl__input {
+  width: 58.78cqw;
+  height: 13.99cqw;
+  border: 1px solid #000000;
+  border-radius: 7.63cqw;
+  background: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 5.09cqw;
+  color: #000000;
+  text-align: center;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.bl__input::placeholder {
+  color: #aaaaaa;
+}
+
+/* ── 액션 버튼 공통 ── */
+/* Figma: w=231px, h=55px, radius=30px, font-size=20px */
+.bl__action-btn {
+  width: 58.78cqw;
+  height: 13.99cqw;
+  border: 1px solid #000000;
+  border-radius: 7.63cqw;
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: 5.09cqw;
+  text-align: center;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+/* 검정 버튼 (차단하기, 차단해제하기) */
+.bl__action-btn--black {
+  background: #000000;
+  color: #ffffff;
+}
+
+.bl__action-btn--black:hover:not(:disabled) {
+  background: #222222;
+}
+
+.bl__action-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ── 섹션 간 구분선 ── */
+.bl__section-divider {
+  border: none;
+  border-top: 1px solid #000000;
+  margin: 0;
+}
+
+/* ── CSV 버튼 영역 ── */
+/* Figma: CSV btn top=767px, 차단해제하기 btn bottom=632px → gap≈135px → 34.35cqw */
+.bl__csv-wrap {
+  display: flex;
+  justify-content: center;
+  padding-top: 34.35cqw;
+  padding-bottom: 10cqw;
+}
+
+/* 파란 CSV 버튼 */
+/* Figma: bg=#0088ff */
+.bl__csv-btn {
+  width: 58.78cqw;
+  height: 13.99cqw;
+  border: 1px solid #000000;
+  border-radius: 7.63cqw;
+  background: #0088ff;
+  color: #ffffff;
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: 5.09cqw;
+  text-align: center;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.bl__csv-btn:hover:not(:disabled) {
+  background: #006ee0;
+}
+
+.bl__csv-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}

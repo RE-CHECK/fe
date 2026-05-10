@@ -9,6 +9,7 @@ const MENU_ITEMS = [
   { label: '참여하기  활성화 기능',   path: null },
   { label: '유저 대시보드',          path: '/admin/user-dashboard' },
   { label: '단과대별 소비금액',       path: '/admin/college-spending' },
+  { label: '블랙리스트',             path: '/admin/blacklist' },
 ]
 
 export default function AdminMain() {
