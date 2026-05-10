@@ -29,3 +29,21 @@ export function downloadUsersCsv() {
 export function downloadReceiptsCsv() {
   return downloadCsv('/api/admin/receipts/csv', 'receipts.csv')
 }
+
+export function addBlacklist(phoneNumber) {
+  return apiRequest('/api/admin/blacklist', {
+    method: 'POST',
+    body: JSON.stringify({ phoneNumber }),
+  })
+}
+
+export function removeBlacklist(phoneNumber) {
+  return apiRequest('/api/admin/blacklist/unban', {
+    method: 'PATCH',
+    body: JSON.stringify({ phoneNumber }),
+  })
+}
+
+export function downloadBlacklistCsv() {
+  return downloadCsv('/api/admin/blacklist/csv', 'blacklist.csv')
+}
