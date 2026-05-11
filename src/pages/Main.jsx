@@ -15,6 +15,7 @@ import mascotNamsek  from '../assets/image/mascot/남색-2.svg'
 import mascotBeige   from '../assets/image/mascot/베이지-2.svg'
 import mascotPink    from '../assets/image/mascot/분홍색-2.svg'
 import mascotBlack   from '../assets/image/mascot/검정색-2.svg'
+import { logout } from '../api/auth'
 import { getMyDashboard } from '../api/users'
 import {
   getTotalParticipation, getTotalAllPayment,
@@ -181,10 +182,7 @@ export default function Main() {
         </div>
         <button
           className="main__logout-btn"
-          onClick={() => {
-            localStorage.removeItem('accessToken')
-            navigate('/')
-          }}
+          onClick={() => logout()}
         >
           로그아웃
         </button>

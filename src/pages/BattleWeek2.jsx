@@ -48,7 +48,7 @@ const STORES_CONFIG = [
     },
   },
   {
-    storeName: '포푸리',
+    storeName: '포푸리리프',
     infoLabel: '포푸리',
     colleges: ['자연과학대학', '경영대학', '메디컬', '경제정치사회융합학부'],
     info: {
@@ -64,7 +64,7 @@ const STORES_CONFIG = [
     },
   },
   {
-    storeName: '조희탁',
+    storeName: '조희탁커피',
     infoLabel: '조희탁',
     colleges: ['첨단바이오융합대학', '다산학부', '국방디지털융합학과', '사회과학대학'],
     info: {
