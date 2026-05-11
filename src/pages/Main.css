@@ -433,6 +433,24 @@
   height: 100%;
 }
 
+.main__legal {
+  display: flex;
+  justify-content: center;
+  gap: 4cqw;
+  margin-top: 4cqw;
+  margin-bottom: 8cqw;
+}
+
+.main__legal-link {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-weight: 700;
+  font-size: 3cqw;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: underline;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
 .main__float-btn-text {
   margin: 0;
   font-family: '온글잎 박다현체', sans-serif;

@@ -148,3 +148,23 @@
   width:  32.22cqw;
   height:  5.33cqw;
 }
+
+.home__legal {
+  position: absolute;
+  top: 211cqw;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4cqw;
+  z-index: 2;
+}
+
+.home__legal-link {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 3cqw;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: underline;
+  white-space: nowrap;
+  cursor: pointer;
+}
