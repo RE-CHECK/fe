@@ -370,6 +370,14 @@
 .upload__receipt-value--orange { border-color: #ba7526; }
 .upload__receipt-value--red    { border-color: #ab4b4f; }
 
+.upload__partner-notice {
+  font-size: 4cqw;
+  color: #1e7a2e;
+  text-align: center;
+  margin: 0;
+  padding: 0 0 2cqw;
+}
+
 /* ── 스피너 ── */
 .upload__spinner-wrap {
   width: 22.71cqw;

@@ -34,7 +34,7 @@ export default function StoreInfoModal({ storeInfo, onClose }) {
             </svg>
             <a
               className="sinfo__address-link"
-              href={`https://map.naver.com/v5/search/${encodeURIComponent(storeInfo.address)}`}
+              href={`https://map.naver.com/v5/search/${encodeURIComponent(storeInfo.storeName ?? storeInfo.badgeName)}`}
               target="_blank"
               rel="noopener noreferrer"
             >

@@ -4,9 +4,12 @@ import './BattleWeek2.css'
 import { getWeek2Ranking } from '../api/receipts'
 import StoreInfoModal from '../components/StoreInfoModal'
 
-import ImgStoreSarangjip from '../assets/image/store/사랑집.svg'
-import ImgStoreUjok1     from '../assets/image/store/우족1.svg'
-import ImgStoreUjok2     from '../assets/image/store/우족2.svg'
+import ImgAppatteng1      from '../assets/image/store/아빠땡1.svg'
+import ImgAppatteng2      from '../assets/image/store/아빠땡2.svg'
+import ImgPopuri1         from '../assets/image/store/포푸리1.svg'
+import ImgPopuri2         from '../assets/image/store/포푸리2.svg'
+import ImgChoehytak1      from '../assets/image/store/조희탁1.svg'
+import ImgChoehytak3      from '../assets/image/store/조희탁3.svg'
 
 // ── 왕관 이미지 (4.svg=1등, 2.svg=2등, 5.svg=3등, 6.svg=4등)
 import crown1 from '../assets/image/ChatGPT Image 2026년 4월 7일 오후 09_44_19 4.svg'
@@ -29,40 +32,52 @@ import mascotGray  from '../assets/image/mascot/회색.svg'
 // ── 하드코딩 대진표 (2주차 고정) ────────────────────────────
 const STORES_CONFIG = [
   {
-    storeName: '사랑집',
-    infoLabel: '사랑집',
+    storeName: '아빠땡',
+    infoLabel: '아빠땡',
     colleges: ['공과대학', '소프트웨어융합대학', '첨단ICT융합대학', '인문대학'],
     info: {
-      badgeName: '사랑집',
-      images:    [ImgStoreSarangjip],
-      color:     '#fdbd28',
-      address:   '경기 수원시 팔달구 아주로39번길 18-7 1층',
-      hours:     '매일 11:00~22:00 / 브레이크타임 14:30~16:30',
-      phone:     '0507-1349-9209',
-      desc:      '눈 뜨면 없어져 있는 돼지김치구이 맛집',
+      storeName:   '아빠땡',
+      badgeName:   '아빠땡',
+      images:      [ImgAppatteng1, ImgAppatteng2],
+      imageRatios: [576, 418],
+      color:       '#fdbd28',
+      address:     '경기 수원시 영통구 월드컵로 193번길 15 2층',
+      hours:       '매일 8:00~22:00 / 매주 일요일 휴무',
+      phone:       '0507-1373-7260',
+      desc:        '순공시간 2시간 확보되는 잠봉뵈르 맛집 카페',
     },
   },
   {
-    storeName: '사랑집2',
-    infoLabel: '우족',
+    storeName: '포푸리',
+    infoLabel: '포푸리',
     colleges: ['자연과학대학', '경영대학', '메디컬', '경제정치사회융합학부'],
     info: {
-      badgeName: '우만동 족발집',
-      images:      [ImgStoreUjok1, ImgStoreUjok2],
-      imageRatios: [483, 560],
-      imageHeight: 35.05,
+      storeName:   '포푸리리프',
+      badgeName:   '포푸리',
+      images:      [ImgPopuri1, ImgPopuri2],
+      imageRatios: [615, 360],
       color:       '#ff5252',
-      address:   '경기 수원시 팔달구 아주로27번길 10-20 1층',
-      hours:     '매일 11:30~21:30 / 브레이크타임 15:00~16:30',
-      phone:     '0507-1406-7066',
-      desc:      '점심특선이 레전설인 아주대 최고 족발집',
+      address:     '경기 수원시 영통구 월드컵로 179번길 32-3',
+      hours:       '매일 11:00~23:00 / 매주 일요일 휴무',
+      phone:       '010-3012-3856',
+      desc:        '들어가자마자 에겐되는 케이크가 맛있는 예카',
     },
   },
   {
-    storeName: '사랑집3',
-    infoLabel: '동떡이',
+    storeName: '조희탁',
+    infoLabel: '조희탁',
     colleges: ['첨단바이오융합대학', '다산학부', '국방디지털융합학과', '사회과학대학'],
-    info: null,
+    info: {
+      storeName:   '조희탁커피',
+      badgeName:   '조희탁',
+      images:      [ImgChoehytak1, ImgChoehytak3],
+      imageRatios: [573, 466],
+      color:       '#0ca214',
+      address:     '경기 수원시 팔달구 아주로47번길 12 1층',
+      hours:       '매일 11:00~22:00',
+      phone:       '0507-1410-8867',
+      desc:        '레전드 버터떡이 있는 카공 맛집',
+    },
   },
 ]
 
@@ -97,9 +112,9 @@ const COLLEGE_INFO = {
 }
 
 const STORE_COLORS = {
-  '사랑집1': '#fdbd28',
-  '사랑집2': '#ff5252',
-  '사랑집3': '#0ca214',
+  '아빠땡': '#fdbd28',
+  '포푸리': '#ff5252',
+  '조희탁': '#0ca214',
 }
 
 const BADGE_BG = ['', '#fca506', '#646d80', '#646d80', '#646d80']

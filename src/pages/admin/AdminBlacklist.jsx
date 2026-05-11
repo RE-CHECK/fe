@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AlertModal from '../../components/AlertModal'
 import { addBlacklist, removeBlacklist, downloadBlacklistCsv } from '../../api/admin'
+import successImg from '../../assets/image/sginup-success.svg'
 import './AdminBlacklist.css'
 
 function formatPhone(value) {
@@ -26,7 +27,7 @@ export default function AdminBlacklist() {
     setIsAdding(true)
     try {
       await addBlacklist(raw)
-      setModal({ title: '차단 완료', desc: `${addPhone} 번호가 블랙리스트에 추가되었습니다.` })
+      setModal({ title: '차단 완료', desc: `${addPhone} 번호가 블랙리스트에 추가되었습니다.`, icon: successImg })
       setAddPhone('')
     } catch (e) {
       setModal({ title: '차단 실패', desc: e.message || '오류가 발생했습니다.' })
@@ -41,7 +42,7 @@ export default function AdminBlacklist() {
     setIsRemoving(true)
     try {
       await removeBlacklist(raw)
-      setModal({ title: '차단 해제 완료', desc: `${removePhone} 번호가 블랙리스트에서 해제되었습니다.` })
+      setModal({ title: '차단 해제 완료', desc: `${removePhone} 번호가 블랙리스트에서 해제되었습니다.`, icon: successImg })
       setRemovePhone('')
     } catch (e) {
       setModal({ title: '차단 해제 실패', desc: e.message || '오류가 발생했습니다.' })
@@ -65,7 +66,7 @@ export default function AdminBlacklist() {
   return (
     <div className="bl">
       {modal && (
-        <AlertModal title={modal.title} desc={modal.desc} onClose={() => setModal(null)} />
+        <AlertModal title={modal.title} desc={modal.desc} icon={modal.icon} onClose={() => setModal(null)} />
       )}
 
       <div className="bl__header">

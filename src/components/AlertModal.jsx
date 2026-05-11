@@ -1,11 +1,11 @@
 import './AlertModal.css'
 import warningIcon from '../assets/icon/warning.png'
 
-export default function AlertModal({ title, desc, onClose, btnVariant = '' }) {
+export default function AlertModal({ title, desc, onClose, btnVariant = '', icon }) {
   return (
     <div className="alert-overlay" onClick={onClose}>
       <div className="alert-modal" onClick={e => e.stopPropagation()}>
-        <img className="alert-modal__icon" src={warningIcon} alt="경고" />
+        <img className="alert-modal__icon" src={icon ?? warningIcon} alt="" />
         <p className="alert-modal__title">{title}</p>
         {desc && <p className="alert-modal__desc">{desc}</p>}
         <button
