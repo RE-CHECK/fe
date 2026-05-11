@@ -113,8 +113,8 @@ const COLLEGE_INFO = {
 
 const STORE_COLORS = {
   '아빠땡': '#fdbd28',
-  '포푸리': '#ff5252',
-  '조희탁': '#0ca214',
+  '포푸리리프': '#ff5252',
+  '조희탁커피': '#0ca214',
 }
 
 const BADGE_BG = ['', '#fca506', '#646d80', '#646d80', '#646d80']
