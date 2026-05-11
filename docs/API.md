@@ -1,49 +1,73 @@
-ReCheck API 명세서
-Base URL: https://api.reajoucheck.site Content-Type: application/json (파일 업로드 제외) 인증: Authorization: Bearer {accessToken} 헤더 사용 Refresh Token: HttpOnly 쿠키(refreshToken)로 관리 — JS 접근 불가, 로그인 시 자동 설정
+# ReCheck API 명세서
 
-Access Token 만료 처리
+> **Base URL**: `https://api.reajoucheck.site` 
+> **Content-Type**: `application/json` (파일 업로드 제외)
+> **인증**: `Authorization: Bearer {accessToken}` 헤더 사용
+> **Refresh Token**: HttpOnly 쿠키(`refreshToken`)로 관리 — JS 접근 불가, 로그인 시 자동 설정
+
+### Access Token 만료 처리
+
 Access Token이 만료된 상태로 요청을 보내면 서버가 자동으로 재발급합니다.
 
-만료된 Access Token으로 요청
-서버가 DB에 저장된 Refresh Token을 검증
-Refresh Token 유효 → 새 Access Token을 응답 헤더 Authorization에 담아 반환, 요청 정상 처리
-Refresh Token 만료 → 401 반환 → 재로그인 필요
-클라이언트는 모든 응답에서 Authorization 헤더를 확인하여 새 토큰이 있으면 갱신해야 합니다.
+1. 만료된 Access Token으로 요청
+2. 서버가 DB에 저장된 Refresh Token을 검증
+3. **Refresh Token 유효** → 새 Access Token을 응답 헤더 `Authorization`에 담아 반환, 요청 정상 처리
+4. **Refresh Token 만료** → `401` 반환 → 재로그인 필요
 
-공통 응답 형식
+클라이언트는 모든 응답에서 `Authorization` 헤더를 확인하여 새 토큰이 있으면 갱신해야 합니다.
+
+---
+
+## 공통 응답 형식
+
 모든 API는 아래 형식으로 응답합니다.
 
+```json
 {
   "success": true,
   "code": 200,
   "message": "요청이 성공적으로 처리되었습니다.",
   "data": { }
 }
-에러 응답
+```
+
+### 에러 응답
+
+```json
 {
   "success": false,
   "code": 401,
   "message": "에러 메시지",
   "data": null
 }
-HTTP 상태	상황
-400	요청값 검증 실패
-401	인증 토큰 없음 / 만료 / 유효하지 않음
-404	리소스 없음
-409	중복 데이터
-500	서버 오류
-인증 (Auth)
-로그인
-POST /api/auth/login
+```
 
-Request Body
+| HTTP 상태 | 상황 |
+|-----------|------|
+| `400` | 요청값 검증 실패 |
+| `401` | 인증 토큰 없음 / 만료 / 유효하지 않음 |
+| `404` | 리소스 없음 |
+| `409` | 중복 데이터 |
+| `500` | 서버 오류 |
 
+---
+
+## 인증 (Auth)
+
+### 로그인
+
+**POST** `/api/auth/login`
+
+**Request Body**
+```json
 {
   "username": "user123",
   "password": "password123"
 }
-Response
+```
 
+**Response**
+```json
 {
   "success": true,
   "code": 200,
@@ -53,60 +77,91 @@ Response
     "accessToken": "eyJhbGciOiJIUzI1NiJ9..."
   }
 }
-Refresh Token은 응답 body에 포함되지 않으며, Set-Cookie: refreshToken=...; HttpOnly; Secure; SameSite=Strict 헤더로 자동 설정됩니다.
+```
 
-에러 케이스 | 상태 | 메시지 | |------|--------| | 401 | 아이디 또는 비밀번호가 올바르지 않습니다. |
+> Refresh Token은 응답 body에 포함되지 않으며, `Set-Cookie: refreshToken=...; HttpOnly; Secure; SameSite=Strict` 헤더로 자동 설정됩니다.
 
-로그아웃
-POST /api/auth/logout 🔒 인증 필요
+**에러 케이스**
+| 상태 | 메시지 |
+|------|--------|
+| `401` | 아이디 또는 비밀번호가 올바르지 않습니다. |
 
-Response
+---
 
+### 로그아웃
+
+**POST** `/api/auth/logout` `🔒 인증 필요`
+
+**Response**
+```json
 {
   "success": true,
   "code": 200,
   "message": "요청이 성공적으로 처리되었습니다.",
   "data": null
 }
-DB에 저장된 Refresh Token을 삭제하고 쿠키를 만료시킵니다.
+```
 
-에러 케이스 | 상태 | 메시지 | |------|--------| | 401 | 로그인이 필요합니다. |
+> DB에 저장된 Refresh Token을 삭제하고 쿠키를 만료시킵니다.
 
-휴대폰 인증번호 발송
-POST /api/auth/phone/send-code
+**에러 케이스**
+| 상태 | 메시지 |
+|------|--------|
+| `401` | 로그인이 필요합니다. |
 
-회원가입 전 휴대폰 본인 인증을 위해 6자리 인증번호를 SMS로 발송합니다. 인증번호 유효시간은 5분입니다.
+---
+
+### 휴대폰 인증번호 발송
+
+**POST** `/api/auth/phone/send-code`
+
+회원가입 전 휴대폰 본인 인증을 위해 6자리 인증번호를 SMS로 발송합니다. 인증번호 유효시간은 **5분**입니다.  
 동일 번호로 재요청하면 기존 인증 요청은 무효화됩니다.
 
-Request Body
-
+**Request Body**
+```json
 {
   "phoneNumber": "01012345678"
 }
-Response
+```
 
+**Response**
+```json
 {
   "success": true,
   "code": 200,
   "message": "요청이 성공적으로 처리되었습니다.",
   "data": null
 }
-에러 케이스 | 상태 | 메시지 | |------|--------| | 400 | 올바른 휴대폰 번호를 입력해 주세요. | | 403 | 사용이 제한된 전화번호입니다. | | 409 | 이미 가입된 전화번호입니다. | | 500 | 문자 발송에 실패했습니다. 잠시 후 다시 시도해 주세요. |
+```
 
-휴대폰 인증번호 확인
-POST /api/auth/phone/verify-code
+**에러 케이스**
+| 상태 | 메시지 |
+|------|--------|
+| `400` | 올바른 휴대폰 번호를 입력해 주세요. |
+| `403` | 사용이 제한된 전화번호입니다. |
+| `409` | 이미 가입된 전화번호입니다. |
+| `500` | 문자 발송에 실패했습니다. 잠시 후 다시 시도해 주세요. |
 
-발송된 인증번호를 검증합니다. 성공 시 회원가입에 사용할 verifiedToken을 반환합니다.
-verifiedToken의 유효시간은 30분이며, 회원가입 완료 시 1회 소진됩니다.
+---
 
-Request Body
+### 휴대폰 인증번호 확인
 
+**POST** `/api/auth/phone/verify-code`
+
+발송된 인증번호를 검증합니다. 성공 시 회원가입에 사용할 `verifiedToken`을 반환합니다.  
+`verifiedToken`의 유효시간은 **30분**이며, 회원가입 완료 시 1회 소진됩니다.
+
+**Request Body**
+```json
 {
   "phoneNumber": "01012345678",
   "code": "123456"
 }
-Response
+```
 
+**Response**
+```json
 {
   "success": true,
   "code": 200,
@@ -115,22 +170,34 @@ Response
     "verifiedToken": "550e8400-e29b-41d4-a716-446655440000"
   }
 }
-에러 케이스 | 상태 | 메시지 | |------|--------| | 400 | 인증 요청을 찾을 수 없습니다. 인증번호를 다시 요청해 주세요. | | 400 | 인증번호가 만료되었습니다. | | 400 | 인증번호가 일치하지 않습니다. |
+```
 
-회원가입
-POST /api/auth/register
+**에러 케이스**
+| 상태 | 메시지 |
+|------|--------|
+| `400` | 인증 요청을 찾을 수 없습니다. 인증번호를 다시 요청해 주세요. |
+| `400` | 인증번호가 만료되었습니다. |
+| `400` | 인증번호가 일치하지 않습니다. |
 
-Content-Type: multipart/form-data
+---
 
-회원가입 전 /api/auth/phone/send-code → /api/auth/phone/verify-code 순서로 휴대폰 인증을 완료해야 합니다.
+### 회원가입
 
-Request (multipart/form-data)
+**POST** `/api/auth/register`
 
-필드	타입	필수	설명
-request	JSON (application/json part)	O	아래 JSON 형식
-studentCardImage	File	O	학생증 이미지 (.jpg, .jpeg, .png, .gif, .webp / 최대 5MB)
-request JSON 형식:
+> `Content-Type: multipart/form-data`
 
+> 회원가입 전 `/api/auth/phone/send-code` → `/api/auth/phone/verify-code` 순서로 휴대폰 인증을 완료해야 합니다.
+
+**Request (multipart/form-data)**
+
+| 필드 | 타입 | 필수 | 설명 |
+|------|------|------|------|
+| `request` | JSON (application/json part) | O | 아래 JSON 형식 |
+| `studentCardImage` | File | O | 학생증 이미지 (.jpg, .jpeg, .png, .gif, .webp / 최대 5MB) |
+
+`request` JSON 형식:
+```json
 {
   "username": "user123",
   "password": "password123",
@@ -141,41 +208,67 @@ request JSON 형식:
   "departmentId": 3,
   "verifiedToken": "550e8400-e29b-41d4-a716-446655440000"
 }
-Response
+```
 
+**Response**
+```json
+{
+  "success": true,
+  "code": 200,
+  "message": "요청이 성공적으로 처리되었습니다.",
+  "data": {
+    "id": 2
+  }
+}
+```
+
+**에러 케이스**
+| 상태 | 메시지 |
+|------|--------|
+| `400` | 휴대폰 인증이 필요합니다. |
+| `400` | 휴대폰 인증 유효시간이 만료되었습니다. 다시 인증해 주세요. |
+| `400` | 비밀번호가 일치하지 않습니다. |
+| `409` | 이미 사용 중인 아이디입니다. |
+
+---
+
+### 아이디 중복 확인
+
+**GET** `/api/auth/check-username?username={username}`
+
+**Query Parameter**
+
+| 파라미터 | 타입 | 필수 | 설명 |
+|----------|------|------|------|
+| `username` | String | O | 중복 확인할 아이디 |
+
+**Response**
+```json
 {
   "success": true,
   "code": 200,
   "message": "요청이 성공적으로 처리되었습니다.",
   "data": null
 }
-에러 케이스 | 상태 | 메시지 | |------|--------| | 400 | 휴대폰 인증이 필요합니다. | | 400 | 휴대폰 인증 유효시간이 만료되었습니다. 다시 인증해 주세요. | | 400 | 비밀번호가 일치하지 않습니다. | | 409 | 이미 사용 중인 아이디입니다. |
+```
 
-아이디 중복 확인
-GET /api/auth/check-username?username={username}
+> 사용 가능한 아이디면 `200`, 중복이면 `409` 반환
 
-Query Parameter
+**에러 케이스**
+| 상태 | 메시지 |
+|------|--------|
+| `409` | 이미 사용 중인 아이디입니다. |
 
-파라미터	타입	필수	설명
-username	String	O	중복 확인할 아이디
-Response
+---
 
-{
-  "success": true,
-  "code": 200,
-  "message": "요청이 성공적으로 처리되었습니다.",
-  "data": null
-}
-사용 가능한 아이디면 200, 중복이면 409 반환
+## 단과대 / 학과 (Colleges)
 
-에러 케이스 | 상태 | 메시지 | |------|--------| | 409 | 이미 사용 중인 아이디입니다. |
+### 단과대 목록 조회
 
-단과대 / 학과 (Colleges)
-단과대 목록 조회
-GET /api/colleges
+**GET** `/api/colleges`
 
-Response
-
+**Response**
+```json
 {
   "success": true,
   "code": 200,
@@ -186,15 +279,22 @@ Response
     { "id": 3, "name": "경영대학" }
   ]
 }
-학과 목록 조회
-GET /api/colleges/{collegeId}/departments
+```
 
-Path Parameter
+---
 
-파라미터	타입	설명
-collegeId	Long	단과대 ID
-Response
+### 학과 목록 조회
 
+**GET** `/api/colleges/{collegeId}/departments`
+
+**Path Parameter**
+
+| 파라미터 | 타입 | 설명 |
+|----------|------|------|
+| `collegeId` | Long | 단과대 ID |
+
+**Response**
+```json
 {
   "success": true,
   "code": 200,
@@ -204,20 +304,29 @@ Response
     { "id": 2, "name": "전자공학과" }
   ]
 }
-영수증 (Receipts)
-영수증 OCR 분석
-POST /api/receipts/analyze 🔒 인증 필요
+```
 
-Content-Type: multipart/form-data
+---
 
-영수증 이미지를 OCR로 분석하여 결제 정보를 반환합니다. S3 업로드 및 DB 저장은 하지 않습니다. 사용자가 OCR 결과를 확인한 뒤 /confirm을 호출해야 최종 저장됩니다.
+## 영수증 (Receipts)
 
-Request (multipart/form-data)
+### 영수증 OCR 분석
 
-필드	타입	필수	설명
-image	File	O	영수증 이미지 (.jpg, .jpeg, .png, .gif, .webp / 최대 5MB)
-Response
+**POST** `/api/receipts/analyze` `🔒 인증 필요`
 
+> `Content-Type: multipart/form-data`
+
+영수증 이미지를 OCR로 분석하여 결제 정보를 반환합니다. S3 업로드 및 DB 저장은 하지 않습니다.
+사용자가 OCR 결과를 확인한 뒤 `/confirm`을 호출해야 최종 저장됩니다.
+
+**Request (multipart/form-data)**
+
+| 필드 | 타입 | 필수 | 설명 |
+|------|------|------|------|
+| `image` | File | O | 영수증 이미지 (.jpg, .jpeg, .png, .gif, .webp / 최대 5MB) |
+
+**Response**
+```json
 {
   "success": true,
   "code": 200,
@@ -229,30 +338,43 @@ Response
     "confirmNum": "12345678"
   }
 }
-에러 케이스 | 상태 | 메시지 | |------|--------| | 400 | 지원하지 않는 카드사 입니다. (국민카드만 허용) | | 409 | 이미 등록된 영수증입니다. |
+```
 
-영수증 업로드 확정
-POST /api/receipts/confirm 🔒 인증 필요
+**에러 케이스**
+| 상태 | 메시지 |
+|------|--------|
+| `400` | 지원하지 않는 카드사 입니다. (국민카드만 허용) |
+| `409` | 이미 등록된 영수증입니다. |
 
-Content-Type: multipart/form-data
+---
+
+### 영수증 업로드 확정
+
+**POST** `/api/receipts/confirm` `🔒 인증 필요`
+
+> `Content-Type: multipart/form-data`
 
 OCR 분석 결과를 사용자가 확인한 후 호출합니다. 이미지를 S3에 업로드하고 DB에 저장합니다.
 
-Request (multipart/form-data)
+**Request (multipart/form-data)**
 
-필드	타입	Content-Type	필수	설명
-image	File	-	O	영수증 이미지 (.jpg, .jpeg, .png, .gif, .webp / 최대 5MB)
-data	JSON	application/json	O	/analyze 응답의 OCR 결과
-data JSON 형식:
+| 필드 | 타입 | Content-Type | 필수 | 설명 |
+|------|------|--------------|------|------|
+| `image` | File | - | O | 영수증 이미지 (.jpg, .jpeg, .png, .gif, .webp / 최대 5MB) |
+| `data` | JSON | `application/json` | O | `/analyze` 응답의 OCR 결과 |
 
+`data` JSON 형식:
+```json
 {
   "storeName": "사랑집4",
   "paymentAmount": 15000,
   "cardCompany": "국민카드",
   "confirmNum": "12345678"
 }
-Response
+```
 
+**Response**
+```json
 {
   "success": true,
   "code": 200,
@@ -265,13 +387,22 @@ Response
     "confirmNum": "12345678"
   }
 }
-에러 케이스 | 상태 | 메시지 | |------|--------| | 400 | 지원하지 않는 카드사 입니다. (국민카드만 허용) | | 409 | 이미 등록된 영수증입니다. |
+```
 
-전체 누적 참여 횟수 조회
-GET /api/receipts/total-participation
+**에러 케이스**
+| 상태 | 메시지 |
+|------|--------|
+| `400` | 지원하지 않는 카드사 입니다. (국민카드만 허용) |
+| `409` | 이미 등록된 영수증입니다. |
 
-Response
+---
 
+### 전체 누적 참여 횟수 조회
+
+**GET** `/api/receipts/total-participation`
+
+**Response**
+```json
 {
   "success": true,
   "code": 200,
@@ -280,11 +411,16 @@ Response
     "totalParticipationCount": 342
   }
 }
-전체 누적 소비금액 조회
-GET /api/receipts/total-all-payment
+```
 
-Response
+---
 
+### 전체 누적 소비금액 조회
+
+**GET** `/api/receipts/total-all-payment`
+
+**Response**
+```json
 {
   "success": true,
   "code": 200,
@@ -293,11 +429,16 @@ Response
     "totalAllPaymentAmount": 5120000
   }
 }
-내 단과대 누적 소비금액 조회
-GET /api/receipts/college-total-payment 🔒 인증 필요
+```
 
-Response
+---
 
+### 내 단과대 누적 소비금액 조회
+
+**GET** `/api/receipts/college-total-payment` `🔒 인증 필요`
+
+**Response**
+```json
 {
   "success": true,
   "code": 200,
@@ -308,52 +449,64 @@ Response
     "totalPaymentAmount": 980000
   }
 }
-2주차 대진별 랭킹 조회
-GET /api/receipts/week2-ranking
+```
 
-Response
+---
 
+### 2주차 대진별 랭킹 조회
+
+**GET** `/api/receipts/week2-ranking`
+
+**Response**
+```json
 {
   "success": true,
   "code": 200,
   "message": "요청이 성공적으로 처리되었습니다.",
   "data": [
     {
-      "storeName": "사랑집1",
+      "storeName": "아빠땡",
       "rankings": [
         { "rank": 1, "collegeName": "소프트웨어융합대학", "totalPaymentAmount": 320000 },
         { "rank": 2, "collegeName": "공과대학", "totalPaymentAmount": 210000 },
-        { "rank": 3, "collegeName": "첨단바이오융합대학", "totalPaymentAmount": 180000 },
+        { "rank": 3, "collegeName": "첨단ICT융합대학", "totalPaymentAmount": 180000 },
         { "rank": 4, "collegeName": "인문대학", "totalPaymentAmount": 90000 }
       ]
     },
     {
-      "storeName": "사랑집3",
-      "rankings": [
-        { "rank": 1, "collegeName": "사회과학대학", "totalPaymentAmount": 270000 },
-        { "rank": 2, "collegeName": "국방디지털융합학과", "totalPaymentAmount": 150000 }
-      ]
-    },
-    {
-      "storeName": "사랑집2",
+      "storeName": "포푸리리프",
       "rankings": [
         { "rank": 1, "collegeName": "경영대학", "totalPaymentAmount": 400000 },
         { "rank": 2, "collegeName": "메디컬", "totalPaymentAmount": 310000 }
       ]
+    },
+    {
+      "storeName": "조희탁커피",
+      "rankings": [
+        { "rank": 1, "collegeName": "사회과학대학", "totalPaymentAmount": 270000 },
+        { "rank": 2, "collegeName": "국방디지털융합학과", "totalPaymentAmount": 150000 }
+      ]
     }
   ]
 }
-주차별 단과대 소비금액 랭킹 조회
-GET /api/receipts/weekly-college-ranking?weekNumber={weekNumber}
+```
+
+---
+
+### 주차별 단과대 소비금액 랭킹 조회
+
+**GET** `/api/receipts/weekly-college-ranking?weekNumber={weekNumber}`
 
 해당 주차의 단과대별 영수증 소비금액 합산 기준 상위 4개 단과대와, 각 단과대의 요일별(월~금) 소비금액을 반환합니다.
 
-Query Parameter
+**Query Parameter**
 
-파라미터	타입	필수	설명
-weekNumber	int	O	조회할 주차 (1, 2, 3)
-Response
+| 파라미터 | 타입 | 필수 | 설명 |
+|----------|------|------|------|
+| `weekNumber` | int | O | 조회할 주차 (1, 2, 3) |
 
+**Response**
+```json
 {
   "success": true,
   "code": 200,
@@ -386,14 +539,20 @@ Response
     ]
   }
 }
-rankings는 해당 주차 소비금액 총합 기준 내림차순 정렬이며 최대 4개입니다.
-데이터가 없는 요일의 amount는 0으로 반환됩니다.
-해당 주차에 영수증 데이터가 없으면 rankings는 빈 배열([])로 반환됩니다.
-3주차 학번 대결 현황 조회
-GET /api/receipts/week3-challenge
+```
 
-Response (승패 있음)
+> - `rankings`는 해당 주차 소비금액 총합 기준 내림차순 정렬이며 최대 4개입니다.
+> - 데이터가 없는 요일의 `amount`는 `0`으로 반환됩니다.
+> - 해당 주차에 영수증 데이터가 없으면 `rankings`는 빈 배열(`[]`)로 반환됩니다.
 
+---
+
+### 3주차 학번 대결 현황 조회
+
+**GET** `/api/receipts/week3-challenge`
+
+**Response (승패 있음)**
+```json
 {
   "success": true,
   "code": 200,
@@ -417,8 +576,10 @@ Response (승패 있음)
     }
   ]
 }
-Response (무승부)
+```
 
+**Response (무승부)**
+```json
 {
   "success": true,
   "code": 200,
@@ -434,15 +595,22 @@ Response (무승부)
     }
   ]
 }
-year1Total: 첫 번째 학번 그룹(23학번 / 25학번) 합산 금액
-year2Total: 두 번째 학번 그룹(24학번 / 26학번) 합산 금액
-무승부 시 win, lose는 null
-사용자 (Users)
-내 대시보드 조회
-GET /api/users/me/dashboard 🔒 인증 필요
+```
 
-Response
+> - `year1Total`: 첫 번째 학번 그룹(23학번 / 25학번) 합산 금액
+> - `year2Total`: 두 번째 학번 그룹(24학번 / 26학번) 합산 금액
+> - 무승부 시 `win`, `lose`는 `null`
 
+---
+
+## 사용자 (Users)
+
+### 내 대시보드 조회
+
+**GET** `/api/users/me/dashboard` `🔒 인증 필요`
+
+**Response**
+```json
 {
   "success": true,
   "code": 200,
@@ -453,14 +621,20 @@ Response
     "totalPaymentAmount": 45000
   }
 }
-관리자 (Admin)
-GET /api/admin/weeks/current를 제외한 모든 관리자 API는 🔒 관리자 계정 인증 필요
+```
 
-가입자 수 통계 조회
-GET /api/admin/users/stats
+---
 
-Response
+## 관리자 (Admin)
 
+> `GET /api/admin/weeks/current`를 제외한 모든 관리자 API는 `🔒 관리자 계정 인증 필요`
+
+### 가입자 수 통계 조회
+
+**GET** `/api/admin/users/stats`
+
+**Response**
+```json
 {
   "success": true,
   "code": 200,
@@ -470,21 +644,34 @@ Response
     "totalCount": 120
   }
 }
-유저 가입 정보 CSV 다운로드
-GET /api/admin/users/csv
+```
 
-파일 다운로드 응답 (Content-Type: text/csv) 컬럼: 가입일시, 유저ID, 단과대, 학과
+---
 
-단과대별 소비금액 CSV 다운로드
-GET /api/admin/receipts/csv
+### 유저 가입 정보 CSV 다운로드
 
-파일 다운로드 응답 (Content-Type: text/csv) 컬럼: 일자, 단과대명, 소비금액합계
+**GET** `/api/admin/users/csv`
 
-현재 활성화 주차 조회
-GET /api/admin/weeks/current 🌐 공개
+> 파일 다운로드 응답 (`Content-Type: text/csv`)
+> 컬럼: `가입일시, 유저ID, 단과대, 학과`
 
-Response
+---
 
+### 단과대별 소비금액 CSV 다운로드
+
+**GET** `/api/admin/receipts/csv`
+
+> 파일 다운로드 응답 (`Content-Type: text/csv`)
+> 컬럼: `일자, 단과대명, 소비금액합계`
+
+---
+
+### 현재 활성화 주차 조회
+
+**GET** `/api/admin/weeks/current` `🌐 공개`
+
+**Response**
+```json
 {
   "success": true,
   "code": 200,
@@ -493,17 +680,24 @@ Response
     "weekNumber": 3
   }
 }
-weekNumber가 null이면 테스트 기간
+```
 
-주차 활성화
-PATCH /api/admin/weeks/{weekNumber}/activate
+> `weekNumber`가 `null`이면 테스트 기간
 
-Path Parameter
+---
 
-파라미터	타입	설명
-weekNumber	int	활성화할 주차 (1, 2, 3)
-Response
+### 주차 활성화
 
+**PATCH** `/api/admin/weeks/{weekNumber}/activate`
+
+**Path Parameter**
+
+| 파라미터 | 타입 | 설명 |
+|----------|------|------|
+| `weekNumber` | int | 활성화할 주차 (1, 2, 3) |
+
+**Response**
+```json
 {
   "success": true,
   "code": 200,
@@ -512,11 +706,16 @@ Response
     "weekNumber": 2
   }
 }
-주차 비활성화
-PATCH /api/admin/weeks/deactivate
+```
 
-Response
+---
 
+### 주차 비활성화
+
+**PATCH** `/api/admin/weeks/deactivate`
+
+**Response**
+```json
 {
   "success": true,
   "code": 200,
@@ -525,16 +724,23 @@ Response
     "weekNumber": null
   }
 }
-팝업 등록/수정
-PATCH /api/admin/popup 🔒 관리자 계정 인증 필요
+```
 
-Request Body
+---
 
+### 팝업 등록/수정
+
+**PATCH** `/api/admin/popup` `🔒 관리자 계정 인증 필요`
+
+**Request Body**
+```json
 {
   "content": "이번 주 이벤트 참여하세요!"
 }
-Response
+```
 
+**Response**
+```json
 {
   "success": true,
   "code": 200,
@@ -545,63 +751,97 @@ Response
     "updatedAt": "2026-04-20T10:00:00"
   }
 }
-등록 즉시 활성화됩니다. 기존 팝업이 있으면 덮어씁니다.
+```
 
-에러 케이스 | 상태 | 메시지 | |------|--------| | 400 | 팝업 내용을 입력해주세요. |
+> 등록 즉시 활성화됩니다. 기존 팝업이 있으면 덮어씁니다.
 
-블랙리스트 등록
-POST /api/admin/blacklist 🔒 관리자 계정 인증 필요
+**에러 케이스**
+| 상태 | 메시지 |
+|------|--------|
+| `400` | 팝업 내용을 입력해주세요. |
 
-전화번호를 블랙리스트에 등록합니다. 해당 번호로 가입된 계정이 있으면 계정도 함께 삭제됩니다.
+---
+
+### 블랙리스트 등록
+
+**POST** `/api/admin/blacklist` `🔒 관리자 계정 인증 필요`
+
+전화번호를 블랙리스트에 등록합니다. 해당 번호로 가입된 계정이 있으면 계정도 함께 삭제됩니다.  
 등록 이후 해당 전화번호로는 인증번호 발송(재가입 시도) 자체가 차단됩니다.
 
-Request Body
-
+**Request Body**
+```json
 {
   "phoneNumber": "01012345678"
 }
-Response
+```
 
+**Response**
+```json
 {
   "success": true,
   "code": 200,
   "message": "요청이 성공적으로 처리되었습니다.",
   "data": null
 }
-에러 케이스 | 상태 | 메시지 | |------|--------| | 400 | 올바른 휴대폰 번호를 입력해 주세요. | | 404 | 해당 전화번호로 가입된 사용자를 찾을 수 없습니다. | | 409 | 이미 블랙리스트에 등록된 전화번호입니다. |
+```
 
-블랙리스트 해제
-PATCH /api/admin/blacklist/unban 🔒 관리자 계정 인증 필요
+**에러 케이스**
+| 상태 | 메시지 |
+|------|--------|
+| `400` | 올바른 휴대폰 번호를 입력해 주세요. |
+| `404` | 해당 전화번호로 가입된 사용자를 찾을 수 없습니다. |
+| `409` | 이미 블랙리스트에 등록된 전화번호입니다. |
+
+---
+
+### 블랙리스트 해제
+
+**PATCH** `/api/admin/blacklist/unban` `🔒 관리자 계정 인증 필요`
 
 전화번호로 블랙리스트를 해제하여 해당 번호로 재가입을 허용합니다. 차단 이력은 DB에 보존됩니다.
 
-Request Body
-
+**Request Body**
+```json
 {
   "phoneNumber": "01012345678"
 }
-Response
+```
 
+**Response**
+```json
 {
   "success": true,
   "code": 200,
   "message": "요청이 성공적으로 처리되었습니다.",
   "data": null
 }
-에러 케이스 | 상태 | 메시지 | |------|--------| | 400 | 올바른 휴대폰 번호를 입력해 주세요. | | 404 | 블랙리스트 항목을 찾을 수 없습니다. |
+```
 
-블랙리스트 CSV 다운로드
-GET /api/admin/blacklist/csv 🔒 관리자 계정 인증 필요
+**에러 케이스**
+| 상태 | 메시지 |
+|------|--------|
+| `400` | 올바른 휴대폰 번호를 입력해 주세요. |
+| `404` | 블랙리스트 항목을 찾을 수 없습니다. |
 
-파일 다운로드 응답 (Content-Type: text/csv)
-컬럼: 차단일시, 전화번호, 활성 여부
-차단 해제된 항목(활성 여부: 해제됨)도 전체 이력으로 포함됩니다.
+---
 
-팝업 비활성화
-PATCH /api/admin/popup/deactivate 🔒 관리자 계정 인증 필요
+### 블랙리스트 CSV 다운로드
 
-Response
+**GET** `/api/admin/blacklist/csv` `🔒 관리자 계정 인증 필요`
 
+> 파일 다운로드 응답 (`Content-Type: text/csv`)  
+> 컬럼: `차단일시, 전화번호, 활성 여부`  
+> 차단 해제된 항목(`활성 여부: 해제됨`)도 전체 이력으로 포함됩니다.
+
+---
+
+### 팝업 비활성화
+
+**PATCH** `/api/admin/popup/deactivate` `🔒 관리자 계정 인증 필요`
+
+**Response**
+```json
 {
   "success": true,
   "code": 200,
@@ -612,12 +852,18 @@ Response
     "updatedAt": "2026-04-20T10:05:00"
   }
 }
-팝업 (Popup)
-팝업 조회
-GET /api/popup 🌐 공개
+```
 
-Response
+---
 
+## 팝업 (Popup)
+
+### 팝업 조회
+
+**GET** `/api/popup` `🌐 공개`
+
+**Response**
+```json
 {
   "success": true,
   "code": 200,
@@ -628,5 +874,7 @@ Response
     "updatedAt": "2026-04-20T10:00:00"
   }
 }
-active: false이면 팝업을 표시하지 않습니다.
-클라이언트는 updatedAt을 localStorage에 저장하여, 동일한 값이면 팝업을 재표시하지 않습니다. 관리자가 팝업을 새로 등록하면 updatedAt이 변경되어 다시 표시됩니다.
+```
+
+> - `active: false`이면 팝업을 표시하지 않습니다.
+> - 클라이언트는 `updatedAt`을 `localStorage`에 저장하여, 동일한 값이면 팝업을 재표시하지 않습니다. 관리자가 팝업을 새로 등록하면 `updatedAt`이 변경되어 다시 표시됩니다.
