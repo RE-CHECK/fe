@@ -49,8 +49,8 @@
   bottom: -3cqw;
   left:   50%;
   transform: translateX(-50%);
-  width:  106%;
-  height: 153.22cqw;
+  width:  110%;
+  height: 159.01cqw;
 }
 
 .home__flag-wrap {
@@ -105,7 +105,7 @@
 
 .home__mascot-wrap {
   position: absolute;
-  top:    21.39cqw;
+  top:    17.39cqw;
   left:    8.21cqw;
   width:  83.34cqw;
   height: 40.55cqw;
@@ -119,11 +119,11 @@
 
 .home__campus {
   position: absolute;
-  top:  62.94cqw;
+  top:  54.94cqw;
   left: 69.53cqw;
   transform: translateX(-50%);
   font-family: '온글잎 박다현체', sans-serif;
-  font-size:   7.69cqw;
+  font-size:   6.50cqw;
   line-height: 10.25cqw;
   letter-spacing: 0.115cqw;
   color: #ffffff;
@@ -132,7 +132,7 @@
 
 .home__pretitle {
   position: absolute;
-  top:  6.72cqw;
+  top:  2.72cqw;
   left: 66.44cqw;
   transform: translateX(-50%);
   font-family: '온글잎 박다현체', sans-serif;
@@ -144,7 +144,7 @@
 }
 
 .home__kb-logo {
-  top:    12.89cqw;
+  top:    8.89cqw;
   left:   18.91cqw;
   width:  32.22cqw;
   height:  5.33cqw;
