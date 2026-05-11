@@ -388,6 +388,24 @@
   color: #ff6b6b;
 }
 
+/* ── 이용약관 / 개인정보처리방침 ── */
+.signup__legal {
+  display: flex;
+  justify-content: center;
+  gap: 4cqw;
+  margin-bottom: 3cqw;
+}
+
+.signup__legal-link {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-weight: 700;
+  font-size: 3cqw;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: underline;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
 /* ── 다음 버튼 ── */
 .signup__next-btn {
   width: 100%;

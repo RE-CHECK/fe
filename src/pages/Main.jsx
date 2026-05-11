@@ -308,6 +308,22 @@ export default function Main() {
         </div>
       </div>
 
+      {/* ── 이용약관 / 개인정보처리방침 ── */}
+      <div className="main__legal">
+        <a
+          href="https://feather-raptorex-6d7.notion.site/35c9995f4b0c806ca19ec4183f328141?source=copy_link"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="main__legal-link"
+        >이용약관</a>
+        <a
+          href="https://feather-raptorex-6d7.notion.site/35c9995f4b0c8067897efd139091cb68?source=copy_link"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="main__legal-link"
+        >개인정보처리방침</a>
+      </div>
+
       {showWeekModal && (
         <WeekStartModal week={currentWeek} onClose={handleWeekModalClose} />
       )}

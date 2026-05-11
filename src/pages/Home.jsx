@@ -2,8 +2,7 @@ import { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Home.css'
 
-import img244X1    from '../assets/image/자산 24@4x 1.svg'
-import img114X1    from '../assets/image/자산 11@4x 1.svg'
+import img114X1    from '../assets/image/image 133.png'
 import racingFlag  from '../assets/image/racing-flag 1.svg'
 import mascotImg   from '../assets/image/ChatGPT Image 2026년 4월 9일 오후 03_08_24 1.svg'
 import kbLogo      from '../assets/image/image 72.svg'
@@ -50,11 +49,6 @@ export default function Home() {
     <div className="home-outer">
     <div className="home" ref={homeRef}>
 
-      {/* 외곽 트랙 배경 */}
-      <div className="home__asset home__track-outer">
-        <img src={img244X1} alt="" />
-      </div>
-
       {/* 내부 트랙 + 마스코트 */}
       <div className="home__asset home__track-inner">
         <img src={img114X1} alt="" />
@@ -93,6 +87,22 @@ export default function Home() {
       {/* KB 국민은행 로고 */}
       <div className="home__asset home__kb-logo">
         <img src={kbLogo} alt="KB 국민은행" />
+      </div>
+
+      {/* 이용약관 / 개인정보처리방침 */}
+      <div className="home__legal">
+        <a
+          href="https://feather-raptorex-6d7.notion.site/35c9995f4b0c806ca19ec4183f328141?source=copy_link"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="home__legal-link"
+        >이용약관</a>
+        <a
+          href="https://feather-raptorex-6d7.notion.site/35c9995f4b0c8067897efd139091cb68?source=copy_link"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="home__legal-link"
+        >개인정보처리방침</a>
       </div>
 
     </div>
