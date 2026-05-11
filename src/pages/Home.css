@@ -47,9 +47,10 @@
 
 .home__track-inner {
   bottom: -3cqw;
-  left:   0;
-  width:  100%;
-  height: 144.55cqw;
+  left:   50%;
+  transform: translateX(-50%);
+  width:  106%;
+  height: 153.22cqw;
 }
 
 .home__flag-wrap {
