@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router-dom'
 import './Stores.css'
-import imgSarangjip  from '../assets/image/store/ChatGPT Image 2026년 5월 1일 오후 09_29_41 1.svg'
-import imgUjok       from '../assets/image/store/ChatGPT Image 2026년 5월 1일 오후 09_29_41 3.svg'
-import imgDongtteok  from '../assets/image/store/ChatGPT Image 2026년 5월 1일 오후 09_29_41 2.svg'
-import imgAppatteng  from '../assets/image/store/ChatGPT Image 2026년 5월 1일 오후 09_29_41 4.svg'
-import imgPopuri1    from '../assets/image/store/ChatGPT Image 2026년 5월 1일 오후 09_29_41 6.svg'
-import imgPopuri2    from '../assets/image/store/ChatGPT Image 2026년 5월 1일 오후 09_29_41 5.svg'
-import imgVector     from '../assets/image/store/Vector.svg'
+import imgAppatteng     from '../assets/image/store/ChatGPT Image 2026년 5월 1일 오후 09_29_41 4.svg'
+import imgPopuri1       from '../assets/image/store/ChatGPT Image 2026년 5월 1일 오후 09_29_41 6.svg'
+import imgPopuri2       from '../assets/image/store/ChatGPT Image 2026년 5월 1일 오후 09_29_41 5.svg'
+import imgChoehytak1    from '../assets/image/store/ChatGPT Image 2026년 5월 10일 오후 10_46_12 1.svg'
+import imgChoehytak2    from '../assets/image/store/ChatGPT Image 2026년 5월 10일 오후 10_46_12 2.svg'
+import imgSarangjip     from '../assets/image/store/ChatGPT Image 2026년 5월 1일 오후 09_29_41 1.svg'
+import imgSomunna       from '../assets/image/store/ChatGPT Image 2026년 5월 10일 오후 10_38_48 1.svg'
+import imgVector        from '../assets/image/store/Vector.svg'
 
 export default function Stores() {
   const navigate = useNavigate()
@@ -35,27 +36,6 @@ export default function Stores() {
 
       <div className="stores__grid stores__grid--3col">
         <div className="stores__card">
-          <img src={imgSarangjip} className="stores__card-img" alt="" />
-          <p className="stores__card-desc">돼지김치구이 맛집</p>
-          <p className="stores__card-name stores__card-name--yellow">사랑집</p>
-        </div>
-        <div className="stores__card">
-          <img src={imgUjok} className="stores__card-img" alt="" />
-          <p className="stores__card-desc">아주대 최고 족발집</p>
-          <p className="stores__card-name stores__card-name--yellow">우만동 족발집</p>
-        </div>
-        <div className="stores__card">
-          <img src={imgDongtteok} className="stores__card-img" alt="" />
-          <p className="stores__card-desc">쯔양도 인정한 즉떡</p>
-          <p className="stores__card-name stores__card-name--yellow">동떡이</p>
-        </div>
-      </div>
-
-      {/* ── 2주차 (5월 18~24일) ── */}
-      <div className="stores__week-badge stores__week-badge--red">5월 18~24일</div>
-
-      <div className="stores__grid stores__grid--2col">
-        <div className="stores__card">
           <img src={imgAppatteng} className="stores__card-img stores__card-img--appatteng" alt="" />
           <p className="stores__card-desc">잠봉뵈르와 아메가 맛있는</p>
           <p className="stores__card-name stores__card-name--red">아빠땡</p>
@@ -67,6 +47,30 @@ export default function Stores() {
           </div>
           <p className="stores__card-desc">케이크와 에이드가 맛있는</p>
           <p className="stores__card-name stores__card-name--red">포푸리</p>
+        </div>
+        <div className="stores__card">
+          <div className="stores__card-img-group stores__card-img-group--choehytak">
+            <img src={imgChoehytak1} alt="" />
+            <img src={imgChoehytak2} alt="" />
+          </div>
+          <p className="stores__card-desc">케이크와 에이드가 맛있는</p>
+          <p className="stores__card-name stores__card-name--red">조희탁</p>
+        </div>
+      </div>
+
+      {/* ── 2주차 (5월 18~24일) ── */}
+      <div className="stores__week-badge stores__week-badge--red">5월 18~24일</div>
+
+      <div className="stores__grid stores__grid--2col">
+        <div className="stores__card">
+          <img src={imgSarangjip} className="stores__card-img" alt="" />
+          <p className="stores__card-desc">돼지김치구이 맛집</p>
+          <p className="stores__card-name stores__card-name--yellow">사랑집</p>
+        </div>
+        <div className="stores__card">
+          <img src={imgSomunna} className="stores__card-img stores__card-img--somunna" alt="" />
+          <p className="stores__card-desc">가성비 고기집</p>
+          <p className="stores__card-name stores__card-name--yellow">소문난대구막창</p>
         </div>
       </div>
 

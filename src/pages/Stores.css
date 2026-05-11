@@ -140,6 +140,11 @@
   top: 4cqw;
 }
 
+.stores__card-img--somunna {
+  max-width: 95%;
+  max-height: 70%;
+}
+
 .stores__card-desc {
   margin: 0;
   font-family: '온글잎 박다현체', sans-serif;
@@ -192,6 +197,15 @@
   margin-left: -3.91cqw;
   position: relative;
   top: 1.5cqw;
+}
+
+/* 조희탁: 두 번째 이미지 6.44도 회전 + 크기 살짝 확대 */
+.stores__card-img-group--choehytak img:last-child {
+  margin-left: -7cqw;
+  position: relative;
+  top: 1.5cqw;
+  transform: rotate(6.44deg);
+  max-width: 56%;
 }
 
 /* ── 벡터 데코 ── */
