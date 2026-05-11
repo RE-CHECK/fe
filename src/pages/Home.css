@@ -46,10 +46,10 @@
 .home__track-outer img { object-fit: fill; }
 
 .home__track-inner {
-  top:    72.14cqw;
-  left:   18.91cqw;
-  width:  63.35cqw;
-  height: 86.57cqw;
+  bottom: -3cqw;
+  left:   0;
+  width:  100%;
+  height: 144.55cqw;
 }
 
 .home__flag-wrap {

@@ -2,8 +2,7 @@ import { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Home.css'
 
-import img244X1    from '../assets/image/자산 24@4x 1.svg'
-import img114X1    from '../assets/image/자산 11@4x 1.svg'
+import img114X1    from '../assets/image/image 133.png'
 import racingFlag  from '../assets/image/racing-flag 1.svg'
 import mascotImg   from '../assets/image/ChatGPT Image 2026년 4월 9일 오후 03_08_24 1.svg'
 import kbLogo      from '../assets/image/image 72.svg'
@@ -49,11 +48,6 @@ export default function Home() {
   return (
     <div className="home-outer">
     <div className="home" ref={homeRef}>
-
-      {/* 외곽 트랙 배경 */}
-      <div className="home__asset home__track-outer">
-        <img src={img244X1} alt="" />
-      </div>
 
       {/* 내부 트랙 + 마스코트 */}
       <div className="home__asset home__track-inner">
