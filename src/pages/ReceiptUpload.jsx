@@ -40,6 +40,12 @@ function compressImage(file) {
   })
 }
 
+function getReceiptErrorModal(err) {
+  if (err.code === 429) return { title: '요청이 너무 많아요', desc: 'OCR 요청 한도를 초과했어요. 잠시 후 다시 시도해주세요.' }
+  if (err.code === 503) return { title: 'OCR 서비스 점검 중', desc: '일시적으로 사용이 어려워요. 잠시 후 다시 시도해주세요.' }
+  return { title: '분석 실패', desc: err.message || '잠시 후 다시 시도해주세요' }
+}
+
 export default function ReceiptUpload() {
   const navigate = useNavigate()
   const fileInputRef = useRef(null)
@@ -68,7 +74,7 @@ export default function ReceiptUpload() {
       })
     } catch (err) {
       if (fileInputRef.current) fileInputRef.current.value = ''
-      setErrorModal({ title: '분석 실패', desc: err.message || '잠시 후 다시 시도해주세요' })
+      setErrorModal(getReceiptErrorModal(err))
     } finally {
       setIsLoading(false)
     }
@@ -83,7 +89,7 @@ export default function ReceiptUpload() {
       await confirmReceipt(imageFile, receiptData.raw)
       setIsConfirmed(true)
     } catch (err) {
-      setErrorModal({ title: '업로드 실패', desc: err.message || '잠시 후 다시 시도해주세요' })
+      setErrorModal(getReceiptErrorModal(err))
     } finally {
       setIsConfirming(false)
     }
