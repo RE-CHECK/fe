@@ -189,7 +189,7 @@ export default function ReceiptUpload() {
 
             <p className="upload__card-title">영수증 정보가 맞나요?</p>
 
-            {['아빠땡', '포푸리리프', '조희탁커피', '소문난대구막창집', '사랑집'].includes(receiptData.storeName) && (
+            {['아빠땡', '포푸리리프', '조희탁커피', '소문난대구막창', '사랑집'].includes(receiptData.storeName) && (
               <p className="upload__partner-notice">🎊 이 매장은 저희와 제휴를 맺은 매장이에요! 🎊</p>
             )}
             <div className="upload__receipt-rows">
