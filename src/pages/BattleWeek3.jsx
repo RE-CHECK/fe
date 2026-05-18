@@ -147,13 +147,13 @@ function MatchupSection({ config, data, onInfo }) {
       ) : (
         <div className="bw3__matchup">
           <BattleSlot
-            charSrc={char1}
+            charSrc={year1Result === 'win' ? char1 : char2}
             badge={config.badge1}
             result={year1Result}
             amount={data.year1Total}
           />
           <BattleSlot
-            charSrc={char2}
+            charSrc={year2Result === 'win' ? char1 : char2}
             badge={config.badge2}
             result={year2Result}
             amount={data.year2Total}
