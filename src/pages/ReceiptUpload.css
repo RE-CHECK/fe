@@ -378,6 +378,14 @@
   padding: 0 0 2cqw;
 }
 
+.upload__special-notice{
+  font-size: 4cqw;
+  color: #1e7a2e;
+  text-align: center;
+  margin: 0;
+  padding: 0 0 2cqw;
+}
+
 /* ── 스피너 ── */
 .upload__spinner-wrap {
   width: 22.71cqw;
