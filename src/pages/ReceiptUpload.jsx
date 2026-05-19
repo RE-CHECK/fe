@@ -192,6 +192,9 @@ export default function ReceiptUpload() {
             {['아빠땡', '포푸리리프', '조희탁커피', '소문난대구막창', '사랑집'].includes(receiptData.storeName) && (
               <p className="upload__partner-notice">🎊 이 매장은 저희와 제휴를 맺은 매장이에요! 🎊</p>
             )}
+            {['경영인텔리빨사이에낀SPAGHETTI'].includes(receiptData.storeName) && (
+              <p className="upload__special-notice">🎉 축제 주점에 방문하셨군요! 🎉</p>
+            )}
             <div className="upload__receipt-rows">
               <div className="upload__receipt-row">
                 <span className="upload__receipt-label upload__receipt-label--green">매장</span>

@@ -17,7 +17,7 @@ import wreathR from '../assets/image/1등장식-오른쪽.svg'
 import specialMascot from '../assets/image/mascot/남색.svg'
 
 // ── 고정 데이터 ─────────────────────────────────────────────
-const MATCH_TITLE = '경영인텔리빨사이에낀SPAGHETTL'
+const MATCH_TITLE = '경영인텔리빨사이에낀SPAGHETTI'
 const YEAR_LABELS = ['23학번', '24학번', '25학번', '26학번']
 
 const CROWNS = [null, crown1, crown2, crown3, crown4]
