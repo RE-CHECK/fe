@@ -12,6 +12,7 @@ import CollegeSpending from './pages/admin/CollegeSpending'
 import AdminBlacklist from './pages/admin/AdminBlacklist'
 import BattleWeek2 from './pages/BattleWeek2'
 import BattleWeek3 from './pages/BattleWeek3'
+import SpecialMatch from './pages/SpecialMatch'
 import Landing from './pages/Landing'
 import Stores from './pages/Stores'
 
@@ -31,6 +32,7 @@ function App() {
       <Route path="/admin/blacklist" element={<AdminBlacklist />} />
       <Route path="/battle/week2" element={<BattleWeek2 />} />
       <Route path="/battle/week3" element={<BattleWeek3 />} />
+      <Route path="/special" element={<SpecialMatch />} />
       <Route path="/landing" element={<Landing />} />
       <Route path="/stores" element={<Stores />} />
     </Routes>

@@ -31,6 +31,10 @@ export async function getWeek3Challenge() {
   return apiRequest('/api/receipts/week3-challenge')
 }
 
+export async function getSpecialMatchRanking() {
+  return apiRequest('/api/receipts/special-match')
+}
+
 export async function getWeeklyCollegeRanking(weekNumber) {
   const query = weekNumber !== null ? `?weekNumber=${weekNumber}` : ''
   return apiRequest(`/api/receipts/weekly-college-ranking${query}`)
