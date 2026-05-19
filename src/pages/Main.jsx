@@ -296,7 +296,7 @@ export default function Main() {
           <p className="main__bottom-big">RANK</p>
           <button className="main__bottom-btn main__bottom-btn--white" onClick={() => {
             if (currentWeek === 2) navigate('/battle/week2')
-            else if (currentWeek === 3) navigate('/battle/week3')
+            else if (currentWeek === 3) navigate('/special') // TODO: 원복 시 '/battle/week3'
             else setShowBattleModal(true)
           }}>대결현황</button>
         </div>
