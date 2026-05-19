@@ -193,6 +193,22 @@
   z-index: 10;
 }
 
+.sm__crown--dim {
+  opacity: 0.22;
+}
+
+/* 빈 카드 ? 텍스트 */
+.sm__empty-q {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 700;
+  font-size: 14cqw;
+  color: rgba(0, 0, 0, 0.18);
+  line-height: 1;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
 /* 마스코트 + 리스 감싸는 컨테이너 */
 .sm__mascot-wrap {
   position: relative;
@@ -267,6 +283,11 @@
   color: #00315b;
   line-height: 1;
   letter-spacing: 0.05cqw;
+}
+
+.sm__amount--dim {
+  opacity: 0.35;
+  font-size: 4.5cqw;
 }
 
 .sm__won {
